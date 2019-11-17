@@ -14,13 +14,23 @@ namespace PlantvsZombie
         //private Texture2D _Image = Content.Load<Texture2D>("Texture/BlueZombieMale");
         private float _ScaleFactor = .3f;
         private Vector2 _Position;
+        
 
         private Plant MeetPlant()
         {
-            foreach (var p in PVZGame.Game.Plants)
-                if (p.Position.Y == this.Position.Y && p.Position.X < this.Position.X) // Position.Y or Position.X - the side of a square
-                    return p;
+            int pi, zi, pj, zj;
+            float a = PVZGame.Side;
 
+            foreach (var p in PVZGame.Game.Plants)
+            {
+                pi = Utility.GetCell(p.Position.X,a);
+                pj = Utility.GetCell(p.Position.Y,a);
+                zi = Utility.GetCell(Position.X,a);
+                zj = Utility.GetCell(Position.Y, a);
+                if (pi==zi&&pj==zj) // Position.Y or Position.X - the side of a square
+                    return p;
+            }
+            
             return null;
         }
 
@@ -31,18 +41,17 @@ namespace PlantvsZombie
 
         public override void Update()
         {
+            base.Update();
             var p = MeetPlant();
-            if (p != null) Attack();
+            if (p != null) Attack(p);
 
             else Move();
 
-            base.Update();
-
-        }
+         }
         
-        public override void Attack()
+        public override void Attack(Plant p)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override float GetScaleFactor()
