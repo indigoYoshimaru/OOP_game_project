@@ -31,7 +31,6 @@ namespace PlantvsZombie
             get { return _Speed; }
             set
             {
-            
                 _Speed = value;
             }
         }
@@ -49,7 +48,6 @@ namespace PlantvsZombie
         {
 
         }
-        
     }
     
 }

@@ -11,22 +11,19 @@ namespace PlantvsZombie
 {
     public abstract class Zombie:PlantZombieObject
     {
-        private Vector2 _Position;
         public abstract void Move();
 
         public Zombie()
         {
             
         }
+        public abstract void Attack(Plant p);
 
-        public override void Attack()
+        public override void Update()
         {
-            throw new NotImplementedException();
-        }
-
-        public override float GetScaleFactor()
-        {
-            throw new NotImplementedException();
+            base.Update();
+            if (Position.X < 0)
+                PVZGame.Game.EndGame();
         }
     }
 }

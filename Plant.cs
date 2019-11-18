@@ -17,10 +17,8 @@ namespace PlantvsZombie
             throw new NotImplementedException();
 
         }
-        public override void Attack()
-        {
-            throw new NotImplementedException();    
-        }
+        public abstract void Attack();
+                
 
     }
 }

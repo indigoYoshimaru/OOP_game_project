@@ -17,7 +17,7 @@ namespace PlantvsZombie
         public HashSet<GameObject> ManagedObjects;
         public HashSet<Plant> Plants;
         public HashSet<Zombie> Zombies;
-        private Dictionary<String, Texture2D> _TextureAssets = new Dictionary<string, Texture2D> ();
+        private Dictionary<String, Texture2D> _TextureAssets = new Dictionary<string, Texture2D>();
         public Dictionary<String, Texture2D> TextureAssets
         {
             get
@@ -27,12 +27,13 @@ namespace PlantvsZombie
 
         }
         float timeSinceLastSpawn;
-     
+
         private Texture2D background;
         private Vector2 _ObjectPosition;
         private String _ObjectClassName;
         private MouseState mouseState;
-        private Vector2 _plantPosition;
+        private Vector2 _PlantPosition;
+        public const float Side=50;
 
         private PVZGame()
         {
@@ -101,6 +102,7 @@ namespace PlantvsZombie
             foreach (var ob in ManagedObjects)
             {
                 ob.Update();
+
             }
 
             timeSinceLastSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -114,7 +116,7 @@ namespace PlantvsZombie
                 //checking  before Spawn
                 SpawnPlant(mouseState.X, mouseState.Y);
             }
-                
+
 
             base.Update(gameTime);
         }
@@ -127,7 +129,7 @@ namespace PlantvsZombie
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             Rectangle rec = new Rectangle(0, 0, 800, 480);
-            spriteBatch.Draw(background,rec, Color.White);
+            spriteBatch.Draw(background, rec, Color.White);
             foreach (var ob in ManagedObjects)
             {
                 ob.Update();
@@ -142,7 +144,7 @@ namespace PlantvsZombie
             base.Draw(gameTime);
         }
 
-        
+
         public void SpawnZombie()
         {
             Zombie z = new BlueZombieMale();
@@ -151,14 +153,19 @@ namespace PlantvsZombie
             timeSinceLastSpawn = 0f;
         }
 
-        public void SpawnPlant(int _X,int _Y)
+        public void SpawnPlant(int _X, int _Y)
         {
-            _plantPosition.X = _X;
-            _plantPosition.Y = _Y;
-            Plant pl = new HeartShooter(_plantPosition);
+            _PlantPosition.X = _X;
+            _PlantPosition.Y = _Y;
+            Plant pl = new HeartShooter(_PlantPosition);
             ManagedObjects.Add(pl);
             Plants.Add(pl);
         }
+        
+        public void EndGame()
+        {
+            Exit(); //temporary
+        }
 
-}
+    }
 }

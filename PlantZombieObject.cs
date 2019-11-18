@@ -30,8 +30,6 @@ namespace PlantvsZombie
             if (_Health <= 0)
                 Die();
         }
-
-        public abstract void Attack();
         
     }
 }

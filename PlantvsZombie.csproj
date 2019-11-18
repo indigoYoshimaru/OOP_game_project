@@ -45,6 +45,7 @@
     <Compile Include="BlueZombieMale.cs" />
     <Compile Include="HeartShooter.cs" />
     <Compile Include="Plant.cs" />
+    <Compile Include="Utility.cs" />
     <Compile Include="Zombie.cs" />
     <Compile Include="PlantZombieObject.cs" />
     <Compile Include="GameObject.cs" />

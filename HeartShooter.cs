@@ -22,5 +22,9 @@ namespace PlantvsZombie
             Position = _Position;
         }
 
+        public override void Attack()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
