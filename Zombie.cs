@@ -19,6 +19,8 @@ namespace PlantvsZombie
         }
         public abstract void Attack(Plant p);
 
+        public abstract void Damaged(float dam);
+
         public override void Update()
         {
             base.Update();

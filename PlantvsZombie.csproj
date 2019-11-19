@@ -42,8 +42,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BlueZombieMale.cs" />
-    <Compile Include="HeartShooter.cs" />
+    <Compile Include="NormalZombie.cs" />
+    <Compile Include="PeaShooter.cs" />
     <Compile Include="Plant.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Zombie.cs" />

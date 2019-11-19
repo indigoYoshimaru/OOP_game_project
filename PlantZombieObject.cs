@@ -12,7 +12,7 @@ namespace PlantvsZombie
     //the class for common att. btw plants vs zombies
     public abstract class PlantZombieObject:GameObject
     {
-        private float _Health;
+        private float _Health=100;
         public float Health
         {
             get
@@ -30,6 +30,7 @@ namespace PlantvsZombie
             if (_Health <= 0)
                 Die();
         }
+        
         
     }
 }

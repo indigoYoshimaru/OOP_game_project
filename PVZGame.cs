@@ -34,6 +34,7 @@ namespace PlantvsZombie
         private MouseState mouseState;
         private Vector2 _PlantPosition;
         public const float Side=50;
+        private float scalefact = 0.2f;
 
         private PVZGame()
         {
@@ -71,8 +72,8 @@ namespace PlantvsZombie
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("Texture/Frontyard");
-            _TextureAssets["BlueZombieMale"] = Content.Load<Texture2D>("Texture/BlueZombieMale");
-            _TextureAssets["HeartShooter"] = Content.Load<Texture2D>("Texture/HeartShooter");
+            _TextureAssets["NormalZombie"] = Content.Load<Texture2D>("Texture/NormalZombie");
+            _TextureAssets["PeaShooter"] = Content.Load<Texture2D>("Texture/PeaShooter");
 
             // TODO: use this.Content to load your game content here
         }
@@ -98,8 +99,9 @@ namespace PlantvsZombie
 
             // TODO: Add your update logic here
 
+            var currentObjects = new HashSet<GameObject>(ManagedObjects);
 
-            foreach (var ob in ManagedObjects)
+            foreach (var ob in currentObjects)
             {
                 ob.Update();
 
@@ -130,14 +132,16 @@ namespace PlantvsZombie
             spriteBatch.Begin();
             Rectangle rec = new Rectangle(0, 0, 800, 480);
             spriteBatch.Draw(background, rec, Color.White);
-            foreach (var ob in ManagedObjects)
+            var currentObjects = new HashSet<GameObject>(ManagedObjects);
+
+            foreach (var ob in currentObjects)
             {
                 ob.Update();
                 _ObjectPosition = ob.Position;
                 _ObjectClassName = ob.GetType().Name;
                 //ScaleFactor!
                 if (_ObjectClassName != null)
-                    spriteBatch.Draw(_TextureAssets[_ObjectClassName], _ObjectPosition, null, Color.White, 0f, Vector2.Zero, 0.3f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(_TextureAssets[_ObjectClassName], _ObjectPosition, null, Color.White, 0f, Vector2.Zero, scalefact, SpriteEffects.None, 0f);
             }
             // TODO: Add your drawing code here
             spriteBatch.End();
@@ -147,21 +151,35 @@ namespace PlantvsZombie
 
         public void SpawnZombie()
         {
-            Zombie z = new BlueZombieMale();
+            Zombie z = new NormalZombie();
+            z.Died += HandleDeadZombie;
             ManagedObjects.Add(z);
             Zombies.Add(z);
             timeSinceLastSpawn = 0f;
+        }
+
+        private void HandleDeadZombie(object self)
+        {
+            ManagedObjects.Remove((GameObject)self);
+            Zombies.Remove((Zombie)self);
         }
 
         public void SpawnPlant(int _X, int _Y)
         {
             _PlantPosition.X = _X;
             _PlantPosition.Y = _Y;
-            Plant pl = new HeartShooter(_PlantPosition);
+            Plant pl = new PeaShooter(_PlantPosition);
+            pl.Died += HandleDeadPlantObject;
             ManagedObjects.Add(pl);
             Plants.Add(pl);
         }
-        
+
+        private void HandleDeadPlantObject(object self)
+        {
+            ManagedObjects.Remove((GameObject)self);
+            Plants.Remove((Plant)self);
+        }
+
         public void EndGame()
         {
             Exit(); //temporary

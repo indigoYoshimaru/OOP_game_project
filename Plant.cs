@@ -17,7 +17,9 @@ namespace PlantvsZombie
             throw new NotImplementedException();
 
         }
-        public abstract void Attack();
+        public abstract void Attack(Zombie z);
+
+        public abstract void Damaged(float dam);
                 
 
     }
