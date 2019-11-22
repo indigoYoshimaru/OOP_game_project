@@ -49,7 +49,6 @@ namespace PlantvsZombie
                 PVZGame.Game.SpawnBullet(this);
                 bullNumber++;
             }
-            
 
         }
 
