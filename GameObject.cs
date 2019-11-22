@@ -42,12 +42,6 @@ namespace PlantvsZombie
                 Died(this);
         }
 
-        
-        public abstract float GetScaleFactor();
-        public GameObject()
-        {
-
-        }
     }
     
 }

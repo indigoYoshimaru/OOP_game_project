@@ -42,9 +42,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Bullet.cs" />
     <Compile Include="NormalZombie.cs" />
     <Compile Include="PeaShooter.cs" />
     <Compile Include="Plant.cs" />
+    <Compile Include="Tile.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Zombie.cs" />
     <Compile Include="PlantZombieObject.cs" />

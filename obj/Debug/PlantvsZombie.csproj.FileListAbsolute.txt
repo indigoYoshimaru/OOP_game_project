@@ -19,3 +19,4 @@ C:\Users\Seito-nonroot\source\repos\PlantvsZombie\obj\Debug\PlantvsZombie.pdb
 C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Frontyard.xnb
 C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\Content\Texture\NormalZombie.xnb
 C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\Content\Texture\PeaShooter.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Bullet.xnb

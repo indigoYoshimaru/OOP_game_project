@@ -12,7 +12,7 @@ namespace PlantvsZombie
     public class NormalZombie:Zombie
     {
         //private Texture2D _Image = Content.Load<Texture2D>("Texture/NormalZombie");
-        private float _ScaleFactor = .3f;
+        
         private Vector2 _Position;
         private float _DamageFactor = 20;
         
@@ -22,8 +22,10 @@ namespace PlantvsZombie
             int pi, zi, pj, zj;
             float a = PVZGame.Side;
 
+           
             foreach (var p in PVZGame.Game.Plants)
             {
+                //fixed after Title class finish
                 pi = Utility.GetCell(p.Position.X,a);
                 pj = Utility.GetCell(p.Position.Y,a);
                 zi = Utility.GetCell(Position.X,a);
@@ -35,10 +37,6 @@ namespace PlantvsZombie
             return null;
         }
 
-        //public override void Attack(Plant p)
-        //{
-        //p.Damaged();
-        //}
 
         public override void Update()
         {
@@ -53,11 +51,6 @@ namespace PlantvsZombie
         public override void Attack(Plant p)
         {
             p.Damaged(_DamageFactor);
-        }
-
-        public override float GetScaleFactor()
-        {
-            return _ScaleFactor;
         }
 
         public override void Damaged(float dam)

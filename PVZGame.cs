@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Timers;
 using System;
 
 namespace PlantvsZombie
@@ -17,6 +16,8 @@ namespace PlantvsZombie
         public HashSet<GameObject> ManagedObjects;
         public HashSet<Plant> Plants;
         public HashSet<Zombie> Zombies;
+        //public HashSet<Tile> Tiles;
+        public HashSet<Bullet> Bullets;
         private Dictionary<String, Texture2D> _TextureAssets = new Dictionary<string, Texture2D>();
         public Dictionary<String, Texture2D> TextureAssets
         {
@@ -53,13 +54,16 @@ namespace PlantvsZombie
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+           
             ManagedObjects = new HashSet<GameObject>();
             Plants = new HashSet<Plant>();
             Zombies = new HashSet<Zombie>();
+            //Tiles = new HashSet<Tile>();
+            Bullets = new HashSet<Bullet>();
             timeSinceLastSpawn = 0f;
             SpawnZombie();
             this.IsMouseVisible = true;
+            //TODO: build the map of tiles here
             base.Initialize();
         }
 
@@ -74,7 +78,7 @@ namespace PlantvsZombie
             background = Content.Load<Texture2D>("Texture/Frontyard");
             _TextureAssets["NormalZombie"] = Content.Load<Texture2D>("Texture/NormalZombie");
             _TextureAssets["PeaShooter"] = Content.Load<Texture2D>("Texture/PeaShooter");
-
+            _TextureAssets["Bullet"] = Content.Load<Texture2D>("Texture/Bullet");
             // TODO: use this.Content to load your game content here
         }
 
@@ -116,6 +120,13 @@ namespace PlantvsZombie
             if (mouseState.LeftButton == ButtonState.Pressed)
             {
                 //checking  before Spawn
+                //foreach (var t:Tiles)
+                //{
+                //    if (t.BoundingRectangle.Contains(mouseState.Position){
+                //        SpawnPlant(mouseState.X, mouseState.Y);
+                //    }
+                        
+                //}
                 SpawnPlant(mouseState.X, mouseState.Y);
             }
 
@@ -139,7 +150,7 @@ namespace PlantvsZombie
                 ob.Update();
                 _ObjectPosition = ob.Position;
                 _ObjectClassName = ob.GetType().Name;
-                //ScaleFactor!
+                
                 if (_ObjectClassName != null)
                     spriteBatch.Draw(_TextureAssets[_ObjectClassName], _ObjectPosition, null, Color.White, 0f, Vector2.Zero, scalefact, SpriteEffects.None, 0f);
             }
@@ -178,6 +189,20 @@ namespace PlantvsZombie
         {
             ManagedObjects.Remove((GameObject)self);
             Plants.Remove((Plant)self);
+        }
+
+        public void SpawnBullet(Plant p)
+        {
+            Bullet bul = new Bullet(p);
+            bul.Died += HandleDeadBullet;
+            ManagedObjects.Add(bul);
+            Bullets.Add(bul);
+        }
+
+        private void HandleDeadBullet(object self)
+        {
+            ManagedObjects.Remove((GameObject)self);
+            Bullets.Remove((Bullet)self);
         }
 
         public void EndGame()
