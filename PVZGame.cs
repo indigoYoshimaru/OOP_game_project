@@ -11,8 +11,8 @@ namespace PlantvsZombie
     /// </summary>
     public class PVZGame : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        GraphicsDeviceManager _Graphic;
+        SpriteBatch _SpriteBatch;
         public HashSet<GameObject> ManagedObjects;
         public HashSet<Plant> Plants;
         public HashSet<Zombie> Zombies;
@@ -27,19 +27,22 @@ namespace PlantvsZombie
             }
 
         }
-        float timeSinceLastSpawn;
+        float _TimeSinceLastSpawn;
 
-        private Texture2D background;
+        private Texture2D _Background;
         private Vector2 _ObjectPosition;
         private String _ObjectClassName;
-        private MouseState mouseState;
+        private MouseState _CurrentMouseState;
+        private MouseState _OldMouseState;
+
         private Vector2 _PlantPosition;
         public const float Side=50;
-        private float scalefact = 0.2f;
+        private float _ScaleFact = 0.2f;
+        public GameTime CurrentGameTime { get; private set; }
 
         private PVZGame()
         {
-            graphics = new GraphicsDeviceManager(this);
+            _Graphic = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
         }
@@ -60,10 +63,12 @@ namespace PlantvsZombie
             Zombies = new HashSet<Zombie>();
             //Tiles = new HashSet<Tile>();
             Bullets = new HashSet<Bullet>();
-            timeSinceLastSpawn = 0f;
+            _TimeSinceLastSpawn = 0f;
             SpawnZombie();
             this.IsMouseVisible = true;
             //TODO: build the map of tiles here
+            _OldMouseState = Mouse.GetState();
+
             base.Initialize();
         }
 
@@ -74,8 +79,8 @@ namespace PlantvsZombie
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            background = Content.Load<Texture2D>("Texture/Frontyard");
+            _SpriteBatch = new SpriteBatch(GraphicsDevice);
+            _Background = Content.Load<Texture2D>("Texture/Frontyard");
             _TextureAssets["NormalZombie"] = Content.Load<Texture2D>("Texture/NormalZombie");
             _TextureAssets["PeaShooter"] = Content.Load<Texture2D>("Texture/PeaShooter");
             _TextureAssets["Bullet"] = Content.Load<Texture2D>("Texture/Bullet");
@@ -98,6 +103,7 @@ namespace PlantvsZombie
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            CurrentGameTime = gameTime;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -111,24 +117,26 @@ namespace PlantvsZombie
 
             }
 
-            timeSinceLastSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeSinceLastSpawn >= 5f)
+            _TimeSinceLastSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (_TimeSinceLastSpawn >= 5f)
             {
                 SpawnZombie();
             }
-            mouseState = Mouse.GetState();
-            if (mouseState.LeftButton == ButtonState.Pressed)
+            _CurrentMouseState = Mouse.GetState();
+            if (_CurrentMouseState.LeftButton == ButtonState.Pressed&& _OldMouseState.LeftButton==ButtonState.Released)
             {
                 //checking  before Spawn
                 //foreach (var t:Tiles)
                 //{
-                //    if (t.BoundingRectangle.Contains(mouseState.Position){
-                //        SpawnPlant(mouseState.X, mouseState.Y);
+                //    if (t.BoundingRectangle.Contains(_CurrentMouseState.Position){
+                //        SpawnPlant(_CurrentMouseState.X, _CurrentMouseState.Y);
                 //    }
                         
                 //}
-                SpawnPlant(mouseState.X, mouseState.Y);
+                SpawnPlant(_CurrentMouseState.X, _CurrentMouseState.Y);
+                
             }
+            _OldMouseState = _CurrentMouseState;
 
 
             base.Update(gameTime);
@@ -140,9 +148,9 @@ namespace PlantvsZombie
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
+            _SpriteBatch.Begin();
             Rectangle rec = new Rectangle(0, 0, 800, 480);
-            spriteBatch.Draw(background, rec, Color.White);
+            _SpriteBatch.Draw(_Background, rec, Color.White);
             var currentObjects = new HashSet<GameObject>(ManagedObjects);
 
             foreach (var ob in currentObjects)
@@ -152,10 +160,10 @@ namespace PlantvsZombie
                 _ObjectClassName = ob.GetType().Name;
                 
                 if (_ObjectClassName != null)
-                    spriteBatch.Draw(_TextureAssets[_ObjectClassName], _ObjectPosition, null, Color.White, 0f, Vector2.Zero, scalefact, SpriteEffects.None, 0f);
+                    _SpriteBatch.Draw(_TextureAssets[_ObjectClassName], _ObjectPosition, null, Color.White, 0f, Vector2.Zero, _ScaleFact, SpriteEffects.None, 0f);
             }
             // TODO: Add your drawing code here
-            spriteBatch.End();
+            _SpriteBatch.End();
             base.Draw(gameTime);
         }
 
@@ -166,7 +174,7 @@ namespace PlantvsZombie
             z.Died += HandleDeadZombie;
             ManagedObjects.Add(z);
             Zombies.Add(z);
-            timeSinceLastSpawn = 0f;
+            _TimeSinceLastSpawn = 0f;
         }
 
         private void HandleDeadZombie(object self)

@@ -8,21 +8,20 @@ namespace PlantvsZombie
 {
     public class PeaShooter:Plant
     {
-        private int bullNumber=0;
-        private float timeSinceLastSpawn=0;
-        private GameTime gameTime = new GameTime();
+        
+        private float _TimeSinceLastSpawn=0f;
 
         public override void Update()
         {
             base.Update();
-            
-            //timeSinceLastSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //if (timeSinceLastSpawn >= 2f)
-            //{
+
+            _TimeSinceLastSpawn += (float)PVZGame.Game.CurrentGameTime.ElapsedGameTime.TotalSeconds;
+            if (_TimeSinceLastSpawn >= 2f)
+            {
                 Attack();
-            //    timeSinceLastSpawn = 0f;
-            //}
-               
+                _TimeSinceLastSpawn = 0f;
+            }
+
         }
 
 
@@ -44,11 +43,7 @@ namespace PlantvsZombie
             //throw new NotImplementedException();
             // bulletfire
             // if is only for testing, will be updated after tile is built
-            if (bullNumber == 0)
-            {
-                PVZGame.Game.SpawnBullet(this);
-                bullNumber++;
-            }
+            PVZGame.Game.SpawnBullet(this);
 
         }
 
