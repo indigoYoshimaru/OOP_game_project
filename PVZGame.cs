@@ -66,7 +66,6 @@ namespace PlantvsZombie
             _TimeSinceLastSpawn = 0f;
             SpawnZombie();
             this.IsMouseVisible = true;
-            //TODO: build the map of tiles here
             _OldMouseState = Mouse.GetState();
 
             base.Initialize();
@@ -80,10 +79,12 @@ namespace PlantvsZombie
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             _SpriteBatch = new SpriteBatch(GraphicsDevice);
-            _Background = Content.Load<Texture2D>("Texture/Frontyard");
-            _TextureAssets["NormalZombie"] = Content.Load<Texture2D>("Texture/NormalZombie");
-            _TextureAssets["PeaShooter"] = Content.Load<Texture2D>("Texture/PeaShooter");
-            _TextureAssets["Bullet"] = Content.Load<Texture2D>("Texture/Bullet");
+            _Background = Content.Load<Texture2D>("Texture/Background/Lawn");
+            _TextureAssets["NormalZombie"] = Content.Load<Texture2D>("Texture/Zombies/NormalZombie");
+            _TextureAssets["PeaShooter"] = Content.Load<Texture2D>("Texture/Plants/PeaShooter");
+            _TextureAssets["Bullet"] = Content.Load<Texture2D>("Texture/Miscellaneous/Bullet");
+            _TextureAssets["FlyingZombie"] = Content.Load<Texture2D>("Texture/Zombies/FlyingZombie");
+            _TextureAssets["LaneJumpingZombie"] = Content.Load<Texture2D>("Texture/Zombies/LaneJumpingZombie");
             // TODO: use this.Content to load your game content here
         }
 
@@ -171,9 +172,18 @@ namespace PlantvsZombie
         public void SpawnZombie()
         {
             Zombie z = new NormalZombie();
+            Zombie z1 = new FlyingZombie();
+            Zombie z2 = new LaneJumpingZombie();
+            z2.Died += HandleDeadZombie;
+            z1.Died += HandleDeadZombie;
             z.Died += HandleDeadZombie;
             ManagedObjects.Add(z);
+            ManagedObjects.Add(z1);
+            ManagedObjects.Add(z2);
+
             Zombies.Add(z);
+            Zombies.Add(z1);
+            Zombies.Add(z2);
             _TimeSinceLastSpawn = 0f;
         }
 

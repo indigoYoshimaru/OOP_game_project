@@ -16,7 +16,7 @@ namespace PlantvsZombie
             base.Update();
 
             _TimeSinceLastSpawn += (float)PVZGame.Game.CurrentGameTime.ElapsedGameTime.TotalSeconds;
-            if (_TimeSinceLastSpawn >= 2f)
+            if (_TimeSinceLastSpawn >= 5f)
             {
                 Attack();
                 _TimeSinceLastSpawn = 0f;

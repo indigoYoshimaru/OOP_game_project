@@ -12,7 +12,7 @@ namespace PlantvsZombie
     public class Bullet:GameObject
     {
         private Vector2 _Position;
-        private int _DamageFactor=10;
+        private int _DamageFactor=20;
     
         public Bullet(Plant p)
         {
@@ -59,8 +59,30 @@ namespace PlantvsZombie
         
         public void Attack(Zombie z)
         {
-            z.Damaged(_DamageFactor);
-            Die();
+            //need rewrite
+            //FlyingZombie _FlyingZombie = new FlyingZombie();
+            //if (z.GetType().Equals(_FlyingZombie.GetType()))
+            //{
+            //    _FlyingZombie =(FlyingZombie) z;
+            //    if (_FlyingZombie.DamagedState)
+            //    {
+            //        z.Damaged(_DamageFactor);
+            //        Die();
+            //    }
+            //    else Move();
+            //}
+            //else
+            //{
+            //    z.Damaged(_DamageFactor);
+            //    Die();
+            //}
+            if (z.DamagedState)
+            {
+                z.Damaged(_DamageFactor);
+                Die();
+            }
+            else Move();
+            
         }
 
     }

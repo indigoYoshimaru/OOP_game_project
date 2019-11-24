@@ -11,15 +11,18 @@ namespace PlantvsZombie
 {
     public abstract class Zombie:PlantZombieObject
     {
+        public bool DamagedState { get; set; }
+
         public abstract void Move();
 
         public Zombie()
         {
-            
+            DamagedState = true;
         }
         public abstract void Attack(Plant p);
 
         public abstract void Damaged(float dam);
+        
 
         public override void Update()
         {
