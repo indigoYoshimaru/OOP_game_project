@@ -13,6 +13,7 @@ namespace PlantvsZombie
     {
         GraphicsDeviceManager _Graphic;
         SpriteBatch _SpriteBatch;
+        public Map GameMap;
         public HashSet<GameObject> ManagedObjects;
         public HashSet<Plant> Plants;
         public HashSet<Zombie> Zombies;
@@ -36,7 +37,7 @@ namespace PlantvsZombie
         private MouseState _OldMouseState;
 
         private Vector2 _PlantPosition;
-        public const float Side=50;
+        public const float Side = 50;
         private float _ScaleFact = 0.2f;
         public GameTime CurrentGameTime { get; private set; }
 
@@ -57,7 +58,7 @@ namespace PlantvsZombie
         /// </summary>
         protected override void Initialize()
         {
-           
+            GameMap = new Map(GraphicsDevice.PresentationParameters.Bounds);
             ManagedObjects = new HashSet<GameObject>();
             Plants = new HashSet<Plant>();
             Zombies = new HashSet<Zombie>();
@@ -124,7 +125,7 @@ namespace PlantvsZombie
                 SpawnZombie();
             }
             _CurrentMouseState = Mouse.GetState();
-            if (_CurrentMouseState.LeftButton == ButtonState.Pressed&& _OldMouseState.LeftButton==ButtonState.Released)
+            if (_CurrentMouseState.LeftButton == ButtonState.Pressed && _OldMouseState.LeftButton == ButtonState.Released)
             {
                 //checking  before Spawn
                 //foreach (var t:Tiles)
@@ -132,10 +133,10 @@ namespace PlantvsZombie
                 //    if (t.BoundingRectangle.Contains(_CurrentMouseState.Position){
                 //        SpawnPlant(_CurrentMouseState.X, _CurrentMouseState.Y);
                 //    }
-                        
+
                 //}
                 SpawnPlant(_CurrentMouseState.X, _CurrentMouseState.Y);
-                
+
             }
             _OldMouseState = _CurrentMouseState;
 
@@ -156,14 +157,13 @@ namespace PlantvsZombie
 
             foreach (var ob in currentObjects)
             {
-                ob.Update();
                 _ObjectPosition = ob.Position;
                 _ObjectClassName = ob.GetType().Name;
-                
+
                 if (_ObjectClassName != null)
-                    _SpriteBatch.Draw(_TextureAssets[_ObjectClassName], _ObjectPosition, null, Color.White, 0f, Vector2.Zero, _ScaleFact, SpriteEffects.None, 0f);
+                    Utility.DrawCenter(_SpriteBatch, _TextureAssets[_ObjectClassName], _ObjectPosition, GameMap.TileSize.X, GameMap.TileSize.X); 
             }
-            // TODO: Add your drawing code here
+
             _SpriteBatch.End();
             base.Draw(gameTime);
         }

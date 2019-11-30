@@ -31,6 +31,11 @@ namespace PlantvsZombie
             return new Vector2((X + 0.5f) * map.TileSize.X + map.TopLeft.X, (Y + 0.5f) * map.TileSize.Y + map.TopLeft.Y);
         }
 
+        public bool Contains(Vector2 location)
+        {
+            return map.GetTileAt(location) == this;
+        }
+
         public Tile GetRelativeTile(int xr, int yr)
         {
             return map.GetTile(X + xr, Y + yr);
