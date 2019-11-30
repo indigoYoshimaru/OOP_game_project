@@ -45,9 +45,11 @@
     <Compile Include="Bullet.cs" />
     <Compile Include="FlyingZombie.cs" />
     <Compile Include="LaneJumpingZombie.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="NormalZombie.cs" />
     <Compile Include="PeaShooter.cs" />
     <Compile Include="Plant.cs" />
+    <Compile Include="PlayerManagement.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Zombie.cs" />
