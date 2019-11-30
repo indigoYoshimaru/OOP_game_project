@@ -26,7 +26,12 @@ namespace PlantvsZombie
 
         public override void Update()
         {
-            base.Update();
+
+            if (Health <= 0)
+            {
+                PVZGame.Game.management.UpdateScore(this);
+                Die();
+            }
             if (Position.X < 0)
                 PVZGame.Game.EndGame();
         }
