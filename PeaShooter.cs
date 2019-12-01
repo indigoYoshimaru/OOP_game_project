@@ -43,7 +43,7 @@ namespace PlantvsZombie
             //throw new NotImplementedException();
             // bulletfire
             // if is only for testing, will be updated after tile is built
-            PVZGame.Game.SpawnBullet(this);
+            PVZGame.Game.Spawner.SpawnBullet(this);
 
         }
 

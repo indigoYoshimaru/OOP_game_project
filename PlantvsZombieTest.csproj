@@ -49,7 +49,10 @@
     <Compile Include="NormalZombie.cs" />
     <Compile Include="PeaShooter.cs" />
     <Compile Include="Plant.cs" />
-    <Compile Include="PlayerManagement.cs" />
+    <Compile Include="PlayerManager.cs" />
+    <Compile Include="SpawnManager.cs" />
+    <Compile Include="Sun.cs" />
+    <Compile Include="SunFlower.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Zombie.cs" />

@@ -13,8 +13,6 @@ namespace PlantvsZombie
     {
        
         public abstract void Attack();
-
-        public abstract void Damaged(float dam);
                 
     }
 }

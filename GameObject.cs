@@ -40,6 +40,7 @@ namespace PlantvsZombie
         {
             if (Died != null)
                 Died(this);
+
         }
 
     }
