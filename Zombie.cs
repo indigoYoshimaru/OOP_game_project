@@ -13,21 +13,25 @@ namespace PlantvsZombie
     {
         public bool DamagedState { get; set; }
         public abstract void Move();
-
-        public Zombie()
-        {
-            DamagedState = true;
-        }
         public abstract void Attack(Plant p);
-
-        
-        
 
         public override void Update()
         {
             base.Update();
             if (Position.X < 0)
                 PVZGame.Game.EndGame();
+        }
+
+        public Zombie()
+        {
+            Random r = new Random(Guid.NewGuid().GetHashCode());
+            int y = r.Next(0, 4);
+            Speed = 0.2f;
+            DamagedState = true;
+            var _Position  = PVZGame.Game.GameMap.GetTile(9, y).GetCenter();
+            
+            Position = _Position;
+
         }
     }
 }

@@ -46,10 +46,9 @@ namespace PlantvsZombie
         }
 
         private Texture2D _Background;
-        private Vector2 _ObjectPosition;
-        private String _ObjectClassName;
         private MouseState _CurrentMouseState;
         private MouseState _OldMouseState;
+        private Tile _MouseTile;
 
         public const float Side=50;
         private float _ScaleFact = 0.1f;
@@ -84,6 +83,7 @@ namespace PlantvsZombie
             _TimeManager = 0f;
             Player = new PlayerManager();
             Spawner = new SpawnManager();
+            
            
             Spawner.SpawnZombie();
             
@@ -156,16 +156,10 @@ namespace PlantvsZombie
             _CurrentMouseState = Mouse.GetState();
             if (_CurrentMouseState.LeftButton == ButtonState.Pressed&& _OldMouseState.LeftButton==ButtonState.Released)
             {
-                //checking  before Spawn
-                //foreach (var t:Tiles)
-                //{
-                //    if (t.BoundingRectangle.Contains(_CurrentMouseState.Position){
-                //        SpawnPlant(_CurrentMouseState.X, _CurrentMouseState.Y);
-                //    }
-                        
-                //}
+                
+                _MouseTile = GameMap.GetTileAt(_CurrentMouseState.Position.ToVector2());
 
-                Spawner.SpawnPlant(_CurrentMouseState.X, _CurrentMouseState.Y);
+                Spawner.SpawnPlant(_MouseTile);
                 
             }
             _OldMouseState = _CurrentMouseState;
@@ -181,19 +175,18 @@ namespace PlantvsZombie
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _SpriteBatch.Begin();
-            Rectangle rec = new Rectangle(0, 0, 800, 480);
+            Rectangle rec = new Rectangle(0, 0,800, 480);
             _SpriteBatch.Draw(_Background, rec, Color.White);
             var currentObjects = new HashSet<GameObject>(ManagedObjects);
 
             foreach (var ob in currentObjects)
             {
                 ob.Update();
-                _ObjectPosition = ob.Position;
-                _ObjectClassName = ob.GetType().Name;
+                String objectClassName = ob.GetType().Name;
                 
-                if (_ObjectClassName != null)
-                    //_SpriteBatch.Draw(_TextureAssets[_ObjectClassName], _ObjectPosition, null, Color.White, 0f, Vector2.Zero, _ScaleFact, SpriteEffects.None, 0f);
-                    Utility.DrawCenter(_SpriteBatch, _TextureAssets[_ObjectClassName], _ObjectPosition, GameMap.TileSize.X , GameMap.TileSize.X);
+                if (objectClassName != null)
+                    //_SpriteBatch.Draw(_TextureAssets[objectClassName], _ObjectPosition, null, Color.White, 0f, Vector2.Zero, _ScaleFact, SpriteEffects.None, 0f);
+                    Utility.DrawCenter(_SpriteBatch, _TextureAssets[objectClassName], ob.Position, GameMap.TileSize.X , GameMap.TileSize.X);
             }
             _SpriteBatch.DrawString(_GameFont, "Score: " + Player.GetScore().ToString(), new Vector2(0, _Graphic.PreferredBackBufferHeight - 30), Color.White); //display score at the bottom left
 

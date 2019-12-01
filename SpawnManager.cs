@@ -82,11 +82,10 @@ namespace PlantvsZombie
             PVZGame.Game.Zombies.Remove((Zombie)self);
         }
 
-        public void SpawnPlant(int _X, int _Y)
+        public void SpawnPlant(Tile mouseTile)
         {
-            Vector2 _Position = new Vector2();
-            _Position.X = _X;
-            _Position.Y = _Y;
+            Vector2 _Position = mouseTile.GetCenter();
+
             Plant pl = null;
 
             switch (PVZGame.Game.Player.PlantState)
