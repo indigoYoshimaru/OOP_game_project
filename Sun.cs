@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -70,7 +71,6 @@ namespace PlantvsZombie
             _Position.X = Position.X;
             if (_Position.Y > stop2)
             {
-                Console.WriteLine("HI");
                 _Position.Y = stop2;
             }
             else
@@ -79,6 +79,17 @@ namespace PlantvsZombie
             }
             this.Position = _Position;
         }
-
+        public Boolean CollectSun(int _X, int _Y)
+        {
+            if (_X > Position.X - 50 && _X < Position.X + 50 && _Y > Position.Y - 60 && _Y < Position.Y + 60)
+            {
+                this.Die();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

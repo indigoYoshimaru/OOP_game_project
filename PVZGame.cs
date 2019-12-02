@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace PlantvsZombie
 {
@@ -21,7 +21,7 @@ namespace PlantvsZombie
         public HashSet<Bullet> Bullets;
         public HashSet<Sun> Suns;
         public ArrayList sunList = new ArrayList();
-        public int checkClick = 0;
+        
         private Dictionary<String, Texture2D> _TextureAssets = new Dictionary<string, Texture2D>();
         public Dictionary<String, Texture2D> TextureAssets
         {
@@ -135,18 +135,19 @@ namespace PlantvsZombie
             _CurrentMouseState = Mouse.GetState();
             if (_CurrentMouseState.LeftButton == ButtonState.Pressed && _OldMouseState.LeftButton == ButtonState.Released)
             {
-                //checking  before Spawn
-                //foreach (var t:Tiles)
-                //{
-                //    if (t.BoundingRectangle.Contains(_CurrentMouseState.Position){
-                //        SpawnPlant(_CurrentMouseState.X, _CurrentMouseState.Y);
-                //    }
-                //}
-                CollectSun(_CurrentMouseState.X - 50, _CurrentMouseState.Y - 50);
+                int checkClick = 0;
+                foreach (Sun sun in sunList)
+                {
+                    if (sun.CollectSun(_CurrentMouseState.X - 50, _CurrentMouseState.Y - 50) == true)
+                    {
+                        checkClick = 1;
+                    }
+                }
                 if (checkClick == 0)
                 {
                     SpawnPlant(_CurrentMouseState.X - 50, _CurrentMouseState.Y - 50);
                 }
+
             }
             _OldMouseState = _CurrentMouseState;
             base.Update(gameTime);
@@ -253,20 +254,6 @@ namespace PlantvsZombie
         {
             ManagedObjects.Remove((GameObject)self);
             Suns.Remove((Sun)self);
-        }
-        public void CollectSun(int _X, int _Y)
-        {
-            {
-                foreach (Sun sun in sunList)
-                {
-                    if (_X > sun.Position.X - 50 && _X < sun.Position.X + 50 && _Y > sun.Position.Y - 60 && _Y < sun.Position.Y + 60)
-                    {
-                        sun.Die();
-                        checkClick = 1;
-                    }
-                    else checkClick = 0;
-                }
-            }
         }
         public void EndGame()
         {
