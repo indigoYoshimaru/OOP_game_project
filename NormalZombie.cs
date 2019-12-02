@@ -14,7 +14,7 @@ namespace PlantvsZombie
         //private Texture2D _Image = Content.Load<Texture2D>("Texture/NormalZombie");
         
         private Vector2 _Position;
-        private float _DamageFactor = 10;
+        private float _DamageFactor = 5;
         private Tile _ZombieTile;
 
         private Plant MeetPlant()

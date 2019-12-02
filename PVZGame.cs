@@ -152,19 +152,20 @@ namespace PlantvsZombie
                 Spawner.SpawnSun();
             }
 
+            //call player Update()
             Player.Controller();
             _CurrentMouseState = Mouse.GetState();
             if (_CurrentMouseState.LeftButton == ButtonState.Pressed&& _OldMouseState.LeftButton==ButtonState.Released)
             {
                 
                 _MouseTile = GameMap.GetTileAt(_CurrentMouseState.Position.ToVector2());
-
-                Spawner.SpawnPlant(_MouseTile);
-                
+                {
+                    Spawner.SpawnPlant(_MouseTile);
+                }
             }
             _OldMouseState = _CurrentMouseState;
 
-            //Player.Controller();
+            
             base.Update(gameTime);
         }
         /// <summary>

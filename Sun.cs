@@ -80,5 +80,18 @@ namespace PlantvsZombie
             this.Position = _Position;
         }
 
+        public bool CollectSun(int _X, int _Y)
+        {
+            if (_X > Position.X - 50 && _X < Position.X + 50 && _Y > Position.Y - 60 && _Y < Position.Y + 60)
+            {
+                this.Die();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }
