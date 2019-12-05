@@ -26,7 +26,6 @@ namespace PlantvsZombie
         {
             Random r = new Random(Guid.NewGuid().GetHashCode());
             int y = r.Next(0, 4);
-            Speed = 0.2f;
             DamagedState = true;
             var _Position  = PVZGame.Game.GameMap.GetTile(9, y).GetCenter();
             

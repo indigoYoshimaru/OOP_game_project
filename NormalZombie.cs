@@ -14,7 +14,7 @@ namespace PlantvsZombie
         //private Texture2D _Image = Content.Load<Texture2D>("Texture/NormalZombie");
         
         private Vector2 _Position;
-        private float _DamageFactor = 5;
+        private float _DamageFactor = 1;
         private Tile _ZombieTile;
 
         private Plant MeetPlant()
@@ -22,14 +22,8 @@ namespace PlantvsZombie
             
             foreach (var p in PVZGame.Game.Plants)
             {
-                //fixed after Title class finish
-                //pi = Utility.GetCell(p.Position.X,a);
-                //pj = Utility.GetCell(p.Position.Y,a);
-                //zi = Utility.GetCell(Position.X,a);
-                //zj = Utility.GetCell(Position.Y, a);
 
-                
-                if (_ZombieTile.Contains(p.Position)) // Position.Y or Position.X - the side of a square
+                if (_ZombieTile.Contains(p.Position))
                     return p;
             }
             
@@ -71,6 +65,7 @@ namespace PlantvsZombie
         {
             _Position = Position;
             _ZombieTile = PVZGame.Game.GameMap.GetTileAt(_Position);
+            Speed = 0.1f;
         }
     }
 }
