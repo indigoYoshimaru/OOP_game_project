@@ -11,26 +11,18 @@ namespace PlantvsZombie
 {
     public class FlyingZombie : Zombie
     {
-        //private Texture2D _Image = Content.Load<Texture2D>("Texture/NormalZombie");
-        private float _ScaleFactor = .3f;
+        
         private Vector2 _Position;
-        private float _DamageFactor = 20;
-        private int counter = 0;
-        private int state = 0;
+        private float _DamageFactor = 5;
+        private int _Counter = 0;
+        private Tile _ZombieTile;
         private Plant MeetPlant()
         {
-            int pi, zi, pj, zj;
-            float a = PVZGame.Side;
             foreach (var p in PVZGame.Game.Plants)
             {
-                pi = Utility.GetCell(p.Position.X, a);
-                pj = Utility.GetCell(p.Position.Y, a);
-                zi = Utility.GetCell(Position.X, a);
-                zj = Utility.GetCell(Position.Y, a);
-
-                if (pi == zi && pj == zj) // Position.Y or Position.X - the side of a square
+                if (_ZombieTile.Contains(p.Position))
                     return p;
-            } 
+            }
             return null;
         }
 
@@ -39,23 +31,23 @@ namespace PlantvsZombie
         public override void Update()
         {
             base.Update();
+            _ZombieTile = PVZGame.Game.GameMap.GetTileAt(_Position);
             var p = MeetPlant();
             if (p != null)
             {
-                Console.WriteLine(counter);
-                if (counter == 0)
+                if (_Counter == 0)
                 {
-                    counter++;
-                    float a = PVZGame.Side;
-                    MoveByCell(Utility.GetCell(p.Position.X, a), Utility.GetCell(p.Position.Y, a));
+                    _Counter++;
+                    DamagedState = true;
+                    MoveByCell();
                 }
                 else
                 {
-                    state = 1;
                     Attack(p);
                 }
             } 
             else Move();
+            
         }
 
         public override void Attack(Plant p)
@@ -63,15 +55,11 @@ namespace PlantvsZombie
             p.Damaged(_DamageFactor);
         }
 
-        public override float GetScaleFactor()
-        {
-            return _ScaleFactor;
-        }
+       
 
         public override void Damaged(float dam)
         {
-            if (state == 1)
-                Health -= dam;
+            Health -= dam;
         }
 
         public override void Move()
@@ -81,20 +69,19 @@ namespace PlantvsZombie
             this.Position = _Position;
         }
 
-        public void MoveByCell(int zx, int zy)
+        public void MoveByCell()
         {
             _Position.X = Position.X-PVZGame.Side;
             _Position.Y = Position.Y;
             Position = _Position;
         }
 
-        public FlyingZombie()
+        public FlyingZombie() : base()
         {
-            _Position.X = 700;
-            Random r = new Random(Guid.NewGuid().GetHashCode());
-            _Position.Y = r.Next(0, 300);
-            Position = _Position;
+            _Position = Position;
             Speed = 0.2f;
+            DamagedState = false;
+            _ZombieTile = PVZGame.Game.GameMap.GetTileAt(_Position);
         }
     }
 }
