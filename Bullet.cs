@@ -13,39 +13,40 @@ namespace PlantvsZombie
     {
         private Vector2 _Position;
         private int _DamageFactor=20;
+        private Tile _BulletTile;
     
-        public Bullet(Plant p)
+        public Bullet(PeaShooter p)
         {
             _Position = p.Position;
             this.Position = _Position;
+            _BulletTile=PVZGame.Game.GameMap.GetTileAt(_Position);
             Speed = 0.4f;
         }
 
         public Zombie MeetZombie()
         {
-            int bi, bj, zi, zj;
-            float a = PVZGame.Side;
+
             foreach (var z in PVZGame.Game.Zombies)
             {
-                //fixed after Title class finish, otherwise the zombie dies after two hits
-                //since the bullet travel through the cell in a considerable amount of time
-                zi = Utility.GetCell(z.Position.X, a);
-                zj = Utility.GetCell(z.Position.Y, a);
-                bi = Utility.GetCell(Position.X, a);
-                bj = Utility.GetCell(Position.Y, a);
-                if (bi == zi && bj == zj) // Position.Y or Position.X - the side of a square
+                if (_BulletTile.Contains(z.Position))
                     return z;
             }
-
             return null;
+
         }
 
         public override void Update()
         {
-            var z = MeetZombie();
-            if (z != null) Attack(z);
-
-            else Move();
+            _BulletTile = PVZGame.Game.GameMap.GetTileAt(_Position);
+            if (_BulletTile != null)
+            {
+                var z = MeetZombie();
+                if (z != null) Attack(z);
+                else
+                    Move();
+            }
+            else Die();
+           
         }
 
         public void Move()
@@ -59,23 +60,7 @@ namespace PlantvsZombie
         
         public void Attack(Zombie z)
         {
-            //need rewrite
-            //FlyingZombie _FlyingZombie = new FlyingZombie();
-            //if (z.GetType().Equals(_FlyingZombie.GetType()))
-            //{
-            //    _FlyingZombie =(FlyingZombie) z;
-            //    if (_FlyingZombie.DamagedState)
-            //    {
-            //        z.Damaged(_DamageFactor);
-            //        Die();
-            //    }
-            //    else Move();
-            //}
-            //else
-            //{
-            //    z.Damaged(_DamageFactor);
-            //    Die();
-            //}
+            
             if (z.DamagedState)
             {
                 z.Damaged(_DamageFactor);

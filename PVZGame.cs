@@ -13,11 +13,15 @@ namespace PlantvsZombie
     {
         GraphicsDeviceManager _Graphic;
         SpriteBatch _SpriteBatch;
+        public Map GameMap;
+        
+        public PlayerManager Player { get; set; }
+        public SpawnManager Spawner { get; set; }
+        private SpriteFont _GameFont;
         public HashSet<GameObject> ManagedObjects;
         public HashSet<Plant> Plants;
         public HashSet<Zombie> Zombies;
-        //public HashSet<Tile> Tiles;
-        public HashSet<Bullet> Bullets;
+        public List<String> ZombieTypes;
         private Dictionary<String, Texture2D> _TextureAssets = new Dictionary<string, Texture2D>();
         public Dictionary<String, Texture2D> TextureAssets
         {
@@ -27,17 +31,26 @@ namespace PlantvsZombie
             }
 
         }
-        float _TimeSinceLastSpawn;
+        private float _TimeSinceLastSpawn;
+        public float TimeSinceLastSpawn
+        {
+            get { return _TimeSinceLastSpawn; }
+            set { _TimeSinceLastSpawn = value; }
+        }
+        private float _TimeManager;
+        public float TimeManager
+        {
+            get { return _TimeManager; }
+            set { _TimeManager = value;  }
+        }
 
         private Texture2D _Background;
-        private Vector2 _ObjectPosition;
-        private String _ObjectClassName;
         private MouseState _CurrentMouseState;
         private MouseState _OldMouseState;
+        private Tile _MouseTile;
 
-        private Vector2 _PlantPosition;
         public const float Side=50;
-        private float _ScaleFact = 0.2f;
+        private float _ScaleFact = 0.1f;
         public GameTime CurrentGameTime { get; private set; }
 
         private PVZGame()
@@ -57,15 +70,22 @@ namespace PlantvsZombie
         /// </summary>
         protected override void Initialize()
         {
-           
+            GameMap = new Map(GraphicsDevice.PresentationParameters.Bounds);
             ManagedObjects = new HashSet<GameObject>();
             Plants = new HashSet<Plant>();
             Zombies = new HashSet<Zombie>();
-            //Tiles = new HashSet<Tile>();
-            Bullets = new HashSet<Bullet>();
+            ZombieTypes = new List<string>();
+            ZombieTypes.Add("NormalZombie");
+            ZombieTypes.Add("FlyingZombie");
+            ZombieTypes.Add("LaneJumpingZombie");
             _TimeSinceLastSpawn = 0f;
-            SpawnZombie();
-            this.IsMouseVisible = true;
+            _TimeManager = 0f;
+            Player = new PlayerManager();
+            Spawner = new SpawnManager();
+            
+           
+            Spawner.SpawnZombie();
+            
             _OldMouseState = Mouse.GetState();
 
             base.Initialize();
@@ -82,9 +102,15 @@ namespace PlantvsZombie
             _Background = Content.Load<Texture2D>("Texture/Background/Lawn");
             _TextureAssets["NormalZombie"] = Content.Load<Texture2D>("Texture/Zombies/NormalZombie");
             _TextureAssets["PeaShooter"] = Content.Load<Texture2D>("Texture/Plants/PeaShooter");
+            _TextureAssets["SunFlower"] = Content.Load<Texture2D>("Texture/Plants/SunFlower");
+            _TextureAssets["CarnivorousPlant"] = Content.Load<Texture2D>("Texture/Plants/CarnivorousPlant");
             _TextureAssets["Bullet"] = Content.Load<Texture2D>("Texture/Miscellaneous/Bullet");
+            _TextureAssets["Sun"] = Content.Load<Texture2D>("Texture/Miscellaneous/Sun");
             _TextureAssets["FlyingZombie"] = Content.Load<Texture2D>("Texture/Zombies/FlyingZombie");
             _TextureAssets["LaneJumpingZombie"] = Content.Load<Texture2D>("Texture/Zombies/LaneJumpingZombie");
+            _TextureAssets["NormalMouse"]=Content.Load<Texture2D>("Texture/Miscellaneous/NormalMouse");
+            _GameFont = Content.Load<SpriteFont>("Texture/Miscellaneous/GalleryFont");
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -118,28 +144,28 @@ namespace PlantvsZombie
 
             }
 
-            _TimeSinceLastSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (_TimeSinceLastSpawn >= 5f)
+            TimeSinceLastSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            TimeManager += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (TimeSinceLastSpawn >= 5f)
             {
-                SpawnZombie();
+                Spawner.SpawnZombie();
+                Spawner.SpawnSun();
             }
+
+            //call player Update()
+            Player.Controller();
             _CurrentMouseState = Mouse.GetState();
             if (_CurrentMouseState.LeftButton == ButtonState.Pressed&& _OldMouseState.LeftButton==ButtonState.Released)
             {
-                //checking  before Spawn
-                //foreach (var t:Tiles)
-                //{
-                //    if (t.BoundingRectangle.Contains(_CurrentMouseState.Position){
-                //        SpawnPlant(_CurrentMouseState.X, _CurrentMouseState.Y);
-                //    }
-                        
-                //}
-                SpawnPlant(_CurrentMouseState.X, _CurrentMouseState.Y);
                 
+                _MouseTile = GameMap.GetTileAt(_CurrentMouseState.Position.ToVector2());
+                {
+                    Spawner.SpawnPlant(_MouseTile);
+                }
             }
             _OldMouseState = _CurrentMouseState;
 
-
+            
             base.Update(gameTime);
         }
         /// <summary>
@@ -150,77 +176,40 @@ namespace PlantvsZombie
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _SpriteBatch.Begin();
-            Rectangle rec = new Rectangle(0, 0, 800, 480);
+            Rectangle rec = new Rectangle(0, 0,800, 480);
             _SpriteBatch.Draw(_Background, rec, Color.White);
             var currentObjects = new HashSet<GameObject>(ManagedObjects);
 
             foreach (var ob in currentObjects)
             {
                 ob.Update();
-                _ObjectPosition = ob.Position;
-                _ObjectClassName = ob.GetType().Name;
+                String objectClassName = ob.GetType().Name;
                 
-                if (_ObjectClassName != null)
-                    _SpriteBatch.Draw(_TextureAssets[_ObjectClassName], _ObjectPosition, null, Color.White, 0f, Vector2.Zero, _ScaleFact, SpriteEffects.None, 0f);
+                if (objectClassName != null)
+                    //_SpriteBatch.Draw(_TextureAssets[objectClassName], _ObjectPosition, null, Color.White, 0f, Vector2.Zero, _ScaleFact, SpriteEffects.None, 0f);
+                    Utility.DrawCenter(_SpriteBatch, _TextureAssets[objectClassName], ob.Position, GameMap.TileSize.X , GameMap.TileSize.X);
             }
-            // TODO: Add your drawing code here
+            _SpriteBatch.DrawString(_GameFont, "Score: " + Player.GetScore().ToString(), new Vector2(0, _Graphic.PreferredBackBufferHeight - 30), Color.White); //display score at the bottom left
+
+            
+            switch (Player.GetMouseIcon())
+            {
+                case PlayerManager.MouseIcon.NORMAL:
+                    _SpriteBatch.Draw(_TextureAssets["NormalMouse"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), Color.White);
+                    break;
+                case PlayerManager.MouseIcon.PEASHOOTER:
+                    Utility.DrawCenter(_SpriteBatch, _TextureAssets["PeaShooter"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), GameMap.TileSize.X, GameMap.TileSize.X);
+                    break;
+                case PlayerManager.MouseIcon.SUNFLOWER:
+                    Utility.DrawCenter(_SpriteBatch, _TextureAssets["SunFlower"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), GameMap.TileSize.X, GameMap.TileSize.X);
+                    break;
+                case PlayerManager.MouseIcon.CARNIVOROUSPLANT:
+                    Utility.DrawCenter(_SpriteBatch, _TextureAssets["CarnivorousPlant"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), GameMap.TileSize.X, GameMap.TileSize.X);
+                    break;
+            }
+
             _SpriteBatch.End();
             base.Draw(gameTime);
-        }
-
-
-        public void SpawnZombie()
-        {
-            Zombie z = new NormalZombie();
-            Zombie z1 = new FlyingZombie();
-            Zombie z2 = new LaneJumpingZombie();
-            z2.Died += HandleDeadZombie;
-            z1.Died += HandleDeadZombie;
-            z.Died += HandleDeadZombie;
-            ManagedObjects.Add(z);
-            ManagedObjects.Add(z1);
-            ManagedObjects.Add(z2);
-
-            Zombies.Add(z);
-            Zombies.Add(z1);
-            Zombies.Add(z2);
-            _TimeSinceLastSpawn = 0f;
-        }
-
-        private void HandleDeadZombie(object self)
-        {
-            ManagedObjects.Remove((GameObject)self);
-            Zombies.Remove((Zombie)self);
-        }
-
-        public void SpawnPlant(int _X, int _Y)
-        {
-            _PlantPosition.X = _X;
-            _PlantPosition.Y = _Y;
-            Plant pl = new PeaShooter(_PlantPosition);
-            pl.Died += HandleDeadPlantObject;
-            ManagedObjects.Add(pl);
-            Plants.Add(pl);
-        }
-
-        private void HandleDeadPlantObject(object self)
-        {
-            ManagedObjects.Remove((GameObject)self);
-            Plants.Remove((Plant)self);
-        }
-
-        public void SpawnBullet(Plant p)
-        {
-            Bullet bul = new Bullet(p);
-            bul.Died += HandleDeadBullet;
-            ManagedObjects.Add(bul);
-            Bullets.Add(bul);
-        }
-
-        private void HandleDeadBullet(object self)
-        {
-            ManagedObjects.Remove((GameObject)self);
-            Bullets.Remove((Bullet)self);
         }
 
         public void EndGame()

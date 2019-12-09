@@ -43,11 +43,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bullet.cs" />
+    <Compile Include="CarnivorousPlant.cs" />
     <Compile Include="FlyingZombie.cs" />
     <Compile Include="LaneJumpingZombie.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="NormalZombie.cs" />
     <Compile Include="PeaShooter.cs" />
     <Compile Include="Plant.cs" />
+    <Compile Include="PlayerManager.cs" />
+    <Compile Include="SpawnManager.cs" />
+    <Compile Include="Sun.cs" />
+    <Compile Include="SunFlower.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Zombie.cs" />
