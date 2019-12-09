@@ -82,29 +82,31 @@ namespace PlantvsZombie
             PVZGame.Game.Zombies.Remove((Zombie)self);
         }
 
-        public void SpawnPlant(Tile mouseTile)
+        private Plant PlantFactory(String plantState,Vector2 plantPosition)
         {
-            Vector2 _Position = mouseTile.GetCenter();
-
-            Plant pl = null;
-
-            switch (PVZGame.Game.Player.PlantState)
+            switch (plantState)
             {
                 case "PeaShooter":
-                    pl = new PeaShooter(_Position);
-                    break;
+                    return new PeaShooter(plantPosition);
                 case "SunFlower":
-                    pl = new SunFlower(_Position);
-                    break;
-
+                    return new SunFlower(plantPosition);
+                case "CarnivorousPlant":
+                    return new CarnivorousPlant(plantPosition);
+                default:
+                    return null;
             }
+        } 
+
+        public void SpawnPlant(Tile mouseTile)
+        {
+            
+            Plant pl = PlantFactory(PVZGame.Game.Player.PlantState, mouseTile.GetCenter());
             if (pl != null)
             {
                 pl.Died += HandleDeadPlantObject;
                 PVZGame.Game.ManagedObjects.Add(pl);
                 PVZGame.Game.Plants.Add(pl);
             }
-
 
         }
 

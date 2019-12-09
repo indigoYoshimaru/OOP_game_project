@@ -78,7 +78,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Texture/Plants/Carnivorousplant.png
+/build:Texture/Plants/Carnivorousplant.png;Texture/Plants/CarnivorousPlant.png
 
 #begin Texture/Plants/carnivorousplant1.png
 /importer:TextureImporter

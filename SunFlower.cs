@@ -29,7 +29,7 @@ namespace PlantvsZombie
             Health -= dam;
         }
 
-        public override void Attack()
+        public override void Attack(Zombie z)
         {
             throw new NotImplementedException();
         }

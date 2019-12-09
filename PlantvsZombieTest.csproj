@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bullet.cs" />
+    <Compile Include="CarnivorousPlant.cs" />
     <Compile Include="FlyingZombie.cs" />
     <Compile Include="LaneJumpingZombie.cs" />
     <Compile Include="Map.cs" />

@@ -65,7 +65,7 @@ namespace PlantvsZombie
         {
             _Position = Position;
             _ZombieTile = PVZGame.Game.GameMap.GetTileAt(_Position);
-            Speed = 0.1f;
+            Speed = 0.2f;
         }
     }
 }

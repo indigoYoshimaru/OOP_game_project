@@ -17,13 +17,12 @@ namespace PlantvsZombie
         {
             base.Update();
 
-            // if the Zombie passes the tile but haven't been check
             if (_CurrentZombie!=null&&_CurrentZombie.Health>0)
             {
                 _TimeSinceLastSpawn += (float)PVZGame.Game.CurrentGameTime.ElapsedGameTime.TotalSeconds;
                 if (_TimeSinceLastSpawn >= 5f)
                 {
-                    Attack();
+                    Attack(null);
                     _TimeSinceLastSpawn = 0f;
                 }
             }
@@ -55,11 +54,8 @@ namespace PlantvsZombie
             
         }
 
-        public override void Attack()
+        public override void Attack(Zombie z)
         {
-            //throw new NotImplementedException();
-            // bulletfire
-            // if is only for testing, will be updated after tile is built
             PVZGame.Game.Spawner.SpawnBullet(this);
 
         }

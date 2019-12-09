@@ -10,7 +10,7 @@ namespace PlantvsZombie
     public class PlayerManager
     {
         private int score = 0; 
-        public enum MouseIcon { NORMAL, SUNFLOWER, PEASHOOTER };    //icon of the mouse
+        public enum MouseIcon { NORMAL, SUNFLOWER, PEASHOOTER, CARNIVOROUSPLANT };    //icon of the mouse
         private  MouseIcon mIcon;
         public String PlantState { get; set; } = "";
 
@@ -50,15 +50,20 @@ namespace PlantvsZombie
                 mIcon = MouseIcon.NORMAL;
                 PlantState = "";
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.A))
+            else if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 mIcon = MouseIcon.SUNFLOWER;
                 PlantState = "SunFlower";
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S))
+            else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 mIcon = MouseIcon.PEASHOOTER;
                 PlantState = "PeaShooter";
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.C))
+            {
+                mIcon = MouseIcon.CARNIVOROUSPLANT;
+                PlantState = "CarnivorousPlant";
             }
             
         }

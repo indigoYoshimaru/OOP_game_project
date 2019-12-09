@@ -12,7 +12,7 @@ namespace PlantvsZombie
     public abstract class Plant:PlantZombieObject
     {
        
-        public abstract void Attack();
+        public abstract void Attack(Zombie z);
                 
     }
 }
