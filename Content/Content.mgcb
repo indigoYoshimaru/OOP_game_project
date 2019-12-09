@@ -37,6 +37,25 @@
 /processorParam:TextureFormat=Color
 /build:Texture/Miscellaneous/Bullet.png
 
+#begin Texture/Miscellaneous/galleryFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Texture/Miscellaneous/galleryFont.spritefont
+
+#begin Texture/Miscellaneous/NormalMouse.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/Miscellaneous/NormalMouse.png
+
 #begin Texture/Miscellaneous/Sun.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -59,7 +78,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Texture/Plants/Carnivorousplant.png
+/build:Texture/Plants/Carnivorousplant.png;Texture/Plants/CarnivorousPlant.png
 
 #begin Texture/Plants/carnivorousplant1.png
 /importer:TextureImporter
@@ -83,7 +102,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Texture/Plants/Peashooter.png
+/build:Texture/Plants/Peashooter.png;Texture/Plants/PeaShooter.png
 
 #begin Texture/Plants/Sunflower.png
 /importer:TextureImporter
@@ -95,7 +114,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Texture/Plants/Sunflower.png
+/build:Texture/Plants/Sunflower.png;Texture/Plants/SunFlower.png
 
 #begin Texture/Zombies/FlyingZombie.png
 /importer:TextureImporter

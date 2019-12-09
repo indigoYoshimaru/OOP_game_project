@@ -12,23 +12,25 @@ namespace PlantvsZombie
     public abstract class Zombie:PlantZombieObject
     {
         public bool DamagedState { get; set; }
-
         public abstract void Move();
-
-        public Zombie()
-        {
-            DamagedState = true;
-        }
         public abstract void Attack(Plant p);
-
-        public abstract void Damaged(float dam);
-        
 
         public override void Update()
         {
             base.Update();
             if (Position.X < 0)
                 PVZGame.Game.EndGame();
+        }
+
+        public Zombie()
+        {
+            Random r = new Random(Guid.NewGuid().GetHashCode());
+            int y = r.Next(0, 4);
+            DamagedState = true;
+            var _Position  = PVZGame.Game.GameMap.GetTile(9, y).GetCenter();
+            
+            Position = _Position;
+
         }
     }
 }

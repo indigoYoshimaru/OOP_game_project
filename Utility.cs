@@ -15,5 +15,12 @@ namespace PlantvsZombie
         {
             return Convert.ToInt32(Math.Ceiling(x / a));
         }
+
+        public static void DrawCenter(SpriteBatch sb, Texture2D texture, Vector2 center, float width, float height)
+        {
+            int x = (int)(center.X - width / 2);
+            int y = (int)(center.Y - height / 2);
+            sb.Draw(texture, new Rectangle(x, y, (int) width, (int) height), Color.White);
+        }
     }
 }

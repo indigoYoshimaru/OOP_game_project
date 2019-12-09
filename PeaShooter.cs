@@ -10,17 +10,25 @@ namespace PlantvsZombie
     {
         
         private float _TimeSinceLastSpawn=0f;
+        private Zombie _CurrentZombie;
+        private Tile _ShooterTile;
 
         public override void Update()
         {
             base.Update();
 
-            _TimeSinceLastSpawn += (float)PVZGame.Game.CurrentGameTime.ElapsedGameTime.TotalSeconds;
-            if (_TimeSinceLastSpawn >= 5f)
+            if (_CurrentZombie!=null&&_CurrentZombie.Health>0)
             {
-                Attack();
-                _TimeSinceLastSpawn = 0f;
+                _TimeSinceLastSpawn += (float)PVZGame.Game.CurrentGameTime.ElapsedGameTime.TotalSeconds;
+                if (_TimeSinceLastSpawn >= 5f)
+                {
+                    Attack(null);
+                    _TimeSinceLastSpawn = 0f;
+                }
             }
+
+            else
+                _CurrentZombie = MeetZombie();
 
         }
 
@@ -28,22 +36,27 @@ namespace PlantvsZombie
         // Idea: check if the tile that is 3 cell from the plant has a zombie in it --> attack if it does
 
         public Zombie MeetZombie()
-        {          
-            throw new NotImplementedException();
+        {
+            
+            foreach (var z in PVZGame.Game.Zombies)
+            {
+                if (_ShooterTile.Contains(z.Position))
+                    return z;
+            }
+            return null;
 
         }
 
         public PeaShooter(Vector2 _Position)
         {
             Position = _Position;
+            _ShooterTile = PVZGame.Game.GameMap.GetTileAt(_Position).GetRelativeTile(4,0);
+            
         }
 
-        public override void Attack()
+        public override void Attack(Zombie z)
         {
-            //throw new NotImplementedException();
-            // bulletfire
-            // if is only for testing, will be updated after tile is built
-            PVZGame.Game.SpawnBullet(this);
+            PVZGame.Game.Spawner.SpawnBullet(this);
 
         }
 

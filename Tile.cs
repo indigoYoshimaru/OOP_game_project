@@ -6,14 +6,40 @@ using System;
 
 namespace PlantvsZombie
 {
-    class Tile
+    public class Tile
     {
-        private Point _Location;
-        private Point _Size;
+        private readonly Map map;
+        public int X { get; }
+        public int Y { get; }
 
-        public Rectangle BoundingRectangle
+        public Tile(int x, int y, Map map)
         {
-            get { return new Rectangle(_Location, _Size); } // need someone to build the map
+            this.map = map;
+            X = x;
+            Y = y;
         }
+
+        public Plant Plant { get; set; }
+
+        public bool HasPlant()
+        {
+            return Plant != null;
+        }
+
+        public Vector2 GetCenter()
+        {
+            return new Vector2((X + 0.5f) * map.TileSize.X + map.TopLeft.X, (Y + 0.5f) * map.TileSize.Y + map.TopLeft.Y);
+        }
+
+        public bool Contains(Vector2 location)
+        {
+            return map.GetTileAt(location) == this;
+        }
+
+        public Tile GetRelativeTile(int xr, int yr)
+        {
+            return map.GetTile(X + xr, Y + yr);
+        }
+
     }
 }
