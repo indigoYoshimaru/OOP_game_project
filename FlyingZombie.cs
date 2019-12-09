@@ -13,7 +13,7 @@ namespace PlantvsZombie
     {
         
         private Vector2 _Position;
-        private float _DamageFactor = 2;
+        private float _DamageFactor = 1;
         private int _Counter = 0;
         private Tile _ZombieTile;
         private Plant MeetPlant()
@@ -25,8 +25,6 @@ namespace PlantvsZombie
             }
             return null;
         }
-
-        
 
         public override void Update()
         {
@@ -71,7 +69,8 @@ namespace PlantvsZombie
 
         public void MoveByCell()
         {
-            _Position.X = Position.X - PVZGame.Side;
+            var jumpTile = PVZGame.Game.GameMap.GetTileAt(_Position).GetRelativeTile(-1,0);
+            _Position.X = jumpTile.GetCenter().X;
             _Position.Y = Position.Y;
             Position = _Position;
         }
@@ -79,7 +78,7 @@ namespace PlantvsZombie
         public FlyingZombie() : base()
         {
             _Position = Position;
-            Speed = 0.4f;
+            Speed = 0.3f;
             DamagedState = false;
             _ZombieTile = PVZGame.Game.GameMap.GetTileAt(_Position);
         }

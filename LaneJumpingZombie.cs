@@ -13,7 +13,8 @@ namespace PlantvsZombie
     {
         
         private Vector2 _Position;
-        private float _DamageFactor = 10;
+        private float _DamageFactor = 2;
+        private Tile _ZombieTile;
         Random rand = new Random();
 
         float yDes;
@@ -21,30 +22,22 @@ namespace PlantvsZombie
 
         private Plant MeetPlant()
         {
-            int pi, zi, pj, zj;
-            float a = PVZGame.Side;
-
             foreach (var p in PVZGame.Game.Plants)
             {
-                pi = Utility.GetCell(p.Position.X, a);
-                pj = Utility.GetCell(p.Position.Y, a);
-                zi = Utility.GetCell(Position.X, a);
-                zj = Utility.GetCell(Position.Y, a);
-                if (pi == zi && pj == zj) // Position.Y or Position.X - the side of a square
-                    return p;
+                if (_ZombieTile != null)
+                {
+                    if (_ZombieTile.Contains(p.Position)) // Position.Y or Position.X - the side of a square
+                        return p;
+                }
             }
 
             return null;
         }
 
-        //public override void Attack(Plant p)
-        //{
-        //p.Damaged();
-        //}
-
         public override void Update()
         {
             base.Update();
+            _ZombieTile = PVZGame.Game.GameMap.GetTileAt(_Position);
             var p = MeetPlant();
             if (p != null) Attack(p);
 
@@ -55,9 +48,7 @@ namespace PlantvsZombie
         public override void Attack(Plant p)
         {
             p.Damaged(_DamageFactor);
-        }
-
-        
+        }  
 
         public override void Damaged(float dam)
         {
@@ -69,19 +60,21 @@ namespace PlantvsZombie
             _Position.X -= Speed;
 
             xMinus += Speed;
-            float yCheck;
+            Tile tileCheck;
             
-                if (Math.Abs(_Position.Y - yDes) < 1 && xMinus >= 20)
+            
+            if (Math.Abs(_Position.Y - yDes) < 1 && xMinus >= 2*PVZGame.Game.GameMap.TileSize.X)
+            {
+                int r = rand.Next(-1,2);
+                tileCheck = _ZombieTile.GetRelativeTile(0, r);
+                
+                if (tileCheck != null)
                 {
-                    int r = rand.Next(0, 3) - 1;
-                    yCheck = yDes + (r * 75);
-                    if ((yCheck >= 30) && (yCheck <= 380))
-                    {
-                        yDes = yCheck;
-
-                    }
-                    xMinus = 0;
+                    System.Diagnostics.Debug.WriteLine(tileCheck.Y);
+                    yDes = tileCheck.GetCenter().Y;
                 }
+                xMinus = 0;
+            }
             _Position.Y = Lerp(_Position.Y, yDes, 0.02f);
             this.Position = _Position;
            
@@ -92,14 +85,12 @@ namespace PlantvsZombie
             return firstFloat * (1 - by) + secondFloat * by;
         }
 
-        public LaneJumpingZombie()
+        public LaneJumpingZombie() : base()
         {
-            _Position.X = 700;
-            int i = rand.Next(0,5);
-            _Position.Y = i * 75 + 20;
-            Position = _Position;
+            _Position = Position;
+            _ZombieTile = PVZGame.Game.GameMap.GetTileAt(_Position);
             yDes = Position.Y;
-            Speed = 0.2f;
+            Speed = 0.4f;
         }
     }
 }

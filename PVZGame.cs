@@ -201,7 +201,7 @@ namespace PlantvsZombie
                     Utility.DrawCenter(_SpriteBatch, _TextureAssets["PeaShooter"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), GameMap.TileSize.X, GameMap.TileSize.X);
                     break;
                 case PlayerManager.MouseIcon.SUNFLOWER:
-                    Utility.DrawCenter(_SpriteBatch, _TextureAssets["PeaShooter"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), GameMap.TileSize.X, GameMap.TileSize.X);
+                    Utility.DrawCenter(_SpriteBatch, _TextureAssets["SunFlower"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), GameMap.TileSize.X, GameMap.TileSize.X);
                     break;
                 case PlayerManager.MouseIcon.CARNIVOROUSPLANT:
                     Utility.DrawCenter(_SpriteBatch, _TextureAssets["CarnivorousPlant"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), GameMap.TileSize.X, GameMap.TileSize.X);
