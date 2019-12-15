@@ -28,3 +28,4 @@ C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\obj\Debug\PlantvsZombie.ex
 C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\obj\Debug\PlantvsZombie.pdb
 C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Miscellaneous\galleryFont.xnb
 C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Miscellaneous\NormalMouse.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\bin\DesktopGL\AnyCPU\Debug\Content\highscore.txt
