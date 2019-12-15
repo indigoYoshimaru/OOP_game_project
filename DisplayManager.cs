@@ -19,25 +19,41 @@ namespace PlantvsZombie
 
         public void Display(GameTime gameTime)
         {
-            _game.SpriteBatch.Begin();
-            DrawBackground();
-            DisplayGameObjects();
-            _game.SpriteBatch.End();
+            switch (_game.State)
+            {
+                case PVZGame.GameState.START_MENU:
+                    _game.SpriteBatch.Begin();
+                    DrawBackground("StartMenuBG");
+                    _game.SpriteBatch.End();
+                    _game.StartMenu.Draw(gameTime);
+                    break;
+                case PVZGame.GameState.PLAYING:
+                    _game.SpriteBatch.Begin();
+                    DrawBackground("Background");
+                    DrawGameplay();
+                    _game.SpriteBatch.End();
+                    break;
+                case PVZGame.GameState.END_MENU:
+                    _game.SpriteBatch.Begin();
+                    DrawBackground("EndMenuBG");
+                    _game.SpriteBatch.End();
+                    _game.EndMenu.Draw(gameTime);
+                    break;
+            }
 
-            _game.StartMenu.Draw(gameTime);
 
             _game.SpriteBatch.Begin();
             DrawMouse();
             _game.SpriteBatch.End();
         }
 
-        private void DrawBackground()
+        private void DrawBackground(string backgroundName)
         {
             Rectangle rec = new Rectangle(0, 0, 800, 480);
-            _game.SpriteBatch.Draw(_game.TextureAssets["Background"], rec, Color.White);
+            _game.SpriteBatch.Draw(_game.TextureAssets[backgroundName], rec, Color.White);
         }
 
-        private void DisplayGameObjects()
+        private void DrawGameplay()
         {
             var currentObjects = new HashSet<GameObject>(_game.ManagedObjects);
 
@@ -49,7 +65,7 @@ namespace PlantvsZombie
                     DrawCenter(_game.TextureAssets[objectClassName], ob.Position, size, size);
             }
             _game.SpriteBatch.DrawString(_game.GameFont, "Score: " + _game.Player.GetScore().ToString(), 
-                new Vector2(0, _game.Graphic.PreferredBackBufferHeight - 30), 
+                new Vector2(0, _game.Graphics.PreferredBackBufferHeight - 30), 
                 Color.White); //display score at the bottom left
         }
 
@@ -74,8 +90,7 @@ namespace PlantvsZombie
                     break;
             }
         }
-
-        public void DrawCenter(Texture2D texture, Vector2 center, float width, float height)
+        private void DrawCenter(Texture2D texture, Vector2 center, float width, float height)
         {
             int x = (int)(center.X - width / 2);
             int y = (int)(center.Y - height / 2);

@@ -17,11 +17,9 @@ namespace PlantvsZombie
         public HashSet<Zombie> Zombies;
         public List<string> ZombieTypes;
         public SpriteFont GameFont;
-        public GraphicsDeviceManager Graphic;
+        public GraphicsDeviceManager Graphics;
         public StartMenu StartMenu;
         public EndMenu EndMenu;
-
-        private GameState _State;
         private MouseState _CurrentMouseState;
         private MouseState _OldMouseState;
 
@@ -38,10 +36,11 @@ namespace PlantvsZombie
 
         public GameTime CurrentGameTime { get; private set; }
         public SpriteBatch SpriteBatch { get; set; }
+        public GameState State { get; set; }
 
         private PVZGame()
         {
-            Graphic = new GraphicsDeviceManager(this);
+            Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
         }
@@ -98,7 +97,8 @@ namespace PlantvsZombie
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-
+            TextureAssets["EndMenuBG"] = Content.Load<Texture2D>("Texture/Background/EndMenuBG");
+            TextureAssets["StartMenuBG"] = Content.Load<Texture2D>("Texture/Background/StartMenuBG");
             TextureAssets["Background"] = Content.Load<Texture2D>("Texture/Background/Lawn");
             TextureAssets["NormalZombie"] = Content.Load<Texture2D>("Texture/Zombies/NormalZombie");
             TextureAssets["PeaShooter"] = Content.Load<Texture2D>("Texture/Plants/PeaShooter");
@@ -178,26 +178,24 @@ namespace PlantvsZombie
 
         public void ToStartMenu()
         {
-            _State = GameState.START_MENU;
-            StartMenu.Visible = true;
+            State = GameState.START_MENU;
         }
 
         public void EnterGame()
         {
-            _State = GameState.PLAYING;
-            StartMenu.Visible = false;
-            EndMenu.Visible = false;
+            State = GameState.PLAYING;
+            Console.WriteLine(Graphics.PreferredBackBufferWidth);
+            Console.WriteLine(Graphics.PreferredBackBufferHeight);
         }
 
         public void ToEndMenu()
         {
-            _State = GameState.END_MENU;
-            EndMenu.Visible = true;
+            State = GameState.END_MENU;
         }
 
         public void EndGame()
         {
-            Exit(); //temporary
+            //Exit(); //temporary
         }
 
     }
