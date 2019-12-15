@@ -13,7 +13,7 @@ namespace PlantvsZombie
         [STAThread]
         static void Main()
         {
-            //using (var game = new GameManager())
+            //using (var game = new PVZGame())
                 PVZGame.Game.Run();
         }
     }

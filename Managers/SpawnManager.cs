@@ -42,7 +42,6 @@ namespace PlantvsZombie
             else if (PVZGame.Game.TimeManager >= 90f)
             {
                 PVZGame.Game.TimeManager = 0f;
-                PVZGame.Game.TimeSinceLastSpawn = 0f;
             }
 
             else
@@ -67,7 +66,6 @@ namespace PlantvsZombie
             z.Died += HandleScore;
             PVZGame.Game.ManagedObjects.Add(z);
             PVZGame.Game.Zombies.Add(z);
-            PVZGame.Game.TimeSinceLastSpawn = 0f;
 
         }
 
