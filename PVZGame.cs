@@ -16,17 +16,14 @@ namespace PlantvsZombie
         public HashSet<Plant> Plants;
         public HashSet<Zombie> Zombies;
         public List<string> ZombieTypes;
-
-        GraphicsDeviceManager _Graphic;
-        SpriteBatch _SpriteBatch;
+        public SpriteFont GameFont;
+        public GraphicsDeviceManager Graphic;
+        public StartMenu StartMenu;
+        public EndMenu EndMenu;
 
         private GameState _State;
-        private SpriteFont _GameFont;
-        private Texture2D _Background;
         private MouseState _CurrentMouseState;
         private MouseState _OldMouseState;
-        private StartMenu _StartMenu;
-        private EndMenu _EndMenu;
 
         public enum GameState { START_MENU, PLAYING, END_MENU };
 
@@ -37,17 +34,30 @@ namespace PlantvsZombie
 
         public PlayerManager Player { get; set; }
         public SpawnManager Spawner { get; set; }
+        public DisplayManager Displayer { get; set; }
 
         public GameTime CurrentGameTime { get; private set; }
+        public SpriteBatch SpriteBatch { get; set; }
 
         private PVZGame()
         {
-            _Graphic = new GraphicsDeviceManager(this);
+            Graphic = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
         }
 
         public static readonly PVZGame Game = new PVZGame();
+
+
+        public int MouseX()
+        {
+            return Mouse.GetState().X;
+        }
+
+        public int MouseY()
+        {
+            return Mouse.GetState().Y;
+        }
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -69,12 +79,13 @@ namespace PlantvsZombie
             TimeManager = 0f;
             Player = new PlayerManager();
             Spawner = new SpawnManager();
+            Displayer = new DisplayManager(this);
             _OldMouseState = Mouse.GetState();
 
-            _StartMenu = new StartMenu(this);
-            _EndMenu = new EndMenu(this);
-            Components.Add(_StartMenu);
-            Components.Add(_EndMenu);
+            StartMenu = new StartMenu(this);
+            EndMenu = new EndMenu(this);
+            Components.Add(StartMenu);
+            Components.Add(EndMenu);
 
             base.Initialize();
         }
@@ -86,9 +97,9 @@ namespace PlantvsZombie
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            _SpriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _Background = Content.Load<Texture2D>("Texture/Background/Lawn");
+            TextureAssets["Background"] = Content.Load<Texture2D>("Texture/Background/Lawn");
             TextureAssets["NormalZombie"] = Content.Load<Texture2D>("Texture/Zombies/NormalZombie");
             TextureAssets["PeaShooter"] = Content.Load<Texture2D>("Texture/Plants/PeaShooter");
             TextureAssets["SunFlower"] = Content.Load<Texture2D>("Texture/Plants/SunFlower");
@@ -98,7 +109,7 @@ namespace PlantvsZombie
             TextureAssets["FlyingZombie"] = Content.Load<Texture2D>("Texture/Zombies/FlyingZombie");
             TextureAssets["LaneJumpingZombie"] = Content.Load<Texture2D>("Texture/Zombies/LaneJumpingZombie");
             TextureAssets["NormalMouse"] = Content.Load<Texture2D>("Texture/Miscellaneous/NormalMouse");
-            _GameFont = Content.Load<SpriteFont>("Texture/Miscellaneous/GalleryFont");
+            GameFont = Content.Load<SpriteFont>("Texture/Miscellaneous/GalleryFont");
         }
 
         /// <summary>
@@ -155,67 +166,33 @@ namespace PlantvsZombie
 
             base.Update(gameTime);
         }
+
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            _SpriteBatch.Begin();
-            Rectangle rec = new Rectangle(0, 0, 800, 480);
-            _SpriteBatch.Draw(_Background, rec, Color.White);
-            var currentObjects = new HashSet<GameObject>(ManagedObjects);
-
-            foreach (var ob in currentObjects)
-            {
-                ob.Update();
-                string objectClassName = ob.GetType().Name;
-
-                if (objectClassName != null)
-                    //_SpriteBatch.Draw(_TextureAssets[objectClassName], _ObjectPosition, null, Color.White, 0f, Vector2.Zero, _ScaleFact, SpriteEffects.None, 0f);
-                    Utility.DrawCenter(_SpriteBatch, TextureAssets[objectClassName], ob.Position, GameMap.TileSize.X, GameMap.TileSize.X);
-            }
-            _SpriteBatch.DrawString(_GameFont, "Score: " + Player.GetScore().ToString(), new Vector2(0, _Graphic.PreferredBackBufferHeight - 30), Color.White); //display score at the bottom left
-
-
-            switch (Player.GetMouseIcon())
-            {
-                case PlayerManager.MouseIcon.NORMAL:
-                    _SpriteBatch.Draw(TextureAssets["NormalMouse"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), Color.White);
-                    break;
-                case PlayerManager.MouseIcon.PEASHOOTER:
-                    Utility.DrawCenter(_SpriteBatch, TextureAssets["PeaShooter"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), GameMap.TileSize.X, GameMap.TileSize.X);
-                    break;
-                case PlayerManager.MouseIcon.SUNFLOWER:
-                    Utility.DrawCenter(_SpriteBatch, TextureAssets["SunFlower"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), GameMap.TileSize.X, GameMap.TileSize.X);
-                    break;
-                case PlayerManager.MouseIcon.CARNIVOROUSPLANT:
-                    Utility.DrawCenter(_SpriteBatch, TextureAssets["CarnivorousPlant"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), GameMap.TileSize.X, GameMap.TileSize.X);
-                    break;
-            }
-
-            _SpriteBatch.End();
-            base.Draw(gameTime);
+            Displayer.Display(gameTime);
         }
 
-        public void StartMenu()
+        public void ToStartMenu()
         {
             _State = GameState.START_MENU;
-            _StartMenu.Visible = true;
+            StartMenu.Visible = true;
         }
 
-        public void StartGame()
+        public void EnterGame()
         {
             _State = GameState.PLAYING;
-            _StartMenu.Visible = false;
-            _EndMenu.Visible = false;
+            StartMenu.Visible = false;
+            EndMenu.Visible = false;
         }
 
-        public void EndMenu()
+        public void ToEndMenu()
         {
             _State = GameState.END_MENU;
-            _EndMenu.Visible = true;
+            EndMenu.Visible = true;
         }
 
         public void EndGame()
