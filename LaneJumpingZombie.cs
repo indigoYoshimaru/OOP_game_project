@@ -22,6 +22,9 @@ namespace PlantvsZombie
 
         private Plant MeetPlant()
         {
+            if (_ZombieTile == null)
+                return null;
+
             foreach (var p in PVZGame.Game.Plants)
             {
                 if (_ZombieTile != null)
