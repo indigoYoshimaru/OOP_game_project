@@ -23,7 +23,7 @@ namespace PlantvsZombie
         private Plant MeetPlant()
         {
             
-            foreach (var p in PVZGame.Game.Plants)
+            foreach (var p in PVZGame.Game.LogicManager.Plants)
             {
                 if (_ZombieTile != null)
                 {
@@ -38,7 +38,7 @@ namespace PlantvsZombie
         public override void Update()
         {
             base.Update();
-            _ZombieTile = PVZGame.Game.GameMap.GetTileAt(_Position);
+            _ZombieTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
             var p = MeetPlant();
             if (p != null) Attack(p);
 
@@ -64,7 +64,7 @@ namespace PlantvsZombie
             Tile tileCheck;
             
             
-            if (Math.Abs(_Position.Y - yDes) < 1 && xMinus >= 2*PVZGame.Game.GameMap.TileSize.X)
+            if (Math.Abs(_Position.Y - yDes) < 1 && xMinus >= 2*PVZGame.Game.LogicManager.GameMap.TileSize.X)
             {
                 int r = rand.Next(-1,2);
                 tileCheck = _ZombieTile.GetRelativeTile(0, r);
@@ -89,7 +89,7 @@ namespace PlantvsZombie
         public LaneJumpingZombie() : base()
         {
             _Position = Position;
-            _ZombieTile = PVZGame.Game.GameMap.GetTileAt(_Position);
+            _ZombieTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
             yDes = Position.Y;
             Speed = 0.4f;
         }

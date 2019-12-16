@@ -81,10 +81,10 @@ namespace PlantvsZombie
             if (mIcon != MouseIcon.NORMAL && _CurrentMouseState.LeftButton == ButtonState.Pressed && _OldMouseState.LeftButton == ButtonState.Released)
             {
 
-                _MouseTile = PVZGame.Game.GameMap.GetTileAt(_CurrentMouseState.Position.ToVector2());
+                _MouseTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_CurrentMouseState.Position.ToVector2());
                 {
                     if (SpendSun())
-                        PVZGame.Game.Spawner.SpawnPlant(_MouseTile);
+                        PVZGame.Game.LogicManager.Spawner.SpawnPlant(_MouseTile);
 
                 }
             }
@@ -124,7 +124,7 @@ namespace PlantvsZombie
             if (Mouse.GetState().LeftButton != ButtonState.Pressed)
                 return;
 
-            foreach (GameObject o in PVZGame.Game.ManagedObjects.ToList())
+            foreach (GameObject o in PVZGame.Game.LogicManager.ManagedObjects.ToList())
             {
                 if (o is Sun)
                     totalSun += ((Sun)o).Collect(Mouse.GetState().X, Mouse.GetState().Y);

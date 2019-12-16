@@ -38,7 +38,7 @@ namespace PlantvsZombie
         public Zombie MeetZombie()
         {
             
-            foreach (var z in PVZGame.Game.Zombies)
+            foreach (var z in PVZGame.Game.LogicManager.Zombies)
             {
                 if (_ShooterTile.Contains(z.Position))
                     return z;
@@ -50,13 +50,13 @@ namespace PlantvsZombie
         public PeaShooter(Vector2 _Position)
         {
             Position = _Position;
-            _ShooterTile = PVZGame.Game.GameMap.GetTileAt(_Position).GetRelativeTile(4,0);
+            _ShooterTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position).GetRelativeTile(4,0);
             
         }
 
         public override void Attack(Zombie z)
         {
-            PVZGame.Game.Spawner.SpawnBullet(this);
+            PVZGame.Game.LogicManager.Spawner.SpawnBullet(this);
 
         }
 
