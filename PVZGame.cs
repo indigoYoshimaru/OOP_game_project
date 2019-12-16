@@ -32,6 +32,7 @@ namespace PlantvsZombie
 
         public PlayerManager Player { get; set; }
         public SpawnManager Spawner { get; set; }
+        public DisplayManager Displayer { get; set; }
         public GameTime CurrentGameTime { get; private set; }
         public SpriteBatch SpriteBatch { get; set; }
         public GameState State { get; set; }
@@ -76,6 +77,7 @@ namespace PlantvsZombie
             TimeManager = 0f;
             Player = new PlayerManager();
             Spawner = new SpawnManager();
+            Displayer = new DisplayManager();
             _OldMouseState = Mouse.GetState();
 
             StartMenu = new StartMenu(this);
@@ -170,7 +172,7 @@ namespace PlantvsZombie
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            DisplayManager.Displayer.Display(gameTime);
+            Displayer.Display(gameTime);
         }
 
         public void ToStartMenu()

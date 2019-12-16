@@ -10,11 +10,6 @@ namespace PlantvsZombie
 {
     public class DisplayManager
     {
-        public static readonly DisplayManager Displayer = new DisplayManager();
-        private DisplayManager()
-        {
-        }
-
         public void Display(GameTime gameTime)
         {
             switch (PVZGame.Game.State)
