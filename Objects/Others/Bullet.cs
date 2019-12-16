@@ -19,14 +19,14 @@ namespace PlantvsZombie
         {
             _Position = p.Position;
             this.Position = _Position;
-            _BulletTile=PVZGame.Game.GameMap.GetTileAt(_Position);
+            _BulletTile=PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
             Speed = 0.4f;
         }
 
         public Zombie MeetZombie()
         {
 
-            foreach (var z in PVZGame.Game.Zombies)
+            foreach (var z in PVZGame.Game.LogicManager.Zombies)
             {
                 if (_BulletTile.Contains(z.Position))
                     return z;
@@ -37,7 +37,7 @@ namespace PlantvsZombie
 
         public override void Update()
         {
-            _BulletTile = PVZGame.Game.GameMap.GetTileAt(_Position);
+            _BulletTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
             if (_BulletTile != null)
             {
                 var z = MeetZombie();

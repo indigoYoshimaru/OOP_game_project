@@ -13,7 +13,7 @@ namespace PlantvsZombie
         public Zombie MeetZombie()
         {
 
-            foreach (var z in PVZGame.Game.Zombies)
+            foreach (var z in PVZGame.Game.LogicManager.Zombies)
             {
                 if (_EatTile.Contains(z.Position))
                     return z;
@@ -24,7 +24,7 @@ namespace PlantvsZombie
         public CarnivorousPlant(Vector2 _Position)
         {
             Position = _Position;
-            _EatTile = PVZGame.Game.GameMap.GetTileAt(_Position).GetRelativeTile(1, 0); //check if 1 cell from the plant has a zombie in it
+            _EatTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position).GetRelativeTile(1, 0); //check if 1 cell from the plant has a zombie in it
 
         }
 

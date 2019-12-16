@@ -16,7 +16,7 @@ namespace PlantvsZombie
             base.Update();
             if(_currentTime >=10f)
             {
-                PVZGame.Game.Spawner.SpawnSun(this);
+                PVZGame.Game.LogicManager.Spawner.SpawnSun(this);
                 _currentTime = 0f;
             }
         }

@@ -19,7 +19,7 @@ namespace PlantvsZombie
         {
             base.Update();
             if (Position.X < 0)
-                PVZGame.Game.EndGame();
+                PVZGame.Game.ToEndMenu();
         }
 
         public Zombie()
@@ -27,7 +27,7 @@ namespace PlantvsZombie
             Random r = new Random(Guid.NewGuid().GetHashCode());
             int y = r.Next(0, 4);
             DamagedState = true;
-            var _Position  = PVZGame.Game.GameMap.GetTile(9, y).GetCenter();
+            var _Position  = PVZGame.Game.LogicManager.GameMap.GetTile(9, y).GetCenter();
             
             Position = _Position;
 

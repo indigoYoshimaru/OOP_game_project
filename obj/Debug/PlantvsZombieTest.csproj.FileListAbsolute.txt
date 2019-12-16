@@ -1,4 +1,3 @@
-C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\obj\Debug\PlantvsZombieTest.csprojAssemblyReference.cache
 C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\bin\DesktopGL\AnyCPU\Debug\MonoGame.Framework.dll.config
 C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Zombies\FlyingZombie.xnb
 C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Zombies\LaneJumpingZombie.xnb
@@ -29,3 +28,8 @@ C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\obj\Debug\PlantvsZombie.pd
 C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Miscellaneous\galleryFont.xnb
 C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Miscellaneous\NormalMouse.xnb
 C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\bin\DesktopGL\AnyCPU\Debug\Content\highscore.txt
+C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Background\EndMenuBG.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Background\StartMenuBG.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\bin\DesktopGL\AnyCPU\Debug\MonoGame.UI.Forms.dll
+C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\bin\DesktopGL\AnyCPU\Debug\Content\defaultFont.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\obj\Debug\PlantvsZombieTest.csprojAssemblyReference.cache

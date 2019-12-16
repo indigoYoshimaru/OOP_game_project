@@ -11,27 +11,25 @@ namespace PlantvsZombie
     /// </summary>
     public class PVZGame:Game
     {
-        GraphicsDeviceManager _Graphic;
-        SpriteBatch _SpriteBatch;
-        public Map GameMap;
-        
-        public PlayerManager Player { get; set; }
-        public SpawnManager Spawner { get; set; }
-        private SpriteFont _GameFont;
-        public HashSet<GameObject> ManagedObjects;
-        public HashSet<Plant> Plants;
-        public HashSet<Zombie> Zombies;
-        public List<String> ZombieTypes;
-
+        public GraphicsDeviceManager Graphic { get; set; }
+        public SpriteBatch SpriteBatch { get; set; }
+        public SpriteFont GameFont;
         public Dictionary<String, Texture2D> TextureAssets { get; set; } = new Dictionary<string, Texture2D>();
-        public float TimeManager { get; set; }
-        public float TimeSinceLastSpawn { get; set; }
+
+
+        public LogicManager LogicManager { get; set; }
+        public DisplayManager DisplayManager { get; set; }
         public GameTime CurrentGameTime { get; private set; }
-        private int _UIScreen = 1; //display UIScreen
+
+        public enum GameState { START_MENU, PLAYING, END_MENU };
+        public GameState State { get; set; }
+
+        public StartMenu StartMenu;
+        public EndMenu EndMenu;
 
         private PVZGame()
         {
-            _Graphic = new GraphicsDeviceManager(this);
+            Graphic = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
         }
@@ -46,21 +44,15 @@ namespace PlantvsZombie
         /// </summary>
         protected override void Initialize()
         {
-            GameMap = new Map(GraphicsDevice.PresentationParameters.Bounds);
-            ManagedObjects = new HashSet<GameObject>();
-            Plants = new HashSet<Plant>();
-            Zombies = new HashSet<Zombie>();
-            ZombieTypes = new List<string>();
-            ZombieTypes.Add("NormalZombie");
-            ZombieTypes.Add("FlyingZombie");
-            ZombieTypes.Add("LaneJumpingZombie");
-            TimeSinceLastSpawn = 0f;
-            TimeManager = 0f;
-            Player = new PlayerManager();
-            Spawner = new SpawnManager();
+            
+            DisplayManager = new DisplayManager();
+            LogicManager = new LogicManager();
+            StartMenu = new StartMenu(this);
+            EndMenu = new EndMenu(this);
+            Components.Add(StartMenu);
+            Components.Add(EndMenu);
 
-            Player.LoadHighScore();
-            Spawner.SpawnZombie();
+            LogicManager.Initialize();
             base.Initialize();
         }
 
@@ -71,7 +63,9 @@ namespace PlantvsZombie
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            _SpriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
+            TextureAssets["EndMenuBG"] = Content.Load<Texture2D>("Texture/Background/EndMenuBG");
+            TextureAssets["StartMenuBG"] = Content.Load<Texture2D>("Texture/Background/StartMenuBG");
             TextureAssets["Lawn"] = Content.Load<Texture2D>("Texture/Background/Lawn");
             TextureAssets["NormalZombie"] = Content.Load<Texture2D>("Texture/Zombies/NormalZombie");
             TextureAssets["PeaShooter"] = Content.Load<Texture2D>("Texture/Plants/PeaShooter");
@@ -81,9 +75,8 @@ namespace PlantvsZombie
             TextureAssets["Sun"] = Content.Load<Texture2D>("Texture/Miscellaneous/Sun");
             TextureAssets["FlyingZombie"] = Content.Load<Texture2D>("Texture/Zombies/FlyingZombie");
             TextureAssets["LaneJumpingZombie"] = Content.Load<Texture2D>("Texture/Zombies/LaneJumpingZombie");
-            TextureAssets["NormalMouse"]=Content.Load<Texture2D>("Texture/Miscellaneous/NormalMouse");
-            _GameFont = Content.Load<SpriteFont>("Texture/Miscellaneous/GalleryFont");
-            
+            TextureAssets["NormalMouse"] = Content.Load<Texture2D>("Texture/Miscellaneous/NormalMouse");
+            GameFont = Content.Load<SpriteFont>("Texture/Miscellaneous/galleryFont");
             // TODO: use this.Content to load your game content here
         }
 
@@ -107,41 +100,7 @@ namespace PlantvsZombie
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
-            /*if (_UIScreen == 1)
-            {
-                UI.Update();
-            }*/
-
-            //else
-            {
-                var currentObjects = new HashSet<GameObject>(ManagedObjects);
-
-                foreach (var ob in currentObjects)
-                {
-                    try
-                    {
-                        ob.Update();
-                    }
-                    catch (Exception exc)
-                    {
-                        continue;
-                    }
-                }
-
-                TimeSinceLastSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                TimeManager += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (TimeSinceLastSpawn >= 5f)
-                {
-                    Spawner.SpawnZombie();
-                    Spawner.SpawnSun();
-                    TimeSinceLastSpawn = 0f;
-                }
-
-                Player.Update();
-            }
-
+            LogicManager.Update(gameTime);
             base.Update(gameTime);
         }
         /// <summary>
@@ -150,57 +109,39 @@ namespace PlantvsZombie
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            _SpriteBatch.Begin();
+            DisplayManager.Display(gameTime);
 
-            /*if (_UIScreen == 1)
-              {
-                 UI.Draw();
-              }*/
-
-            //else
-            {
-                Rectangle rec = new Rectangle(0, 0, 800, 480);
-                _SpriteBatch.Draw(TextureAssets["Lawn"], rec, Color.White);
-                var currentObjects = new HashSet<GameObject>(ManagedObjects);
-
-                foreach (var ob in currentObjects)
-                {
-                    ob.Update();
-                    String objectClassName = ob.GetType().Name;
-
-                    if (objectClassName != null)
-                        Utility.DrawCenter(_SpriteBatch, TextureAssets[objectClassName], ob.Position, GameMap.TileSize.X, GameMap.TileSize.X);
-                }
-                _SpriteBatch.DrawString(_GameFont, "SCORE: " + Player.GetScore().ToString(), new Vector2(5, _Graphic.PreferredBackBufferHeight - 40), Color.White); //display score at the bottom left
-                _SpriteBatch.DrawString(_GameFont, "HIGHSCORE: " + Player.GetHighScore().ToString(), new Vector2(480, _Graphic.PreferredBackBufferHeight - 40), Color.White);
-                _SpriteBatch.DrawString(_GameFont, "SUN: " + Player.GetTotalSun().ToString(), new Vector2(10, 10), Color.White);
-
-                switch (Player.GetMouseIcon())
-                {
-                    case PlayerManager.MouseIcon.NORMAL:
-                        _SpriteBatch.Draw(TextureAssets["NormalMouse"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), Color.White);
-                        break;
-                    case PlayerManager.MouseIcon.PEASHOOTER:
-                        Utility.DrawCenter(_SpriteBatch, TextureAssets["PeaShooter"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), GameMap.TileSize.X, GameMap.TileSize.X);
-                        break;
-                    case PlayerManager.MouseIcon.SUNFLOWER:
-                        Utility.DrawCenter(_SpriteBatch, TextureAssets["SunFlower"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), GameMap.TileSize.X, GameMap.TileSize.X);
-                        break;
-                    case PlayerManager.MouseIcon.CARNIVOROUSPLANT:
-                        Utility.DrawCenter(_SpriteBatch, TextureAssets["CarnivorousPlant"], new Vector2(Mouse.GetState().X, Mouse.GetState().Y), GameMap.TileSize.X, GameMap.TileSize.X);
-                        break;
-                }
-            }
-            _SpriteBatch.End();
-            base.Draw(gameTime);
         }
 
-        public void EndGame()
+        public void ToStartMenu()
         {
-            //UI.ShowEndScreen();
-            Player.SaveHighScore();
+            State = GameState.START_MENU;
         }
 
+        public void EnterGame()
+        {
+            State = GameState.PLAYING;
+            Console.WriteLine(Graphic.PreferredBackBufferWidth);
+            Console.WriteLine(Graphic.PreferredBackBufferHeight);
+            //LogicManager.Initialize();
+        }
+
+        public void ToEndMenu()
+        {
+            State = GameState.END_MENU;
+            LogicManager.EndGame();
+        }
+
+        //Close window 
+
+        public int MouseX()
+        {
+            return Mouse.GetState().X;
+        }
+
+        public int MouseY()
+        {
+            return Mouse.GetState().Y;
+        }
     }
 }

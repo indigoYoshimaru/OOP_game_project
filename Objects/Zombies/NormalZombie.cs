@@ -18,7 +18,7 @@ namespace PlantvsZombie
         private Plant MeetPlant()
         {
             
-            foreach (var p in PVZGame.Game.Plants)
+            foreach (var p in PVZGame.Game.LogicManager.Plants)
             {
                 try
                 {
@@ -42,7 +42,7 @@ namespace PlantvsZombie
             base.Update();
             try
             {
-                _ZombieTile = PVZGame.Game.GameMap.GetTileAt(_Position);
+                _ZombieTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
             }
             catch (Exception e)
             {
@@ -77,7 +77,7 @@ namespace PlantvsZombie
         public NormalZombie():base()
         {
             _Position = Position;
-            _ZombieTile = PVZGame.Game.GameMap.GetTileAt(_Position);
+            _ZombieTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
             Speed = 0.2f;
         }
     }
