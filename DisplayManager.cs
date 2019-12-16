@@ -10,83 +10,81 @@ namespace PlantvsZombie
 {
     public class DisplayManager
     {
-        PVZGame _game;
-
-        public DisplayManager(PVZGame game)
+        public static readonly DisplayManager Displayer = new DisplayManager();
+        private DisplayManager()
         {
-            _game = game;
         }
 
         public void Display(GameTime gameTime)
         {
-            switch (_game.State)
+            switch (PVZGame.Game.State)
             {
                 case PVZGame.GameState.START_MENU:
-                    _game.SpriteBatch.Begin();
+                    PVZGame.Game.SpriteBatch.Begin();
                     DrawBackground("StartMenuBG");
-                    _game.SpriteBatch.End();
-                    _game.StartMenu.Draw(gameTime);
+                    PVZGame.Game.SpriteBatch.End();
+                    PVZGame.Game.StartMenu.Draw(gameTime);
                     break;
                 case PVZGame.GameState.PLAYING:
-                    _game.SpriteBatch.Begin();
+                    PVZGame.Game.SpriteBatch.Begin();
                     DrawBackground("Background");
                     DrawGameplay();
-                    _game.SpriteBatch.End();
+                    PVZGame.Game.SpriteBatch.End();
                     break;
                 case PVZGame.GameState.END_MENU:
-                    _game.SpriteBatch.Begin();
+                    PVZGame.Game.SpriteBatch.Begin();
                     DrawBackground("EndMenuBG");
-                    _game.SpriteBatch.End();
-                    _game.EndMenu.Draw(gameTime);
+                    PVZGame.Game.SpriteBatch.End();
+                    PVZGame.Game.EndMenu.Draw(gameTime);
                     break;
             }
 
 
-            _game.SpriteBatch.Begin();
+            PVZGame.Game.SpriteBatch.Begin();
             DrawMouse();
-            _game.SpriteBatch.End();
+            PVZGame.Game.SpriteBatch.End();
         }
 
         private void DrawBackground(string backgroundName)
         {
             Rectangle rec = new Rectangle(0, 0, 800, 480);
-            _game.SpriteBatch.Draw(_game.TextureAssets[backgroundName], rec, Color.White);
+            PVZGame.Game.SpriteBatch.Draw(PVZGame.Game.TextureAssets[backgroundName], rec, Color.White);
         }
 
         private void DrawGameplay()
         {
-            var currentObjects = new HashSet<GameObject>(_game.ManagedObjects);
+            var currentObjects = new HashSet<GameObject>(PVZGame.Game.ManagedObjects);
 
             foreach (var ob in currentObjects)
             {
                 string objectClassName = ob.GetType().Name;
-                float size = _game.GameMap.TileSize.X;
+                float size = PVZGame.Game.GameMap.TileSize.X;
                 if (objectClassName != null)
-                    DrawCenter(_game.TextureAssets[objectClassName], ob.Position, size, size);
+                    DrawCenter(PVZGame.Game.TextureAssets[objectClassName], ob.Position, size, size);
             }
-            _game.SpriteBatch.DrawString(_game.GameFont, "Score: " + _game.Player.GetScore().ToString(), 
-                new Vector2(0, _game.Graphics.PreferredBackBufferHeight - 30), 
+            PVZGame.Game.SpriteBatch.DrawString(PVZGame.Game.GameFont, "Score: " + PVZGame.Game.Player.GetScore().ToString(), 
+                new Vector2(0, PVZGame.Game.Graphics.PreferredBackBufferHeight - 30), 
                 Color.White); //display score at the bottom left
         }
 
         private void DrawMouse()
         {
-            Vector2 pos = new Vector2(_game.MouseX(), _game.MouseY());
-            float size = _game.GameMap.TileSize.X;
+            Vector2 pos = new Vector2(PVZGame.Game.MouseX(), PVZGame.Game.MouseY());
+            float size = PVZGame.Game.GameMap.TileSize.X;
 
-            switch (_game.Player.GetMouseIcon())
+            switch (PVZGame.Game.Player.GetMouseIcon())
             {
                 case PlayerManager.MouseIcon.NORMAL:
-                    _game.SpriteBatch.Draw(_game.TextureAssets["NormalMouse"], pos, Color.White);
+                    PVZGame.Game.SpriteBatch.Draw(PVZGame.Game.TextureAssets["NormalMouse"], pos, Color.White);
                     break;
                 case PlayerManager.MouseIcon.PEASHOOTER:
-                    DrawCenter(_game.TextureAssets["PeaShooter"], pos, size, size);
+                    DrawCenter(PVZGame.Game.TextureAssets["PeaShooter"], pos, size, size);
                     break;
                 case PlayerManager.MouseIcon.SUNFLOWER:
-                    DrawCenter(_game.TextureAssets["SunFlower"], pos, size, size);
+                    DrawCenter(PVZGame.Game.TextureAssets["SunFlower"], pos, size, size);
                     break;
                 case PlayerManager.MouseIcon.CARNIVOROUSPLANT:
-                    DrawCenter(_game.TextureAssets["CarnivorousPlant"], pos, size, size);
+                    DrawCenter(PVZGame.Game.TextureAssets["CarnivorousPlant"], pos, size, size);
                     break;
             }
         }
@@ -94,7 +92,7 @@ namespace PlantvsZombie
         {
             int x = (int)(center.X - width / 2);
             int y = (int)(center.Y - height / 2);
-            _game.SpriteBatch.Draw(texture, new Rectangle(x, y, (int)width, (int)height), Color.White);
+            PVZGame.Game.SpriteBatch.Draw(texture, new Rectangle(x, y, (int)width, (int)height), Color.White);
         }
     }
 }
