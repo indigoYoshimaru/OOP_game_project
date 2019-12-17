@@ -65,6 +65,12 @@ namespace PlantvsZombie
                     }
                     Player.Update();
                     break;
+                case PVZGame.GameState.START_MENU:
+                    PVZGame.Game.StartMenu.Update(gameTime);
+                    break;
+                case PVZGame.GameState.END_MENU:
+                    PVZGame.Game.EndMenu.Update(gameTime);
+                    break;
                 default:
                     break;
             }

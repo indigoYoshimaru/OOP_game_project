@@ -101,7 +101,6 @@ namespace PlantvsZombie
                 Exit();
 
             LogicManager.Update(gameTime);
-            base.Update(gameTime);
         }
         /// <summary>
         /// This is called when the game should draw itself.
@@ -121,8 +120,6 @@ namespace PlantvsZombie
         public void EnterGame()
         {
             State = GameState.PLAYING;
-            Console.WriteLine(Graphic.PreferredBackBufferWidth);
-            Console.WriteLine(Graphic.PreferredBackBufferHeight);
             //LogicManager.Initialize();
         }
 
