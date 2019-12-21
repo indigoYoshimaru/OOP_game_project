@@ -8,65 +8,19 @@ namespace PlantvsZombie
 {
     public class SpawnManager
     {
+
+        private IFactory _Factory = new PlantZombieFactory();
         public void SpawnZombie()
         {
-            Zombie z = null;
-            Random _Rand = new Random();
-
-            if (PVZGame.Game.LogicManager.TimeManager <= 20f)
+            Zombie z = _Factory.ZombieFactory();
+            if (z != null)
             {
-                z = new NormalZombie();
-
+                z.Died += HandleDeadZombie;
+                z.Died += HandleScore;
+                PVZGame.Game.LogicManager.ManagedObjects.Add(z);
+                PVZGame.Game.LogicManager.Zombies.Add(z);
             }
-
-            else if (PVZGame.Game.LogicManager.TimeManager >= 40f)
-            {
-                
-                int num = _Rand.Next(PVZGame.Game.LogicManager.ZombieTypes.Count);
-
-                switch (PVZGame.Game.LogicManager.ZombieTypes[num])
-                {
-                    case "NormalZombie":
-                        z = new NormalZombie();
-                        break;
-                    case "FlyingZombie":
-                        z = new FlyingZombie();
-                        break;
-                    case "LaneJumpingZombie":
-                        z = new LaneJumpingZombie();
-                        break;
-                }
-
-            }
-
-            else if (PVZGame.Game.LogicManager.TimeManager >= 90f)
-            {
-                PVZGame.Game.LogicManager.TimeManager = 0f;
-            }
-
-            else
-            {
-                int num = _Rand.Next(PVZGame.Game.LogicManager.ZombieTypes.Count - 1);
-
-                switch (PVZGame.Game.LogicManager.ZombieTypes[num])
-                {
-                    case "NormalZombie":
-                        z = new NormalZombie();
-                        break;
-                    case "FlyingZombie":
-                        z = new FlyingZombie();
-                        break;
-                    case "":
-                        break;
-                }
-
-            }
-
-            z.Died += HandleDeadZombie;
-            z.Died += HandleScore;
-            PVZGame.Game.LogicManager.ManagedObjects.Add(z);
-            PVZGame.Game.LogicManager.Zombies.Add(z);
-
+            
         }
 
         private void HandleScore(object self)
@@ -80,25 +34,10 @@ namespace PlantvsZombie
             PVZGame.Game.LogicManager.Zombies.Remove((Zombie)self);
         }
 
-        private Plant PlantFactory(String plantState,Vector2 plantPosition)
-        {
-            switch (plantState)
-            {
-                case "PeaShooter":
-                    return new PeaShooter(plantPosition);
-                case "SunFlower":
-                    return new SunFlower(plantPosition);
-                case "CarnivorousPlant":
-                    return new CarnivorousPlant(plantPosition);
-                default:
-                    return null;
-            }
-        } 
-
         public void SpawnPlant(Tile mouseTile)
         {
             
-            Plant pl = PlantFactory(PVZGame.Game.LogicManager.Player.PlantState, mouseTile.GetCenter());
+            Plant pl = _Factory.PlantFactory(PVZGame.Game.LogicManager.Player.IconState, mouseTile.GetCenter());
             if (pl != null)
             {
                 pl.Died += HandleDeadPlantObject;

@@ -15,6 +15,7 @@ namespace PlantvsZombie
 
         public override void Update()
         {
+            ObjectTile = _ShooterTile;
             base.Update();
 
             if (_CurrentZombie!=null&&_CurrentZombie.Health>0)
@@ -51,7 +52,7 @@ namespace PlantvsZombie
         {
             Position = _Position;
             _ShooterTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position).GetRelativeTile(4,0);
-            
+        
         }
 
         public override void Attack(Zombie z)

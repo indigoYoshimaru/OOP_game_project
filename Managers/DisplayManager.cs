@@ -76,19 +76,15 @@ namespace PlantvsZombie
             Vector2 pos = new Vector2(PVZGame.Game.MouseX(), PVZGame.Game.MouseY());
             float size = PVZGame.Game.LogicManager.GameMap.TileSize.X;
 
-            switch (PVZGame.Game.LogicManager.Player.GetMouseIcon())
+            string mouseState = PVZGame.Game.LogicManager.Player.IconState;
+
+            switch (mouseState)
             {
-                case PlayerManager.MouseIcon.NORMAL:
-                    PVZGame.Game.SpriteBatch.Draw(PVZGame.Game.TextureAssets["NormalMouse"], pos, Color.White);
+                case "NormalMouse":
+                    PVZGame.Game.SpriteBatch.Draw(PVZGame.Game.TextureAssets[mouseState], pos, Color.White);
                     break;
-                case PlayerManager.MouseIcon.PEASHOOTER:
-                    DrawCenter(PVZGame.Game.TextureAssets["PeaShooter"], pos, size, size);
-                    break;
-                case PlayerManager.MouseIcon.SUNFLOWER:
-                    DrawCenter(PVZGame.Game.TextureAssets["SunFlower"], pos, size, size);
-                    break;
-                case PlayerManager.MouseIcon.CARNIVOROUSPLANT:
-                    DrawCenter(PVZGame.Game.TextureAssets["CarnivorousPlant"], pos, size, size);
+                default:
+                    DrawCenter(PVZGame.Game.TextureAssets[mouseState], pos, size, size);
                     break;
             }
         }

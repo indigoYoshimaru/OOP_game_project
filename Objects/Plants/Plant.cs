@@ -13,6 +13,15 @@ namespace PlantvsZombie
     {
        
         public abstract void Attack(Zombie z);
+        public override void Update()
+        {
+            if (ObjectTile == null)
+            {
+                //do something
+            }
+            base.Update();
+        }
+
                 
     }
 }

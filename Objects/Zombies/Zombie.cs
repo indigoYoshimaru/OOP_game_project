@@ -18,7 +18,7 @@ namespace PlantvsZombie
         public override void Update()
         {
             base.Update();
-            if (Position.X < 0)
+            if (ObjectTile==null)
                 PVZGame.Game.ToEndMenu();
         }
 
@@ -27,9 +27,7 @@ namespace PlantvsZombie
             Random r = new Random(Guid.NewGuid().GetHashCode());
             int y = r.Next(0, 4);
             DamagedState = true;
-            var _Position  = PVZGame.Game.LogicManager.GameMap.GetTile(9, y).GetCenter();
-            
-            Position = _Position;
+            Position = PVZGame.Game.LogicManager.GameMap.GetTile(9, y).GetCenter();
 
         }
     }

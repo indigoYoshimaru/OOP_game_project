@@ -19,7 +19,7 @@ namespace PlantvsZombie
         private MouseState _OldMouseState;
         private Tile _MouseTile;
 
-        public String PlantState { get; set; } = "";
+        public String IconState { get; set; } = "NormalMouse";
 
         public int GetScore()
         {
@@ -55,22 +55,22 @@ namespace PlantvsZombie
             if (Keyboard.GetState().IsKeyDown(Keys.X) || (Mouse.GetState().RightButton == ButtonState.Pressed))
             {
                 mIcon = MouseIcon.NORMAL;
-                PlantState = "";
+                IconState = "NormalMouse";
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 mIcon = MouseIcon.SUNFLOWER;
-                PlantState = "SunFlower";
+                IconState = "SunFlower";
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 mIcon = MouseIcon.PEASHOOTER;
-                PlantState = "PeaShooter";
+                IconState = "PeaShooter";
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.C))
             {
                 mIcon = MouseIcon.CARNIVOROUSPLANT;
-                PlantState = "CarnivorousPlant";
+                IconState = "CarnivorousPlant";
             }
 
         }
@@ -94,7 +94,7 @@ namespace PlantvsZombie
         public bool SpendSun()
         {
             int sunSpend = 0;
-            switch (PlantState)
+            switch (IconState)
             {
                 case "SunFlower":
                     sunSpend = 50;
