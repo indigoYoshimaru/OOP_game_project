@@ -12,13 +12,10 @@ namespace PlantvsZombie
     public class PVZGame:Game
     {
         public GraphicsDeviceManager Graphic { get; set; }
-        public SpriteBatch SpriteBatch { get; set; }
-        public SpriteFont GameFont;
-        public Dictionary<String, Texture2D> TextureAssets { get; set; } = new Dictionary<string, Texture2D>();
-
+        public SpriteBatch SpriteBatch { get; set; }   
 
         public LogicManager LogicManager { get; set; }
-        public DisplayManager DisplayManager { get; set; }
+        private IDisplay DisplayManager;
         public GameTime CurrentGameTime { get; private set; }
 
         public enum GameState { START_MENU, PLAYING, END_MENU };
@@ -45,7 +42,7 @@ namespace PlantvsZombie
         protected override void Initialize()
         {
             
-            DisplayManager = new DisplayManager();
+            DisplayManager = new DesktopDisplayManager();
             LogicManager = new LogicManager();
             StartMenu = new StartMenu(this);
             EndMenu = new EndMenu(this);
@@ -64,19 +61,7 @@ namespace PlantvsZombie
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-            TextureAssets["EndMenuBG"] = Content.Load<Texture2D>("Texture/Background/EndMenuBG");
-            TextureAssets["StartMenuBG"] = Content.Load<Texture2D>("Texture/Background/StartMenuBG");
-            TextureAssets["Lawn"] = Content.Load<Texture2D>("Texture/Background/Lawn");
-            TextureAssets["NormalZombie"] = Content.Load<Texture2D>("Texture/Zombies/NormalZombie");
-            TextureAssets["PeaShooter"] = Content.Load<Texture2D>("Texture/Plants/PeaShooter");
-            TextureAssets["SunFlower"] = Content.Load<Texture2D>("Texture/Plants/SunFlower");
-            TextureAssets["CarnivorousPlant"] = Content.Load<Texture2D>("Texture/Plants/CarnivorousPlant");
-            TextureAssets["Bullet"] = Content.Load<Texture2D>("Texture/Miscellaneous/Bullet");
-            TextureAssets["Sun"] = Content.Load<Texture2D>("Texture/Miscellaneous/Sun");
-            TextureAssets["FlyingZombie"] = Content.Load<Texture2D>("Texture/Zombies/FlyingZombie");
-            TextureAssets["LaneJumpingZombie"] = Content.Load<Texture2D>("Texture/Zombies/LaneJumpingZombie");
-            TextureAssets["NormalMouse"] = Content.Load<Texture2D>("Texture/Miscellaneous/NormalMouse");
-            GameFont = Content.Load<SpriteFont>("Texture/Miscellaneous/galleryFont");
+            DisplayManager.LoadContent();
             // TODO: use this.Content to load your game content here
         }
 
@@ -101,7 +86,7 @@ namespace PlantvsZombie
                 Exit();
 
             LogicManager.Update(gameTime);
-            base.Update(gameTime);
+            
         }
         /// <summary>
         /// This is called when the game should draw itself.
@@ -121,9 +106,7 @@ namespace PlantvsZombie
         public void EnterGame()
         {
             State = GameState.PLAYING;
-            Console.WriteLine(Graphic.PreferredBackBufferWidth);
-            Console.WriteLine(Graphic.PreferredBackBufferHeight);
-            //LogicManager.Initialize();
+            
         }
 
         public void ToEndMenu()

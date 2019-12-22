@@ -12,6 +12,7 @@ namespace PlantvsZombie
     public abstract class Zombie:PlantZombieObject
     {
         public bool DamagedState { get; set; }
+        public int Score { get; set; }
         public abstract void Move();
         public abstract void Attack(Plant p);
 

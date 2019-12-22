@@ -10,7 +10,7 @@ namespace PlantvsZombie
 {
     public class PlayerManager
     {
-        private int score = 0;
+        private int _PlayerScore= 0;
         private int highScore;
         private int totalSun = 200;
         public enum MouseIcon { NORMAL, SUNFLOWER, PEASHOOTER, CARNIVOROUSPLANT };    //icon of the mouse
@@ -23,7 +23,7 @@ namespace PlantvsZombie
 
         public int GetScore()
         {
-            return score;
+            return _PlayerScore;
         }
 
         public MouseIcon GetMouseIcon()
@@ -31,21 +31,10 @@ namespace PlantvsZombie
             return mIcon;
         }
 
-
+        //open-close principle this is not open for extension
         public void UpdateScore(Zombie z)
         {
-            if (z is NormalZombie)
-            {
-                score += 5;
-            }
-            else if (z is FlyingZombie)
-            {
-                score += 10;
-            }
-            else if (z is LaneJumpingZombie)
-            {
-                score += 15;
-            }
+            _PlayerScore += z.Score;
         }
 
         //send signal to plant the correct type
@@ -82,9 +71,11 @@ namespace PlantvsZombie
             {
 
                 _MouseTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_CurrentMouseState.Position.ToVector2());
+                if (_MouseTile!=null&&!_MouseTile.HasPlant())
                 {
                     if (SpendSun())
                         PVZGame.Game.LogicManager.Spawner.SpawnPlant(_MouseTile);
+                        
 
                 }
             }
@@ -148,9 +139,9 @@ namespace PlantvsZombie
 
         public void UpdateHighScore()
         {
-            if (score > highScore)
+            if (_PlayerScore > highScore)
             {
-                SetHighScore(score);
+                SetHighScore(_PlayerScore);
             }
         }
 

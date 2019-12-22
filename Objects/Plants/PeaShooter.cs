@@ -9,7 +9,7 @@ namespace PlantvsZombie
     public class PeaShooter:Plant
     {
         
-        private float _TimeSinceLastSpawn=0f;
+        private float _TimeSinceLastSpawn=5f;
         private Zombie _CurrentZombie;
         private Tile _ShooterTile;
 
@@ -18,7 +18,19 @@ namespace PlantvsZombie
             ObjectTile = _ShooterTile;
             base.Update();
 
-            if (_CurrentZombie!=null&&_CurrentZombie.Health>0)
+            //if (_CurrentZombie!=null&&_CurrentZombie.Health>0)
+            //{
+            //    _TimeSinceLastSpawn += (float)PVZGame.Game.CurrentGameTime.ElapsedGameTime.TotalSeconds;
+            //    if (_TimeSinceLastSpawn >= 5f)
+            //    {
+            //        Attack(null);
+            //        _TimeSinceLastSpawn = 0f;
+            //    }
+            //}
+
+            //else
+            //    _CurrentZombie = MeetZombie();
+            if (MeetZombie() != null)
             {
                 _TimeSinceLastSpawn += (float)PVZGame.Game.CurrentGameTime.ElapsedGameTime.TotalSeconds;
                 if (_TimeSinceLastSpawn >= 5f)
@@ -27,9 +39,7 @@ namespace PlantvsZombie
                     _TimeSinceLastSpawn = 0f;
                 }
             }
-
-            else
-                _CurrentZombie = MeetZombie();
+            
 
         }
 
@@ -41,7 +51,11 @@ namespace PlantvsZombie
             
             foreach (var z in PVZGame.Game.LogicManager.Zombies)
             {
-                if (_ShooterTile.Contains(z.Position))
+
+                //if (_ShooterTile.Contains(z.Position))
+                //    return z;
+
+                if (_ShooterTile.Y == z.ObjectTile.Y && _ShooterTile.X <= z.ObjectTile.X && z.ObjectTile.X <= _ShooterTile.X + 5)
                     return z;
             }
             return null;
@@ -51,7 +65,7 @@ namespace PlantvsZombie
         public PeaShooter(Vector2 _Position)
         {
             Position = _Position;
-            _ShooterTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position).GetRelativeTile(4,0);
+            _ShooterTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);//.GetRelativeTile(4,0);
         
         }
 

@@ -16,38 +16,33 @@ namespace PlantvsZombie
             if (z != null)
             {
                 z.Died += HandleDeadZombie;
-                z.Died += HandleScore;
                 PVZGame.Game.LogicManager.ManagedObjects.Add(z);
                 PVZGame.Game.LogicManager.Zombies.Add(z);
             }
             
         }
 
-        private void HandleScore(object self)
-        {
-            PVZGame.Game.LogicManager.Player.UpdateScore((Zombie)self);
-        }
-
         private void HandleDeadZombie(object self)
         {
             PVZGame.Game.LogicManager.ManagedObjects.Remove((GameObject)self);
             PVZGame.Game.LogicManager.Zombies.Remove((Zombie)self);
+            PVZGame.Game.LogicManager.Player.UpdateScore((Zombie)self);
         }
 
         public void SpawnPlant(Tile mouseTile)
         {
-            
             Plant pl = _Factory.PlantFactory(PVZGame.Game.LogicManager.Player.IconState, mouseTile.GetCenter());
             if (pl != null)
             {
-                pl.Died += HandleDeadPlantObject;
+                pl.Died += HandleDeadPlant;
                 PVZGame.Game.LogicManager.ManagedObjects.Add(pl);
                 PVZGame.Game.LogicManager.Plants.Add(pl);
+                mouseTile.Plant = pl;
             }
 
         }
 
-        private void HandleDeadPlantObject(object self)
+        private void HandleDeadPlant(object self)
         {
             PVZGame.Game.LogicManager.ManagedObjects.Remove((GameObject)self);
             PVZGame.Game.LogicManager.Plants.Remove((Plant)self);
