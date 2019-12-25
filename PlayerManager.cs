@@ -10,9 +10,8 @@ namespace PlantvsZombie
 {
     public class PlayerManager
     {
-        private int _PlayerScore= 0;
         private int highScore;
-        private int totalSun = 200;
+
         public enum MouseIcon { NORMAL, SUNFLOWER, PEASHOOTER, CARNIVOROUSPLANT };    //icon of the mouse
         private MouseIcon mIcon;
         private MouseState _CurrentMouseState;
@@ -21,12 +20,12 @@ namespace PlantvsZombie
 
         public String IconState { get; set; } = "NormalMouse";
 
-        public int Score => _PlayerScore;
+        public int Score { get; private set; } = 0;
 
         //open-close principle this is not open for extension
         public void UpdateScore(Zombie z)
         {
-            _PlayerScore += z.Score;
+            Score += z.Score;
         }
 
         //send signal to plant the correct type
@@ -90,9 +89,9 @@ namespace PlantvsZombie
                     break;
             }
 
-            if (totalSun >= sunSpend)
+            if (TotalSun >= sunSpend)
             {
-                totalSun -= sunSpend;
+                TotalSun -= sunSpend;
                 return true;
             }
 
@@ -110,19 +109,19 @@ namespace PlantvsZombie
             foreach (GameObject o in PVZGame.Game.LogicManager.ManagedObjects.ToList())
             {
                 if (o is Sun)
-                    totalSun += ((Sun)o).Collect(Mouse.GetState().X, Mouse.GetState().Y);
+                    TotalSun += ((Sun)o).Collect(Mouse.GetState().X, Mouse.GetState().Y);
             }
         }
 
-        public int TotalSun => totalSun;
+        public int TotalSun { get; private set; } = 200;
 
         public int HighScore { get => highScore; set => highScore = value; }
 
         public void UpdateHighScore()
         {
-            if (_PlayerScore > highScore)
+            if (Score > highScore)
             {
-                HighScore = _PlayerScore;
+                HighScore = Score;
             }
         }
 
