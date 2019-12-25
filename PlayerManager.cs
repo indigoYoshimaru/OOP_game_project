@@ -10,7 +10,7 @@ namespace PlantvsZombie
 {
     public class PlayerManager
     {
-        private int score = 0;
+        private int _PlayerScore= 0;
         private int highScore;
         private int totalSun = 200;
         public enum MouseIcon { NORMAL, SUNFLOWER, PEASHOOTER, CARNIVOROUSPLANT };    //icon of the mouse
@@ -18,34 +18,15 @@ namespace PlantvsZombie
         private MouseState _CurrentMouseState;
         private MouseState _OldMouseState;
         private Tile _MouseTile;
-        
-        public String PlantState { get; set; } = "";
 
-        public int GetScore()
-        {
-            return score;
-        }
+        public String IconState { get; set; } = "NormalMouse";
 
-        public MouseIcon GetMouseIcon()
-        {
-            return mIcon;
-        }
+        public int Score => _PlayerScore;
 
-
+        //open-close principle this is not open for extension
         public void UpdateScore(Zombie z)
         {
-            if (z is NormalZombie)
-            {
-                score += 5;
-            }
-            else if (z is FlyingZombie)
-            {
-                score += 10;
-            }
-            else if (z is LaneJumpingZombie)
-            {
-                score += 15;
-            }
+            _PlayerScore += z.Score;
         }
 
         //send signal to plant the correct type
@@ -55,22 +36,22 @@ namespace PlantvsZombie
             if (Keyboard.GetState().IsKeyDown(Keys.X) || (Mouse.GetState().RightButton == ButtonState.Pressed))
             {
                 mIcon = MouseIcon.NORMAL;
-                PlantState = "";
+                IconState = "NormalMouse";
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 mIcon = MouseIcon.SUNFLOWER;
-                PlantState = "SunFlower";
+                IconState = "SunFlower";
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 mIcon = MouseIcon.PEASHOOTER;
-                PlantState = "PeaShooter";
+                IconState = "PeaShooter";
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.C))
             {
                 mIcon = MouseIcon.CARNIVOROUSPLANT;
-                PlantState = "CarnivorousPlant";
+                IconState = "CarnivorousPlant";
             }
 
         }
@@ -78,14 +59,16 @@ namespace PlantvsZombie
         {
             Controller();
             _CurrentMouseState = Mouse.GetState();
-            if (_CurrentMouseState.LeftButton == ButtonState.Pressed && _OldMouseState.LeftButton == ButtonState.Released)
+            if (mIcon != MouseIcon.NORMAL && _CurrentMouseState.LeftButton == ButtonState.Pressed && _OldMouseState.LeftButton == ButtonState.Released)
             {
 
-                _MouseTile = PVZGame.Game.GameMap.GetTileAt(_CurrentMouseState.Position.ToVector2());
+                _MouseTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_CurrentMouseState.Position.ToVector2());
+                if (_MouseTile!=null&&!_MouseTile.HasPlant())
                 {
-                    if(SpendSun())
-                        PVZGame.Game.Spawner.SpawnPlant(_MouseTile);
-                    
+                    if (SpendSun())
+                        PVZGame.Game.LogicManager.Spawner.SpawnPlant(_MouseTile);
+                        
+
                 }
             }
             _OldMouseState = _CurrentMouseState;
@@ -94,7 +77,7 @@ namespace PlantvsZombie
         public bool SpendSun()
         {
             int sunSpend = 0;
-            switch (PlantState)
+            switch (IconState)
             {
                 case "SunFlower":
                     sunSpend = 50;
@@ -124,33 +107,22 @@ namespace PlantvsZombie
             if (Mouse.GetState().LeftButton != ButtonState.Pressed)
                 return;
 
-            foreach(GameObject o in PVZGame.Game.ManagedObjects.ToList())
+            foreach (GameObject o in PVZGame.Game.LogicManager.ManagedObjects.ToList())
             {
-                if(o is Sun)
-                    totalSun += ((Sun) o).Collect(Mouse.GetState().X, Mouse.GetState().Y);
+                if (o is Sun)
+                    totalSun += ((Sun)o).Collect(Mouse.GetState().X, Mouse.GetState().Y);
             }
         }
 
-        public int GetTotalSun()
-        {
-            return totalSun;
-        }
+        public int TotalSun => totalSun;
 
-        public int GetHighScore()
-        {
-            return highScore;
-        }
-
-        public void SetHighScore(int value)
-        {
-            highScore = value;
-        }
+        public int HighScore { get => highScore; set => highScore = value; }
 
         public void UpdateHighScore()
         {
-            if (score > highScore)
+            if (_PlayerScore > highScore)
             {
-                SetHighScore(score);
+                HighScore = _PlayerScore;
             }
         }
 
@@ -158,10 +130,10 @@ namespace PlantvsZombie
         {
             try
             {
-                var text = File.ReadAllText("highscore.txt", Encoding.UTF8);
+                var text = File.ReadAllText("Content/highscore.txt", Encoding.UTF8);
                 if (!Int32.TryParse(text, out highScore))
                 {
-                    SetHighScore(0);
+                    HighScore = 0;
                 }
             }
             catch (Exception e)
@@ -175,9 +147,9 @@ namespace PlantvsZombie
             try
             {
                 //Open the File
-                StreamWriter sw = new StreamWriter("highscore.txt", false, Encoding.UTF8); //false means rewrite the file
+                StreamWriter sw = new StreamWriter("Content/highscore.txt", false, Encoding.UTF8); //false means rewrite the file
 
-                sw.WriteLine(GetHighScore());
+                sw.WriteLine(HighScore);
 
                 //close the file
                 sw.Close();
@@ -190,7 +162,7 @@ namespace PlantvsZombie
 
         public void Update()
         {
-            //call player Update()
+            //call Update()
             UpdateControl();
 
             //update highscore
