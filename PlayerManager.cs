@@ -10,8 +10,8 @@ namespace PlantvsZombie
 {
     public class PlayerManager
     {
-        private int highScore;
-
+        //private int highScore;
+        public int _TotalSun { get; private set; } = 200;
         public enum MouseIcon { NORMAL, SUNFLOWER, PEASHOOTER, CARNIVOROUSPLANT };    //icon of the mouse
         private MouseIcon mIcon;
         private MouseState _CurrentMouseState;
@@ -20,12 +20,14 @@ namespace PlantvsZombie
 
         public String IconState { get; set; } = "NormalMouse";
 
-        public int Score { get; private set; } = 0;
+        public int _PlayerScore { get; private set; } = 0;
+        //public int HighScore { get => highScore; set => highScore = value; }
+        public int _HighScore { get; private set; } = 0;
 
         //open-close principle this is not open for extension
         public void UpdateScore(Zombie z)
         {
-            Score += z.Score;
+            _PlayerScore += z.Score;
         }
 
         //send signal to plant the correct type
@@ -89,9 +91,9 @@ namespace PlantvsZombie
                     break;
             }
 
-            if (TotalSun >= sunSpend)
+            if (_TotalSun >= sunSpend)
             {
-                TotalSun -= sunSpend;
+                _TotalSun -= sunSpend;
                 return true;
             }
 
@@ -109,19 +111,18 @@ namespace PlantvsZombie
             foreach (GameObject o in PVZGame.Game.LogicManager.ManagedObjects.ToList())
             {
                 if (o is Sun)
-                    TotalSun += ((Sun)o).Collect(Mouse.GetState().X, Mouse.GetState().Y);
+                    _TotalSun += ((Sun)o).Collect(Mouse.GetState().X, Mouse.GetState().Y);
             }
         }
 
-        public int TotalSun { get; private set; } = 200;
 
-        public int HighScore { get => highScore; set => highScore = value; }
+
 
         public void UpdateHighScore()
         {
-            if (Score > highScore)
+            if (_PlayerScore > _HighScore)
             {
-                HighScore = Score;
+                _HighScore = _PlayerScore;
             }
         }
 
@@ -129,10 +130,15 @@ namespace PlantvsZombie
         {
             try
             {
+                int temp;
                 var text = File.ReadAllText("Content/highscore.txt", Encoding.UTF8);
-                if (!Int32.TryParse(text, out highScore))
+                if (!Int32.TryParse(text, out temp))
                 {
-                    HighScore = 0;
+                    _HighScore = 0;
+                }
+                else
+                {
+                    _HighScore = temp;
                 }
             }
             catch (Exception e)
@@ -148,7 +154,7 @@ namespace PlantvsZombie
                 //Open the File
                 StreamWriter sw = new StreamWriter("Content/highscore.txt", false, Encoding.UTF8); //false means rewrite the file
 
-                sw.WriteLine(HighScore);
+                sw.WriteLine(_HighScore);
 
                 //close the file
                 sw.Close();
