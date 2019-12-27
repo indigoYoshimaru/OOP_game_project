@@ -82,6 +82,7 @@ namespace PlantvsZombie
             Speed = 0.3f;
             DamagedState = false;
             _ZombieTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
+            ObjectTile = _ZombieTile;
             Score = 10;
         }
     }
