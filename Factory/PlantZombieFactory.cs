@@ -8,13 +8,14 @@ namespace PlantvsZombie
 {
     public class PlantZombieFactory:IFactory
     {
-
+        private static int _CurrentLoop = 0;
         Zombie IFactory.ZombieFactory()
         {
             Random _Rand = new Random();
 
             if (PVZGame.Game.LogicManager.TimeManager <= 20f)
             {
+                PVZGame.Game.LogicManager.TimeSinceLastZombieSpawn = 0f;
                 return new NormalZombie();
             }
 
@@ -32,12 +33,14 @@ namespace PlantvsZombie
                     case "LaneJumpingZombie":
                         return new LaneJumpingZombie();
                 }
+                PVZGame.Game.LogicManager.TimeSinceLastZombieSpawn = _CurrentLoop*1f;
 
             }
 
             else if (PVZGame.Game.LogicManager.TimeManager >= 90f)
             {
-                PVZGame.Game.LogicManager.TimeManager = 0f;
+                PVZGame.Game.LogicManager.TimeManager = 40f;
+                _CurrentLoop ++;
             }
 
             else

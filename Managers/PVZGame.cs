@@ -112,7 +112,6 @@ namespace PlantvsZombie
         public void ToEndMenu()
         {
             State = GameState.END_MENU;
-            LogicManager.EndGame();
         }
 
         //Close window 

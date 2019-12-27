@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/defaultFont.spritefont</File>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/Texture/Background/EndMenuBG.png</File>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/Texture/Background/Lawn.png</File>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/Texture/Background/StartMenuBG.png</File>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/Texture/Miscellaneous/Bullet.png</File>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/Texture/Miscellaneous/galleryFont.spritefont</File>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/Texture/Miscellaneous/NormalMouse.png</File>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/Texture/Miscellaneous/Sun.png</File>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/Texture/Plants/Carnivorousplant.png</File>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/Texture/Plants/carnivorousplant1.png</File>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/Texture/Plants/Peashooter.png</File>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/Texture/Plants/Sunflower.png</File>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/Texture/Zombies/FlyingZombie.png</File>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/Texture/Zombies/LaneJumpingZombie.png</File>
+    <File>D:/IU/semester1_2019-2020/Object-Oriented Programming/project/OOP_game_project_H_fix5/Content/Texture/Zombies/NormalZombie.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

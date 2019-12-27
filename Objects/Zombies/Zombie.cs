@@ -19,8 +19,13 @@ namespace PlantvsZombie
         public override void Update()
         {
             base.Update();
-            if (ObjectTile==null)
-                PVZGame.Game.ToEndMenu();
+            if (ObjectTile == null)
+            {
+                //do something
+            }
+               
+            if (ObjectTile.X <= 0)
+                PVZGame.Game.LogicManager.EndGame();
         }
 
         public Zombie()

@@ -13,12 +13,11 @@ namespace PlantvsZombie
     {
         
         private Vector2 _Position;
-        private float _DamageFactor = 2;
+        private float _DamageFactor = 4;
         private Tile _ZombieTile;
-        Random rand = new Random();
 
-        float yDes;
-        float xMinus = 0f;
+        private float _YDes;
+        private float _XMinus = 0f;
 
         private Plant MeetPlant()
         {
@@ -37,8 +36,9 @@ namespace PlantvsZombie
 
         public override void Update()
         {
-            base.Update();
             _ZombieTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
+            ObjectTile = _ZombieTile;
+            base.Update();
             var p = MeetPlant();
             if (p != null) Attack(p);
 
@@ -60,11 +60,11 @@ namespace PlantvsZombie
         {
             _Position.X -= Speed;
 
-            xMinus += Speed;
+            _XMinus += Speed;
             Tile tileCheck;
-            
-            
-            if (Math.Abs(_Position.Y - yDes) < 1 && xMinus >= 2*PVZGame.Game.LogicManager.GameMap.TileSize.X)
+            Random rand = new Random();
+
+            if (Math.Abs(_Position.Y - _YDes) < 1 && _XMinus >= 2*PVZGame.Game.LogicManager.GameMap.TileSize.X)
             {
                 int r = rand.Next(-1,2);
                 tileCheck = _ZombieTile.GetRelativeTile(0, r);
@@ -72,16 +72,16 @@ namespace PlantvsZombie
                 if (tileCheck != null)
                 {
                     System.Diagnostics.Debug.WriteLine(tileCheck.Y);
-                    yDes = tileCheck.GetCenter().Y;
+                    _YDes = tileCheck.GetCenter().Y;
                 }
-                xMinus = 0;
+                _XMinus = 0;
             }
-            _Position.Y = Lerp(_Position.Y, yDes, 0.02f);
+            _Position.Y = Lerp(_Position.Y, _YDes, 0.02f);
             this.Position = _Position;
            
         }
 
-        float Lerp(float firstFloat, float secondFloat, float by)
+        private float Lerp(float firstFloat, float secondFloat, float by)
         {
             return firstFloat * (1 - by) + secondFloat * by;
         }
@@ -90,8 +90,8 @@ namespace PlantvsZombie
         {
             _Position = Position;
             _ZombieTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
-            yDes = Position.Y;
-            Speed = 0.4f;
+            _YDes = Position.Y;
+            Speed = 0.6f;
             Score = 15;
         }
     }

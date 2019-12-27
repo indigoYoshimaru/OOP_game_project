@@ -3,7 +3,7 @@
 
 /outputDir:bin/$(Platform)
 /intermediateDir:obj/$(Platform)
-/platform:DesktopGL
+/platform:Windows
 /config:
 /profile:Reach
 /compress:False
@@ -109,7 +109,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Texture/Plants/Carnivorousplant.png;Texture/Plants/CarnivorousPlant.png
+/build:Texture/Plants/Carnivorousplant.png
 
 #begin Texture/Plants/carnivorousplant1.png
 /importer:TextureImporter
@@ -133,7 +133,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Texture/Plants/Peashooter.png;Texture/Plants/PeaShooter.png
+/build:Texture/Plants/Peashooter.png
 
 #begin Texture/Plants/Sunflower.png
 /importer:TextureImporter
@@ -145,7 +145,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Texture/Plants/Sunflower.png;Texture/Plants/SunFlower.png
+/build:Texture/Plants/Sunflower.png
 
 #begin Texture/Zombies/FlyingZombie.png
 /importer:TextureImporter

@@ -13,7 +13,8 @@ namespace PlantvsZombie
         public HashSet<Zombie> Zombies;
         public List<String> ZombieTypes;
         public float TimeManager { get; set; }
-        public float TimeSinceLastSpawn { get; set; }
+        public float TimeSinceLastZombieSpawn { get; set; }
+        public float TimeSinceLastSunSpawn { get; set; }
         public PlayerManager Player { get; set; }
         public SpawnManager Spawner { get; set; }
         public Map GameMap;
@@ -27,7 +28,8 @@ namespace PlantvsZombie
             ZombieTypes.Add("NormalZombie");
             ZombieTypes.Add("FlyingZombie");
             ZombieTypes.Add("LaneJumpingZombie");
-            TimeSinceLastSpawn = 0f;
+            TimeSinceLastZombieSpawn = 0f;
+            TimeSinceLastSunSpawn = 0f;
             TimeManager = 0f;
             GameMap = new Map(PVZGame.Game.GraphicsDevice.PresentationParameters.Bounds);
 
@@ -35,7 +37,7 @@ namespace PlantvsZombie
             Spawner = new SpawnManager();
             Player.LoadHighScore();
             Spawner.SpawnZombie();
- 
+
         }
 
         public void Update(GameTime gameTime)
@@ -55,13 +57,17 @@ namespace PlantvsZombie
                             continue;
                         }
                     }
-                    TimeSinceLastSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    TimeSinceLastZombieSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    TimeSinceLastSunSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
                     TimeManager += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    if (TimeSinceLastSpawn >= 5f)
+                    if (TimeSinceLastZombieSpawn >= 10f)
                     {
                         Spawner.SpawnZombie();
+                    }
+                    if (TimeSinceLastSunSpawn >= 3f)
+                    {
                         Spawner.SpawnSun();
-                        TimeSinceLastSpawn = 0f;
+                        TimeSinceLastSunSpawn = 0f;
                     }
                     Player.Update();
                     break;
@@ -73,16 +79,13 @@ namespace PlantvsZombie
                     break;
                 default:
                     break;
-                
             }
         }
 
         public void EndGame()
         {
             Player.SaveHighScore();
+            PVZGame.Game.ToEndMenu();
         }
-
-        
-      
     }
 }

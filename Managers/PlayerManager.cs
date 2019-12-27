@@ -11,10 +11,10 @@ namespace PlantvsZombie
     public class PlayerManager
     {
         private int _PlayerScore= 0;
-        private int highScore;
-        private int totalSun = 200;
+        private int _HighScore;
+        private int _TotalSun = 200;
         public enum MouseIcon { NORMAL, SUNFLOWER, PEASHOOTER, CARNIVOROUSPLANT };    //icon of the mouse
-        private MouseIcon mIcon;
+        private MouseIcon _MIcon;
         private MouseState _CurrentMouseState;
         private MouseState _OldMouseState;
         private Tile _MouseTile;
@@ -28,7 +28,7 @@ namespace PlantvsZombie
 
         public MouseIcon GetMouseIcon()
         {
-            return mIcon;
+            return _MIcon;
         }
 
         //open-close principle this is not open for extension
@@ -43,22 +43,22 @@ namespace PlantvsZombie
 
             if (Keyboard.GetState().IsKeyDown(Keys.X) || (Mouse.GetState().RightButton == ButtonState.Pressed))
             {
-                mIcon = MouseIcon.NORMAL;
+                _MIcon = MouseIcon.NORMAL;
                 IconState = "NormalMouse";
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                mIcon = MouseIcon.SUNFLOWER;
+                _MIcon = MouseIcon.SUNFLOWER;
                 IconState = "SunFlower";
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                mIcon = MouseIcon.PEASHOOTER;
+                _MIcon = MouseIcon.PEASHOOTER;
                 IconState = "PeaShooter";
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.C))
             {
-                mIcon = MouseIcon.CARNIVOROUSPLANT;
+                _MIcon = MouseIcon.CARNIVOROUSPLANT;
                 IconState = "CarnivorousPlant";
             }
 
@@ -67,7 +67,7 @@ namespace PlantvsZombie
         {
             Controller();
             _CurrentMouseState = Mouse.GetState();
-            if (mIcon != MouseIcon.NORMAL && _CurrentMouseState.LeftButton == ButtonState.Pressed && _OldMouseState.LeftButton == ButtonState.Released)
+            if (_MIcon != MouseIcon.NORMAL && _CurrentMouseState.LeftButton == ButtonState.Pressed && _OldMouseState.LeftButton == ButtonState.Released)
             {
 
                 _MouseTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_CurrentMouseState.Position.ToVector2());
@@ -75,7 +75,6 @@ namespace PlantvsZombie
                 {
                     if (SpendSun())
                         PVZGame.Game.LogicManager.Spawner.SpawnPlant(_MouseTile);
-                        
 
                 }
             }
@@ -98,9 +97,9 @@ namespace PlantvsZombie
                     break;
             }
 
-            if (totalSun >= sunSpend)
+            if (_TotalSun >= sunSpend)
             {
-                totalSun -= sunSpend;
+                _TotalSun -= sunSpend;
                 return true;
             }
 
@@ -109,7 +108,7 @@ namespace PlantvsZombie
 
         public void CheckSun()
         {
-            if (mIcon != MouseIcon.NORMAL)
+            if (_MIcon != MouseIcon.NORMAL)
                 return;
 
             if (Mouse.GetState().LeftButton != ButtonState.Pressed)
@@ -118,28 +117,28 @@ namespace PlantvsZombie
             foreach (GameObject o in PVZGame.Game.LogicManager.ManagedObjects.ToList())
             {
                 if (o is Sun)
-                    totalSun += ((Sun)o).Collect(Mouse.GetState().X, Mouse.GetState().Y);
+                    _TotalSun += ((Sun)o).Collect(Mouse.GetState().X, Mouse.GetState().Y);
             }
         }
 
         public int GetTotalSun()
         {
-            return totalSun;
+            return _TotalSun;
         }
 
         public int GetHighScore()
         {
-            return highScore;
+            return _HighScore;
         }
 
         public void SetHighScore(int value)
         {
-            highScore = value;
+            _HighScore = value;
         }
 
         public void UpdateHighScore()
         {
-            if (_PlayerScore > highScore)
+            if (_PlayerScore > _HighScore)
             {
                 SetHighScore(_PlayerScore);
             }
@@ -150,7 +149,7 @@ namespace PlantvsZombie
             try
             {
                 var text = File.ReadAllText("Content/highscore.txt", Encoding.UTF8);
-                if (!Int32.TryParse(text, out highScore))
+                if (!Int32.TryParse(text, out _HighScore))
                 {
                     SetHighScore(0);
                 }

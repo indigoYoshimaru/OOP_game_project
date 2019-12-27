@@ -5,17 +5,16 @@ using System.Collections.Generic;
 using System;
 namespace PlantvsZombie
 {
-    class CarnivorousPlant:Plant
+    public class CarnivorousPlant:Plant
     {
         private float _DamageFactor = 100;
         private float _TimeSinceLastEat = 20f;
-        private Tile _EatTile;
-        public Zombie MeetZombie()
+        private Zombie MeetZombie()
         {
 
             foreach (var z in PVZGame.Game.LogicManager.Zombies)
             {
-                if (_EatTile.Contains(z.Position))
+                if (ObjectTile.Contains(z.Position))
                     return z;
             }
             return null;
@@ -24,7 +23,7 @@ namespace PlantvsZombie
         public CarnivorousPlant(Vector2 _Position)
         {
             Position = _Position;
-            _EatTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position).GetRelativeTile(1, 0); //check if 1 cell from the plant has a zombie in it
+            ObjectTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position).GetRelativeTile(1, 0); //check if 1 cell from the plant has a zombie in it
 
         }
 

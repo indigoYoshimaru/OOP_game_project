@@ -24,9 +24,6 @@ namespace PlantvsZombie
             TextureAssets["SunFlower"] = PVZGame.Game.Content.Load<Texture2D>("Texture/Plants/SunFlower");
             TextureAssets["CarnivorousPlant"] = PVZGame.Game.Content.Load<Texture2D>("Texture/Plants/CarnivorousPlant");
             TextureAssets["Bullet"] = PVZGame.Game.Content.Load<Texture2D>("Texture/Miscellaneous/Bullet");
-            TextureAssets["Bullet"] = PVZGame.Game.Content.Load<Texture2D>("Texture/Miscellaneous/Bullet");
-            TextureAssets["Bullet"] = PVZGame.Game.Content.Load<Texture2D>("Texture/Miscellaneous/Bullet");
-            TextureAssets["Bullet"] = PVZGame.Game.Content.Load<Texture2D>("Texture/Miscellaneous/Bullet");
             TextureAssets["Sun"] = PVZGame.Game.Content.Load<Texture2D>("Texture/Miscellaneous/Sun");
             TextureAssets["FlyingZombie"] = PVZGame.Game.Content.Load<Texture2D>("Texture/Zombies/FlyingZombie");
             TextureAssets["LaneJumpingZombie"] = PVZGame.Game.Content.Load<Texture2D>("Texture/Zombies/LaneJumpingZombie");
@@ -82,10 +79,10 @@ namespace PlantvsZombie
                     DrawCenter(TextureAssets[objectClassName], ob.Position, size, size);
             }
             PVZGame.Game.SpriteBatch.DrawString(GameFont, "Score: " + PVZGame.Game.LogicManager.Player.GetScore().ToString(),
-                new Vector2(0, PVZGame.Game.Graphic.PreferredBackBufferHeight - 30),
+                new Vector2(10, PVZGame.Game.Graphic.PreferredBackBufferHeight - 40),
                 Color.White);
-            PVZGame.Game.SpriteBatch.DrawString(GameFont, "HIGHSCORE: " + PVZGame.Game.LogicManager.Player.GetHighScore().ToString(), new Vector2(480, PVZGame.Game.Graphic.PreferredBackBufferHeight - 40), Color.White);
-            PVZGame.Game.SpriteBatch.DrawString(GameFont, "SUN: " + PVZGame.Game.LogicManager.Player.GetTotalSun().ToString(), new Vector2(10, 10), Color.White);//display score at the bottom left
+            PVZGame.Game.SpriteBatch.DrawString(GameFont, "HIGHSCORE: " + PVZGame.Game.LogicManager.Player.GetHighScore().ToString(), new Vector2(PVZGame.Game.Graphic.PreferredBackBufferWidth - 300, PVZGame.Game.Graphic.PreferredBackBufferHeight - 40), Color.White);
+            PVZGame.Game.SpriteBatch.DrawString(GameFont, "SUN: " + PVZGame.Game.LogicManager.Player.GetTotalSun().ToString(), new Vector2(10, 10), Color.White);
         }
 
         private void DrawMouse()
