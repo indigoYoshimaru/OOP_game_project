@@ -23,7 +23,7 @@ namespace PlantvsZombie
             Speed = 0.8f;
         }
 
-        public Zombie MeetZombie()
+        private Zombie MeetZombie()
         {
 
             foreach (var z in PVZGame.Game.LogicManager.Zombies)

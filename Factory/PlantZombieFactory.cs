@@ -15,7 +15,6 @@ namespace PlantvsZombie
 
             if (PVZGame.Game.LogicManager.TimeManager <= 20f)
             {
-                PVZGame.Game.LogicManager.TimeSinceLastZombieSpawn = 0f;
                 return new NormalZombie();
             }
 
@@ -33,14 +32,13 @@ namespace PlantvsZombie
                     case "LaneJumpingZombie":
                         return new LaneJumpingZombie();
                 }
-                PVZGame.Game.LogicManager.TimeSinceLastZombieSpawn = _CurrentLoop*1f;
 
             }
 
             else if (PVZGame.Game.LogicManager.TimeManager >= 90f)
             {
                 PVZGame.Game.LogicManager.TimeManager = 40f;
-                _CurrentLoop ++;
+                
             }
 
             else

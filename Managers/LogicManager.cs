@@ -63,6 +63,7 @@ namespace PlantvsZombie
                     if (TimeSinceLastZombieSpawn >= 10f)
                     {
                         Spawner.SpawnZombie();
+                        TimeSinceLastZombieSpawn = 0f;
                     }
                     if (TimeSinceLastSunSpawn >= 3f)
                     {
