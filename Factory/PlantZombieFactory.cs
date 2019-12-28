@@ -8,7 +8,7 @@ namespace PlantvsZombie
 {
     public class PlantZombieFactory:IFactory
     {
-        private static int _CurrentLoop = 0;
+        
         Zombie IFactory.ZombieFactory()
         {
             Random _Rand = new Random();
@@ -38,7 +38,7 @@ namespace PlantvsZombie
             else if (PVZGame.Game.LogicManager.TimeManager >= 90f)
             {
                 PVZGame.Game.LogicManager.TimeManager = 40f;
-                
+                PVZGame.Game.LogicManager.TimeSpawnRange -= 2f;
             }
 
             else

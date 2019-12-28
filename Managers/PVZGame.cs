@@ -105,7 +105,7 @@ namespace PlantvsZombie
 
         public void EnterGame()
         {
-            State = GameState.PLAYING;
+            State = GameState.PLAYING; 
             
         }
 
@@ -113,8 +113,6 @@ namespace PlantvsZombie
         {
             State = GameState.END_MENU;
         }
-
-        //Close window 
 
         public int MouseX()
         {

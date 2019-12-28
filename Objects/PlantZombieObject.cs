@@ -18,7 +18,11 @@ namespace PlantvsZombie
         public override void Update()
         {
             if (Health <= 0)
+            {
                 Die();
+                
+            }
+                
         }
 
         public abstract void Damaged(float dam);

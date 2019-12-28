@@ -37,11 +37,11 @@ namespace PlantvsZombie
         }
         public void StartButton_Clicked(object sender, EventArgs e)
         {
-            ((PVZGame)Game).EnterGame();
+            PVZGame.Game.EnterGame();
         }
         public void QuitButton_Clicked(object sender, EventArgs e)
         {
-            ((PVZGame)Game).Exit();
+            PVZGame.Game.Exit();
         }
     }
 }

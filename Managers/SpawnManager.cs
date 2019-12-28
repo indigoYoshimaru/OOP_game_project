@@ -46,6 +46,7 @@ namespace PlantvsZombie
         {
             PVZGame.Game.LogicManager.ManagedObjects.Remove((GameObject)self);
             PVZGame.Game.LogicManager.Plants.Remove((Plant)self);
+            
         }
 
         public void SpawnBullet(PeaShooter p)

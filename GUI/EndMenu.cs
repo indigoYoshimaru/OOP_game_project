@@ -43,13 +43,13 @@ namespace PlantvsZombie
         private void Btn2_Clicked(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            ((PVZGame)Game).Exit();
+            PVZGame.Game.Exit();
         }
 
         private void Btn1_Clicked(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            ((PVZGame)Game).EnterGame();
+            PVZGame.Game.EnterGame();
         }
         public override void Draw(GameTime gameTime)
         {

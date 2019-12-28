@@ -81,6 +81,7 @@ namespace PlantvsZombie
             _OldMouseState = _CurrentMouseState;
         }
 
+        // this one also needs fixing
         public bool SpendSun()
         {
             int sunSpend = 0;
@@ -116,6 +117,7 @@ namespace PlantvsZombie
 
             foreach (GameObject o in PVZGame.Game.LogicManager.ManagedObjects.ToList())
             {
+                // don't use is Sun
                 if (o is Sun)
                     _TotalSun += ((Sun)o).Collect(Mouse.GetState().X, Mouse.GetState().Y);
             }
