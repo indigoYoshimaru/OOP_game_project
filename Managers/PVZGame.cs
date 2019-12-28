@@ -105,8 +105,8 @@ namespace PlantvsZombie
 
         public void EnterGame()
         {
-            State = GameState.PLAYING; 
-            
+            State = GameState.PLAYING;
+            LogicManager.Initialize();
         }
 
         public void ToEndMenu()
