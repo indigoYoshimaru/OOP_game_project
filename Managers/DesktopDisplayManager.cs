@@ -87,20 +87,17 @@ namespace PlantvsZombie
 
         private void DrawMouse()
         {
-            Vector2 pos = new Vector2(PVZGame.Game.MouseX(), PVZGame.Game.MouseY());
-            float size = PVZGame.Game.LogicManager.GameMap.TileSize.X;
+            PVZGame g = PVZGame.Game;
 
-            string mouseState = PVZGame.Game.LogicManager.Player.IconState;
+            Vector2 pos = new Vector2(g.MouseX(), g.MouseY());
+            float size = g.LogicManager.GameMap.TileSize.X;
 
-            switch (mouseState)
-            {
-                case "NormalMouse":
-                    PVZGame.Game.SpriteBatch.Draw(TextureAssets[mouseState], pos, Color.White);
-                    break;
-                default:
-                    DrawCenter(TextureAssets[mouseState], pos, size, size);
-                    break;
-            }
+            string mouseState = g.LogicManager.Player.IconState;
+
+            if (g.State != PVZGame.GameState.PLAYING || mouseState == "NormalMouse")
+                g.SpriteBatch.Draw(TextureAssets["NormalMouse"], pos, Color.White);
+            else
+                DrawCenter(TextureAssets[mouseState], pos, size, size);
         }
 
         private void DrawCenter(Texture2D texture, Vector2 center, float width, float height)

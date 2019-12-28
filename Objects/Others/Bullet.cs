@@ -12,27 +12,24 @@ namespace PlantvsZombie
     public class Bullet:GameObject
     {
         private Vector2 _Position;
-        private int _DamageFactor=50;
+        private int _DamageFactor = 50;
         private Tile _BulletTile;
     
         public Bullet(PeaShooter p)
         {
             _Position = p.Position;
             this.Position = _Position;
-            _BulletTile=PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
+            _BulletTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
             Speed = 0.8f;
         }
 
         private Zombie MeetZombie()
         {
-
             foreach (var z in PVZGame.Game.LogicManager.Zombies)
-            {
-                if (_BulletTile.Contains(z.Position))
+                if (Vector2.Distance(z.Position, Position) <= PVZGame.Game.LogicManager.GameMap.TileSize.X * 0.5)
                     return z;
-            }
-            return null;
 
+            return null;
         }
 
         public override void Update()
@@ -46,7 +43,6 @@ namespace PlantvsZombie
                     Move();
             }
             else Die();
-           
         }
 
         public void Move()

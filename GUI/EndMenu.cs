@@ -16,28 +16,28 @@ namespace PlantvsZombie
         }
         public override void InitializeComponent()
         {
-
             var btn1 = new Button()
             {
                 Text = "Play again",
                 Size = new Vector2(200, 50),
                 Location = new Vector2(300, 150),
-                BackgroundColor = Color.DarkGreen
+                TextColor = Color.Black,
+                BackgroundColor = Color.DarkOrange
             };
 
             btn1.Clicked += Btn1_Clicked;
             Controls.Add(btn1);
+
             var btn2 = new Button()
             {
                 Text = "Quit",
                 Size = new Vector2(200, 50),
-                Location = new Vector2(300, 220),
-                BackgroundColor = Color.DarkGreen
+                Location = new Vector2(300, 250),
+                TextColor = Color.Black,
+                BackgroundColor = Color.DarkOrange
             };
             btn2.Clicked += Btn2_Clicked;
             Controls.Add(btn2);
-
-
         }
 
         private void Btn2_Clicked(object sender, EventArgs e)
