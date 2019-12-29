@@ -13,7 +13,7 @@ namespace PlantvsZombie
     {
         
         private Vector2 _Position;
-        private float _DamageFactor = 5;
+        private float _DamageFactor = 2;
         private Tile _ZombieTile;
         Random rand = new Random();
 
@@ -22,7 +22,8 @@ namespace PlantvsZombie
 
         private Plant MeetPlant()
         {
-            foreach (var p in PVZGame.Game.Plants)
+            
+            foreach (var p in PVZGame.Game.LogicManager.Plants)
             {
                 if (_ZombieTile != null)
                 {
@@ -37,7 +38,7 @@ namespace PlantvsZombie
         public override void Update()
         {
             base.Update();
-            _ZombieTile = PVZGame.Game.GameMap.GetTileAt(_Position);
+            _ZombieTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
             var p = MeetPlant();
             if (p != null) Attack(p);
 
@@ -57,30 +58,32 @@ namespace PlantvsZombie
 
         public override void Move()
         {
-            _Position.X -= Speed;
+            _Position.X -= Speed;   //just let the zombie move in horizontal axis normally
 
-            xMinus += Speed;
+            xMinus += Speed;        //this will capture the distance the zombie has travelled
             Tile tileCheck;
             
-            
-            if (Math.Abs(_Position.Y - yDes) < 1 && xMinus >= 2*PVZGame.Game.GameMap.TileSize.X)
+            //when the zombie has reached to the destination tile and the horizontal distance the zombie has travelled 
+            //is two times greater than horizontal size Tile
+            if (Math.Abs(_Position.Y - yDes) < 1 && xMinus >= 2*PVZGame.Game.LogicManager.GameMap.TileSize.X)
             {
-                int r = rand.Next(-1,2);
-                tileCheck = _ZombieTile.GetRelativeTile(0, r);
+                int r = rand.Next(-1,2);    //random for next reletive tile
+                tileCheck = _ZombieTile.GetRelativeTile(0, r); //get the position of the relative tile
                 
-                if (tileCheck != null)
+                if (tileCheck != null)  //check if that tile is valid
                 {
-                    System.Diagnostics.Debug.WriteLine(tileCheck.Y);
-                    yDes = tileCheck.GetCenter().Y;
+                    //System.Diagnostics.Debug.WriteLine(tileCheck.Y);  //this use for debug
+                    yDes = tileCheck.GetCenter().Y; //get the y value of the next tile
                 }
                 xMinus = 0;
             }
-            _Position.Y = Lerp(_Position.Y, yDes, 0.02f);
-            this.Position = _Position;
+            _Position.Y = Lerp(_Position.Y, yDes, 0.02f);   //lerp from the old y value the new value.
+            this.Position = _Position;  //assign new position
            
         }
 
-        float Lerp(float firstFloat, float secondFloat, float by)
+        //Lerp: Linear interpolation, this will return the value between first float and second float
+        float Lerp(float firstFloat, float secondFloat, float by)  
         {
             return firstFloat * (1 - by) + secondFloat * by;
         }
@@ -88,8 +91,10 @@ namespace PlantvsZombie
         public LaneJumpingZombie() : base()
         {
             _Position = Position;
-            _ZombieTile = PVZGame.Game.GameMap.GetTileAt(_Position);
+            _ZombieTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
             yDes = Position.Y;
+            Speed = 0.4f;
+            Score = 15;
         }
     }
 }
