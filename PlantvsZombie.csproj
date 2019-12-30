@@ -64,10 +64,12 @@
     <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Factory\IFactory.cs" />
-    <Compile Include="Factory\PlantZombieFactory.cs" />
+    <Compile Include="Factory\Factory.cs" />
+    <Compile Include="Factory\PlantFactory.cs" />
+    <Compile Include="Factory\ZombieFactory.cs" />
     <Compile Include="GUI\EndMenu.cs" />
     <Compile Include="GUI\StartMenu.cs" />
+    <Compile Include="Managers\BackgroundMusicManager.cs" />
     <Compile Include="Managers\DesktopDisplayManager.cs" />
     <Compile Include="Managers\IDisplay.cs" />
     <Compile Include="Managers\LogicManager.cs" />

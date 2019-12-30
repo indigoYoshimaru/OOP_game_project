@@ -31,13 +31,11 @@ namespace PlantvsZombie
             return _MIcon;
         }
 
-        //open-close principle this is not open for extension
         public void UpdateScore(Zombie z)
         {
             _PlayerScore += z.Score;
         }
 
-        //send signal to plant the correct type
         public void Controller()
         {
 
@@ -81,7 +79,6 @@ namespace PlantvsZombie
             _OldMouseState = _CurrentMouseState;
         }
 
-        // this one also needs fixing
         public bool SpendSun()
         {
             int sunSpend = 0;
@@ -117,7 +114,7 @@ namespace PlantvsZombie
 
             foreach (GameObject o in PVZGame.Game.LogicManager.ManagedObjects.ToList())
             {
-                // don't use is Sun
+                
                 if (o is Sun)
                     _TotalSun += ((Sun)o).Collect(Mouse.GetState().X, Mouse.GetState().Y);
             }

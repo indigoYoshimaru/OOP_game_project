@@ -23,6 +23,7 @@ namespace PlantvsZombie
 
         public StartMenu StartMenu;
         public EndMenu EndMenu;
+        private BackgroundMusicManager MusicManager;
 
         private PVZGame()
         {
@@ -41,7 +42,7 @@ namespace PlantvsZombie
         /// </summary>
         protected override void Initialize()
         {
-            
+            MusicManager = new BackgroundMusicManager();
             DisplayManager = new DesktopDisplayManager();
             LogicManager = new LogicManager();
             StartMenu = new StartMenu(this);
@@ -62,6 +63,7 @@ namespace PlantvsZombie
             // Create a new SpriteBatch, which can be used to draw textures.
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             DisplayManager.LoadContent();
+            MusicManager.LoadContent();
             // TODO: use this.Content to load your game content here
         }
 
@@ -86,6 +88,7 @@ namespace PlantvsZombie
                 Exit();
 
             LogicManager.Update(gameTime);
+            MusicManager.Update();
             
         }
         /// <summary>
@@ -101,17 +104,20 @@ namespace PlantvsZombie
         public void ToStartMenu()
         {
             State = GameState.START_MENU;
+            MusicManager.OnGameChangeState();
         }
 
         public void EnterGame()
         {
-            State = GameState.PLAYING; 
-            
+            State = GameState.PLAYING;
+            LogicManager.Initialize();
+            MusicManager.OnGameChangeState();
         }
 
         public void ToEndMenu()
         {
             State = GameState.END_MENU;
+            MusicManager.OnGameChangeState();
         }
 
         public int MouseX()

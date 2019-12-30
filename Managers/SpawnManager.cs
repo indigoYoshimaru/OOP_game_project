@@ -9,10 +9,11 @@ namespace PlantvsZombie
     public class SpawnManager
     {
 
-        private IFactory _Factory = new PlantZombieFactory();
+        private Factory _Factory;
         public void SpawnZombie()
         {
-            Zombie z = _Factory.ZombieFactory();
+            _Factory = new ZombieFactory();
+            Zombie z = _Factory.GetZombie();
             if (z != null)
             {
                 z.Died += HandleDeadZombie;
@@ -31,7 +32,8 @@ namespace PlantvsZombie
 
         public void SpawnPlant(Tile mouseTile)
         {
-            Plant pl = _Factory.PlantFactory(PVZGame.Game.LogicManager.Player.IconState, mouseTile.GetCenter());
+            _Factory = new PlantFactory();
+            Plant pl = _Factory.GetPlant(PVZGame.Game.LogicManager.Player.IconState, mouseTile.GetCenter());
             if (pl != null)
             {
                 pl.Died += HandleDeadPlant;
@@ -44,6 +46,9 @@ namespace PlantvsZombie
 
         private void HandleDeadPlant(object self)
         {
+            Tile tile = PVZGame.Game.LogicManager.GameMap.GetTileAt(((GameObject)self).Position);
+            if (tile != null)
+                tile.Plant = null;
             PVZGame.Game.LogicManager.ManagedObjects.Remove((GameObject)self);
             PVZGame.Game.LogicManager.Plants.Remove((Plant)self);
             

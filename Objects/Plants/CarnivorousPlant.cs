@@ -14,7 +14,7 @@ namespace PlantvsZombie
 
             foreach (var z in PVZGame.Game.LogicManager.Zombies)
             {
-                if (ObjectTile.Contains(z.Position))
+                if (z.ObjectTile!=null&&ObjectTile.Contains(z.Position))
                     return z;
             }
             return null;

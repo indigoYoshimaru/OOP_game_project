@@ -5,6 +5,9 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/defaultFont.spritefont</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Media/background1.wma</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Media/background2.wma</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Media/background3.wma</File>
     <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Background/EndMenuBG.png</File>
     <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Background/Lawn.png</File>
     <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Background/StartMenuBG.png</File>
@@ -21,6 +24,9 @@
     <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Zombies/NormalZombie.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

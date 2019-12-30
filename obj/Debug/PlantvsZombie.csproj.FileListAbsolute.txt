@@ -112,3 +112,9 @@ C:\Users\Seito-nonroot\source\repos\PlantvsZombie\obj\Debug\PlantvsZombie.csproj
 C:\Users\Seito-nonroot\source\repos\PlantvsZombie\obj\Debug\PlantvsZombie.csproj.CopyComplete
 C:\Users\Seito-nonroot\source\repos\PlantvsZombie\obj\Debug\PlantvsZombie.exe
 C:\Users\Seito-nonroot\source\repos\PlantvsZombie\obj\Debug\PlantvsZombie.pdb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Media\background1.wma
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Media\background1.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Media\background2.wma
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Media\background2.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Media\background3.wma
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Media\background3.xnb

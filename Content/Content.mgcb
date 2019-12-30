@@ -20,6 +20,24 @@
 /processorParam:TextureFormat=Compressed
 /build:defaultFont.spritefont
 
+#begin Media/background1.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Media/background1.wma
+
+#begin Media/background2.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Media/background2.wma
+
+#begin Media/background3.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Media/background3.wma
+
 #begin Texture/Background/EndMenuBG.png
 /importer:TextureImporter
 /processor:TextureProcessor

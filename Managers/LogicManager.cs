@@ -65,6 +65,8 @@ namespace PlantvsZombie
                     {
                         Spawner.SpawnZombie();
                         TimeSinceLastZombieSpawn = 0f;
+                        Console.WriteLine(TimeSpawnRange);
+                        Console.WriteLine(TimeSinceLastZombieSpawn);
                     }
                     if (TimeSinceLastSunSpawn >= 3f)
                     {
