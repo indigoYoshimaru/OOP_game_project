@@ -17,15 +17,9 @@ namespace PlantvsZombie
 
         private Plant MeetPlant()
         {
-            
-            foreach (var p in PVZGame.Game.LogicManager.Plants)
-            {
-                if (_ZombieTile.Contains(p.Position))
-                    return p;
-                
-            }
-            
-            return null;
+            if (_ZombieTile == null)
+                return null;
+            return _ZombieTile.Plant;
         }
 
 

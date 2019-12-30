@@ -19,22 +19,21 @@ namespace PlantvsZombie
         public override void Update()
         {
             base.Update();
-            if (ObjectTile == null)
-            {
-                //do something
-            }
-               
-            if (ObjectTile.X <= 0)
+            if (Position.X <= 0)
                 PVZGame.Game.LogicManager.EndGame();
         }
 
         public Zombie()
         {
+            Map map = PVZGame.Game.LogicManager.GameMap;
             Random r = new Random(Guid.NewGuid().GetHashCode());
-            int y = r.Next(0, 4);
-            DamagedState = true;
-            Position = PVZGame.Game.LogicManager.GameMap.GetTile(9, y).GetCenter();
+            
+            int y = r.Next(0, map.getDimensionY());
+            Vector2 pos = map.GetTile(map.getDimensionX()-1, y).GetCenter();
+            pos.X += map.TileSize.X;
+            Position = pos;
 
+            DamagedState = true;
         }
     }
 }

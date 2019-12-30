@@ -48,5 +48,15 @@ namespace PlantvsZombie
                 return null;
             return tiles[x, y];
         }
+
+        public int getDimensionX()
+        {
+            return tiles.GetLength(0);
+        }
+
+        public int getDimensionY()
+        {
+            return tiles.GetLength(1);
+        }
     }
 }

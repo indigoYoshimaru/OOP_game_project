@@ -14,6 +14,8 @@ namespace PlantvsZombie
 
             foreach (var z in PVZGame.Game.LogicManager.Zombies)
             {
+                if (z.Position == null)
+                    continue;
                 if (ObjectTile.Contains(z.Position))
                     return z;
             }
@@ -24,7 +26,6 @@ namespace PlantvsZombie
         {
             Position = _Position;
             ObjectTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position).GetRelativeTile(1, 0); //check if 1 cell from the plant has a zombie in it
-
         }
 
         public override void Update()

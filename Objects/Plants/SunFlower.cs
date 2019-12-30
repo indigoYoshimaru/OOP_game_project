@@ -29,7 +29,6 @@ namespace PlantvsZombie
             Health -= dam;
         }
 
-        // how to fix this??
         public override void Attack(Zombie z)
         {
             throw new NotImplementedException();
