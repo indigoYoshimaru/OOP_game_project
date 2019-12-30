@@ -110,7 +110,8 @@ namespace PlantvsZombie
 
             foreach (GameObject o in PVZGame.Game.LogicManager.ManagedObjects.ToList())
             {
-                if (o is Sun)
+                Type t = o.GetType();
+                if (t.Equals(typeof(Sun)))
                     TotalSun += ((Sun)o).Collect(Mouse.GetState().X, Mouse.GetState().Y);
             }
         }
