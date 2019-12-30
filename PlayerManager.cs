@@ -10,7 +10,6 @@ namespace PlantvsZombie
 {
     public class PlayerManager
     {
-        //private int highScore;
         public int TotalSun { get; private set; } = 200;
         public enum MouseIcon { NORMAL, SUNFLOWER, PEASHOOTER, CARNIVOROUSPLANT };    //icon of the mouse
         private MouseIcon MIcon;
@@ -21,7 +20,6 @@ namespace PlantvsZombie
         public String IconState { get; set; } = "NormalMouse";
 
         public int PlayerScore { get; private set; } = 0;
-        //public int HighScore { get => highScore; set => highScore = value; }
         public int HighScore { get; private set; }
 
         //open-close principle this is not open for extension
