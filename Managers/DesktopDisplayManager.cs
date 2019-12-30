@@ -90,7 +90,7 @@ namespace PlantvsZombie
             PVZGame g = PVZGame.Game;
 
             Vector2 pos = new Vector2(g.MouseX(), g.MouseY());
-            float size = g.LogicManager.GameMap.TileSize.X;
+            float size = g.LogicManager.GameMap.TileSize.X * 0.9f;
 
             string mouseState = g.LogicManager.Player.IconState;
 

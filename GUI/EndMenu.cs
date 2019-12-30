@@ -18,7 +18,7 @@ namespace PlantvsZombie
         {
             var btn1 = new Button()
             {
-                Text = "Play again",
+                Text = "Play Again",
                 Size = new Vector2(200, 50),
                 Location = new Vector2(300, 150),
                 TextColor = Color.Black,
@@ -30,7 +30,7 @@ namespace PlantvsZombie
 
             var btn2 = new Button()
             {
-                Text = "Quit",
+                Text = "Main Menu",
                 Size = new Vector2(200, 50),
                 Location = new Vector2(300, 250),
                 TextColor = Color.Black,
@@ -42,7 +42,7 @@ namespace PlantvsZombie
 
         private void Btn2_Clicked(object sender, EventArgs e)
         {
-            PVZGame.Game.Exit();
+            PVZGame.Game.ToStartMenu();
         }
 
         private void Btn1_Clicked(object sender, EventArgs e)
