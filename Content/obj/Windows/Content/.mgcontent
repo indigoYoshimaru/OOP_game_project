@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/defaultFont.spritefont</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Media/background1.wma</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Media/background2.wma</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Media/background3.wma</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Background/EndMenuBG.png</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Background/Lawn.png</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Background/StartMenuBG.png</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Miscellaneous/Bullet.png</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Miscellaneous/galleryFont.spritefont</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Miscellaneous/NormalMouse.png</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Miscellaneous/Sun.png</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Plants/Carnivorousplant.png</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Plants/carnivorousplant1.png</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Plants/Peashooter.png</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Plants/Sunflower.png</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Zombies/FlyingZombie.png</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Zombies/LaneJumpingZombie.png</File>
+    <File>C:/Users/Seito-nonroot/source/repos/PlantvsZombie/Content/Texture/Zombies/NormalZombie.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

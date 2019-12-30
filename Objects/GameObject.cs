@@ -14,26 +14,8 @@ namespace PlantvsZombie
     public abstract class GameObject 
     {
         public event DieDelegate Died;
-        private float _Speed;
-        private Vector2 _Position;
-
-        public Vector2 Position
-        {
-            get { return _Position; }
-            set
-            {
-                _Position = value;
-            }
-        }
-
-        public float Speed
-        {
-            get { return _Speed; }
-            set
-            {
-                _Speed = value;
-            }
-        }
+        public float Speed { get; set; }
+        public Vector2 Position  { get; set; }
 
         public abstract void Update(); // we can foretell this function
         public virtual void Die() // all objects must be in the form of this die function

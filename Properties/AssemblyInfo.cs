@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -6,12 +7,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PlantvsZombie")]
-[assembly: AssemblyProduct("PlantvsZombie")]
+[assembly: AssemblyProduct("P.H.Hoang, T.D.Tri, N.H.Van, L.B.Thoai, P.K.Linh")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyDescription("Object-oriented program project Sem 1 - 2019")]
+[assembly: AssemblyCompany("School of Computer Science and Engineering")]
+[assembly: AssemblyCopyright("Copyright ©  2019 Team ???")]
+[assembly: AssemblyTrademark("Nothing")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -20,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4ebb9850-dcf1-48c0-b8b3-d0d0e8eef631")]
+[assembly: Guid("cd347952-3104-46a6-838a-e21313dd1b0d")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -34,3 +35,4 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguage("en")]

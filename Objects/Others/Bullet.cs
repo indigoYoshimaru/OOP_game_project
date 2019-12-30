@@ -12,7 +12,7 @@ namespace PlantvsZombie
     public class Bullet:GameObject
     {
         private Vector2 _Position;
-        private int _DamageFactor=20;
+        private int _DamageFactor=50;
         private Tile _BulletTile;
     
         public Bullet(PeaShooter p)
@@ -20,10 +20,10 @@ namespace PlantvsZombie
             _Position = p.Position;
             this.Position = _Position;
             _BulletTile=PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
-            Speed = 0.4f;
+            Speed = 0.8f;
         }
 
-        public Zombie MeetZombie()
+        private Zombie MeetZombie()
         {
 
             foreach (var z in PVZGame.Game.LogicManager.Zombies)

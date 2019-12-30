@@ -1,31 +1,120 @@
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\Texture\Zombies\FlyingZombie.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\Texture\Zombies\LaneJumpingZombie.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\Texture\Zombies\NormalZombie.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\Texture\Plants\Carnivorousplant.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\Texture\Plants\carnivorousplant1.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\Texture\Plants\Peashooter.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\Texture\Plants\Sunflower.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\Texture\Miscellaneous\Bullet.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\Texture\Miscellaneous\galleryFont.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\Texture\Miscellaneous\NormalMouse.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\Texture\Miscellaneous\Sun.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\Texture\Background\EndMenuBG.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\Texture\Background\Lawn.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\Texture\Background\StartMenuBG.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\Content\defaultFont.xnb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\MonoGame.Framework.dll
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\MonoGame.UI.Forms.dll
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\SharpDX.MediaFoundation.dll
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\SharpDX.dll
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\SharpDX.XAudio2.dll
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\SharpDX.DXGI.dll
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\SharpDX.Direct3D11.dll
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\SharpDX.Direct2D1.dll
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\SharpDX.XInput.dll
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\MonoGame.Framework.xml
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\SharpDX.MediaFoundation.xml
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\SharpDX.xml
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\SharpDX.XAudio2.xml
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\SharpDX.DXGI.xml
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\SharpDX.Direct3D11.xml
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\SharpDX.Direct2D1.xml
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\SharpDX.XInput.xml
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\obj\Debug\PlantvsZombie.csproj.CopyComplete
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\obj\Debug\PlantvsZombie.csprojAssemblyReference.cache
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\PlantvsZombie.exe
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\bin\Debug\PlantvsZombie.pdb
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\obj\Debug\PlantvsZombie.exe
+D:\IU\semester1_2019-2020\Object-Oriented Programming\project\OOP_game_project_H_fix5\obj\Debug\PlantvsZombie.pdb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\Texture\Zombies\FlyingZombie.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\Texture\Zombies\LaneJumpingZombie.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\Texture\Zombies\NormalZombie.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\Texture\Plants\Carnivorousplant.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\Texture\Plants\carnivorousplant1.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\Texture\Plants\Peashooter.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\Texture\Plants\Sunflower.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\Texture\Miscellaneous\Bullet.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\Texture\Miscellaneous\galleryFont.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\Texture\Miscellaneous\NormalMouse.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\Texture\Miscellaneous\Sun.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\Texture\Background\EndMenuBG.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\Texture\Background\Lawn.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\Texture\Background\StartMenuBG.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\Content\defaultFont.xnb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\PlantvsZombie.exe
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\PlantvsZombie.pdb
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\MonoGame.Framework.dll
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\MonoGame.UI.Forms.dll
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\SharpDX.dll
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\SharpDX.XAudio2.dll
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\SharpDX.DXGI.dll
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\SharpDX.Direct3D11.dll
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\SharpDX.Direct2D1.dll
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\SharpDX.XInput.dll
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\MonoGame.Framework.xml
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\SharpDX.xml
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\SharpDX.XAudio2.xml
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\SharpDX.DXGI.xml
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\SharpDX.Direct3D11.xml
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\SharpDX.Direct2D1.xml
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\bin\Debug\SharpDX.XInput.xml
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\obj\Debug\PlantvsZombie.csprojAssemblyReference.cache
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\obj\Debug\PlantvsZombie.csproj.CopyComplete
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\obj\Debug\PlantvsZombie.exe
+C:\Users\Seito-nonroot\Downloads\PlantvsZombie\obj\Debug\PlantvsZombie.pdb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Texture\Zombies\FlyingZombie.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Texture\Zombies\LaneJumpingZombie.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Texture\Zombies\NormalZombie.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Texture\Plants\Carnivorousplant.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Texture\Plants\carnivorousplant1.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Texture\Plants\Peashooter.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Texture\Plants\Sunflower.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Texture\Miscellaneous\Bullet.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Texture\Miscellaneous\galleryFont.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Texture\Miscellaneous\NormalMouse.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Texture\Miscellaneous\Sun.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Texture\Background\EndMenuBG.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Texture\Background\Lawn.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Texture\Background\StartMenuBG.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\defaultFont.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\PlantvsZombie.exe
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\PlantvsZombie.pdb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\MonoGame.Framework.dll
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\MonoGame.UI.Forms.dll
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\SharpDX.dll
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\SharpDX.XAudio2.dll
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\SharpDX.DXGI.dll
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\SharpDX.Direct3D11.dll
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\SharpDX.Direct2D1.dll
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\SharpDX.XInput.dll
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\MonoGame.Framework.xml
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\SharpDX.xml
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\SharpDX.XAudio2.xml
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\SharpDX.DXGI.xml
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\SharpDX.Direct3D11.xml
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\SharpDX.Direct2D1.xml
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\SharpDX.XInput.xml
 C:\Users\Seito-nonroot\source\repos\PlantvsZombie\obj\Debug\PlantvsZombie.csprojAssemblyReference.cache
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\MonoGame.Framework.dll.config
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\x86\SDL2.dll
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\x64\SDL2.dll
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\x86\soft_oal.dll
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\x64\soft_oal.dll
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\x86\libSDL2-2.0.so.0
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\x64\libSDL2-2.0.so.0
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\x86\libopenal.so.1
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\x64\libopenal.so.1
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\libSDL2-2.0.0.dylib
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\libopenal.1.dylib
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\PlantvsZombie.exe
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\PlantvsZombie.pdb
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\MonoGame.Framework.dll
 C:\Users\Seito-nonroot\source\repos\PlantvsZombie\obj\Debug\PlantvsZombie.csproj.CopyComplete
 C:\Users\Seito-nonroot\source\repos\PlantvsZombie\obj\Debug\PlantvsZombie.exe
 C:\Users\Seito-nonroot\source\repos\PlantvsZombie\obj\Debug\PlantvsZombie.pdb
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Zombies\FlyingZombie.xnb
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Zombies\LaneJumpingZombie.xnb
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Zombies\NormalZombie.xnb
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Plants\Carnivorousplant.xnb
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Plants\carnivorousplant1.xnb
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Plants\Peashooter.xnb
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Plants\Sunflower.xnb
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Miscellaneous\Bullet.xnb
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Miscellaneous\Sun.xnb
-C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\DesktopGL\AnyCPU\Debug\Content\Texture\Background\Lawn.xnb
-C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\obj\Debug\PlantvsZombie.csprojAssemblyReference.cache
-C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\obj\Debug\PlantvsZombie.exe
-C:\Users\Seito-nonroot\source\repos\PlantvsZombieTest\obj\Debug\PlantvsZombie.pdb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Media\background1.wma
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Media\background1.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Media\background2.wma
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Media\background2.xnb
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Media\background3.wma
+C:\Users\Seito-nonroot\source\repos\PlantvsZombie\bin\Debug\Content\Media\background3.xnb

@@ -13,10 +13,12 @@ namespace PlantvsZombie
         public HashSet<Zombie> Zombies;
         public List<String> ZombieTypes;
         public float TimeManager { get; set; }
-        public float TimeSinceLastSpawn { get; set; }
+        public float TimeSinceLastZombieSpawn { get; set; }
+        public float TimeSinceLastSunSpawn { get; set; }
         public PlayerManager Player { get; set; }
         public SpawnManager Spawner { get; set; }
         public Map GameMap;
+        public float TimeSpawnRange { get; set; } = 8f;
 
         public void Initialize()
         {
@@ -27,7 +29,8 @@ namespace PlantvsZombie
             ZombieTypes.Add("NormalZombie");
             ZombieTypes.Add("FlyingZombie");
             ZombieTypes.Add("LaneJumpingZombie");
-            TimeSinceLastSpawn = 0f;
+            TimeSinceLastZombieSpawn = 0f;
+            TimeSinceLastSunSpawn = 0f;
             TimeManager = 0f;
             GameMap = new Map(PVZGame.Game.GraphicsDevice.PresentationParameters.Bounds);
 
@@ -35,7 +38,7 @@ namespace PlantvsZombie
             Spawner = new SpawnManager();
             Player.LoadHighScore();
             Spawner.SpawnZombie();
- 
+
         }
 
         public void Update(GameTime gameTime)
@@ -55,15 +58,28 @@ namespace PlantvsZombie
                             continue;
                         }
                     }
-                    TimeSinceLastSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    TimeSinceLastZombieSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    TimeSinceLastSunSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
                     TimeManager += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    if (TimeSinceLastSpawn >= 5f)
+                    if (TimeSinceLastZombieSpawn >= TimeSpawnRange)
                     {
                         Spawner.SpawnZombie();
+                        TimeSinceLastZombieSpawn = 0f;
+                        Console.WriteLine(TimeSpawnRange);
+                        Console.WriteLine(TimeSinceLastZombieSpawn);
+                    }
+                    if (TimeSinceLastSunSpawn >= 3f)
+                    {
                         Spawner.SpawnSun();
-                        TimeSinceLastSpawn = 0f;
+                        TimeSinceLastSunSpawn = 0f;
                     }
                     Player.Update();
+                    break;
+                case PVZGame.GameState.START_MENU:
+                    PVZGame.Game.StartMenu.Update(gameTime);
+                    break;
+                case PVZGame.GameState.END_MENU:
+                    PVZGame.Game.EndMenu.Update(gameTime);
                     break;
                 default:
                     break;
@@ -73,9 +89,10 @@ namespace PlantvsZombie
         public void EndGame()
         {
             Player.SaveHighScore();
+            ManagedObjects.Clear();
+            Plants.Clear();
+            Zombies.Clear();
+            PVZGame.Game.ToEndMenu();
         }
-
-        
-      
     }
 }

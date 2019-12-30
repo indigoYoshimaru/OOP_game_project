@@ -13,33 +13,34 @@ namespace PlantvsZombie
     {
         private Vector2 _Position;
         private float _TimeSinceLastSpawned = 0f;
-        private float stop;
-        private float stop2;
-        private int kind;
+        private float _Stop;
+        private float _Stop2;
+        private int _Kind;
+
         public Sun(Plant p)
         {
-            kind = 0;
+            _Kind = 0;
             Random r = new Random(Guid.NewGuid().GetHashCode());
             _Position.X = p.Position.X + r.Next(-50,50);
             _Position.Y = p.Position.Y + r.Next(10,50);
-            stop = _Position.Y;
+            _Stop = _Position.Y;
             this.Position = _Position;
             Speed = 0.4f;
         }
         public Sun()
         {
-            kind = 1;
+            _Kind = 1;
             Random r = new Random(Guid.NewGuid().GetHashCode());
             _Position.X = r.Next(0, 700);
             _Position.Y = 50;
-            stop2 = r.Next(100, 500);
+            _Stop2 = r.Next(100, 500);
             this.Position = _Position;
             Speed = 0.4f;
         }
         public override void Update()
         {
             
-            if (kind == 0)
+            if (_Kind == 0)
             {
                 FallFromPlant();
             }
@@ -58,7 +59,7 @@ namespace PlantvsZombie
         public void FallFromPlant()
         {
             _Position.X = Position.X;
-            if (_Position.Y > stop + 20 || _Position.Y == stop2)
+            if (_Position.Y > _Stop + 20 || _Position.Y == _Stop2)
             {
                 _Position.Y = Position.Y;
             }
@@ -68,9 +69,9 @@ namespace PlantvsZombie
         public void FallFromSky()
         {
             _Position.X = Position.X;
-            if (_Position.Y > stop2)
+            if (_Position.Y > _Stop2)
             {
-                _Position.Y = stop2;
+                _Position.Y = _Stop2;
             }
             else
             {
@@ -79,12 +80,12 @@ namespace PlantvsZombie
             this.Position = _Position;
         }
 
-        public int Collect(int _X, int _Y)
+        public int Collect(int x, int y)
         {
-            if (_X > Position.X - 50 && _X < Position.X + 50 && _Y > Position.Y - 60 && _Y < Position.Y + 60)
+            if (x > Position.X - 50 && x < Position.X + 50 && y > Position.Y - 60 && y < Position.Y + 60)
             {
                 this.Die();
-                return 10;
+                return 25;
             }
             else
             {

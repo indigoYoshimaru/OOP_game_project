@@ -8,16 +8,14 @@ namespace PlantvsZombie
 {
     public class PeaShooter:Plant
     {
-        
-        private float _TimeSinceLastSpawn=0f;
-        private Zombie _CurrentZombie;
-        private Tile _ShooterTile;
+
+        private float _TimeSinceLastSpawn=5f;
 
         public override void Update()
         {
+            
             base.Update();
-
-            if (_CurrentZombie!=null&&_CurrentZombie.Health>0)
+            if (MeetZombie() != null)
             {
                 _TimeSinceLastSpawn += (float)PVZGame.Game.CurrentGameTime.ElapsedGameTime.TotalSeconds;
                 if (_TimeSinceLastSpawn >= 5f)
@@ -26,22 +24,16 @@ namespace PlantvsZombie
                     _TimeSinceLastSpawn = 0f;
                 }
             }
-
-            else
-                _CurrentZombie = MeetZombie();
-
         }
 
-
-        // Idea: check if the tile that is 3 cell from the plant has a zombie in it --> attack if it does
-
-        public Zombie MeetZombie()
+        private Zombie MeetZombie()
         {
             
             foreach (var z in PVZGame.Game.LogicManager.Zombies)
             {
-                if (_ShooterTile.Contains(z.Position))
-                    return z;
+                if(z.ObjectTile != null )
+                    if (ObjectTile.Y == z.ObjectTile.Y && ObjectTile.X <= z.ObjectTile.X && z.ObjectTile.X <= ObjectTile.X + 5)
+                        return z;
             }
             return null;
 
@@ -50,14 +42,12 @@ namespace PlantvsZombie
         public PeaShooter(Vector2 _Position)
         {
             Position = _Position;
-            _ShooterTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position).GetRelativeTile(4,0);
-            
+            ObjectTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
         }
 
         public override void Attack(Zombie z)
         {
             PVZGame.Game.LogicManager.Spawner.SpawnBullet(this);
-
         }
 
         public override void Damaged(float dam)

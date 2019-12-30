@@ -13,23 +13,21 @@ namespace PlantvsZombie
     {
         
         private Vector2 _Position;
-        private float _DamageFactor = 1;
+        private float _DamageFactor = 2;
         private int _Counter = 0;
         private Tile _ZombieTile;
         private Plant MeetPlant()
         {
-            foreach (var p in PVZGame.Game.LogicManager.Plants)
-            {
-                if (_ZombieTile.Contains(p.Position))
-                    return p;
-            }
+            if (_ZombieTile != null && _ZombieTile.HasPlant())
+                return _ZombieTile.Plant;
             return null;
         }
 
         public override void Update()
         {
-            base.Update();
             _ZombieTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
+            ObjectTile = _ZombieTile;
+            base.Update();
             var p = MeetPlant();
             if (p != null)
             {
@@ -67,7 +65,7 @@ namespace PlantvsZombie
             this.Position = _Position;
         }
 
-        public void MoveByCell()
+        private void MoveByCell()
         {
             var jumpTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position).GetRelativeTile(-1,0);
             _Position.X = jumpTile.GetCenter().X;
@@ -81,6 +79,8 @@ namespace PlantvsZombie
             Speed = 0.3f;
             DamagedState = false;
             _ZombieTile = PVZGame.Game.LogicManager.GameMap.GetTileAt(_Position);
+            ObjectTile = _ZombieTile;
+            Score = 10;
         }
     }
 }

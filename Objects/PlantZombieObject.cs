@@ -12,23 +12,17 @@ namespace PlantvsZombie
     //the class for common att. btw plants vs zombies
     public abstract class PlantZombieObject:GameObject
     {
-        private float _Health=100;
-        public float Health
-        {
-            get
-            {
-                return _Health;
-            }
-            set
-            {
-                _Health = value;
-            }
-        }
+        public Tile ObjectTile { get; set; }
+        public float Health { get; set; } = 100;
 
         public override void Update()
         {
-            if (_Health <= 0)
+            if (Health <= 0)
+            {
                 Die();
+                
+            }
+                
         }
 
         public abstract void Damaged(float dam);
