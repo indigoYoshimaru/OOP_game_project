@@ -104,20 +104,20 @@ namespace PlantvsZombie
         public void ToStartMenu()
         {
             State = GameState.START_MENU;
-            MusicManager.OnGameChangeState();
+            MusicManager.OnChangeGameState();
         }
 
         public void EnterGame()
         {
             State = GameState.PLAYING;
             LogicManager.Initialize();
-            MusicManager.OnGameChangeState();
+            MusicManager.OnChangeGameState();
         }
 
         public void ToEndMenu()
         {
             State = GameState.END_MENU;
-            MusicManager.OnGameChangeState();
+            MusicManager.OnChangeGameState();
         }
 
         public int MouseX()

@@ -38,7 +38,7 @@ namespace PlantvsZombie
 
         }
 
-        public void OnGameChangeState()
+        public void OnChangeGameState()
         {
             MediaPlayer.Stop();
         }
