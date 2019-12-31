@@ -78,11 +78,11 @@ namespace PlantvsZombie
                 if (objectClassName != null)
                     DrawCenter(TextureAssets[objectClassName], ob.Position, size, size);
             }
-            PVZGame.Game.SpriteBatch.DrawString(GameFont, "Score: " + PVZGame.Game.LogicManager.Player.GetScore().ToString(),
+            PVZGame.Game.SpriteBatch.DrawString(GameFont, "Score: " + PVZGame.Game.LogicManager.Player.PlayerScore.ToString(),
                 new Vector2(10, PVZGame.Game.Graphic.PreferredBackBufferHeight - 40),
                 Color.White);
-            PVZGame.Game.SpriteBatch.DrawString(GameFont, "HIGHSCORE: " + PVZGame.Game.LogicManager.Player.GetHighScore().ToString(), new Vector2(PVZGame.Game.Graphic.PreferredBackBufferWidth - 300, PVZGame.Game.Graphic.PreferredBackBufferHeight - 40), Color.White);
-            PVZGame.Game.SpriteBatch.DrawString(GameFont, "SUN: " + PVZGame.Game.LogicManager.Player.GetTotalSun().ToString(), new Vector2(10, 10), Color.White);
+            PVZGame.Game.SpriteBatch.DrawString(GameFont, "HIGHSCORE: " + PVZGame.Game.LogicManager.Player.HighScore.ToString(), new Vector2(PVZGame.Game.Graphic.PreferredBackBufferWidth - 300, PVZGame.Game.Graphic.PreferredBackBufferHeight - 40), Color.White);
+            PVZGame.Game.SpriteBatch.DrawString(GameFont, "SUN: " + PVZGame.Game.LogicManager.Player.TotalSun.ToString(), new Vector2(10, 10), Color.White);
         }
 
         private void DrawMouse()

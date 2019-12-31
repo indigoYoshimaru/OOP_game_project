@@ -16,6 +16,7 @@ namespace PlantvsZombie
 
         public LogicManager LogicManager { get; set; }
         private IDisplay DisplayManager;
+        private BackgroundMusicManager MusicManager;
         public GameTime CurrentGameTime { get; private set; }
 
         public enum GameState { START_MENU, PLAYING, END_MENU };
@@ -23,7 +24,7 @@ namespace PlantvsZombie
 
         public StartMenu StartMenu;
         public EndMenu EndMenu;
-        private BackgroundMusicManager MusicManager;
+        
 
         private PVZGame()
         {
