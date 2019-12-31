@@ -28,7 +28,7 @@ namespace PlantvsZombie
 
             foreach (var z in PVZGame.Game.LogicManager.Zombies)
             {
-                if (_BulletTile.Contains(z.Position))
+                if (Vector2.Distance(z.Position, Position) <= PVZGame.Game.LogicManager.GameMap.TileSize.X * 0.5)
                     return z;
             }
             return null;
