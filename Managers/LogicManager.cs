@@ -15,10 +15,10 @@ namespace PlantvsZombie
         public float TimeManager { get; set; }
         public float TimeSinceLastZombieSpawn { get; set; }
         public float TimeSinceLastSunSpawn { get; set; }
+        public float TimeSpawnRange { get; set; }
         public PlayerManager Player { get; set; }
         public SpawnManager Spawner { get; set; }
         public Map GameMap;
-        public float TimeSpawnRange { get; set; } = 8f;
 
         public void Initialize()
         {
@@ -31,7 +31,8 @@ namespace PlantvsZombie
             ZombieTypes.Add("LaneJumpingZombie");
             TimeSinceLastZombieSpawn = 0f;
             TimeSinceLastSunSpawn = 0f;
-            TimeManager = 0f;
+            TimeSpawnRange = 8f;
+
             GameMap = new Map(PVZGame.Game.GraphicsDevice.PresentationParameters.Bounds);
 
             Player = new PlayerManager();
@@ -65,8 +66,7 @@ namespace PlantvsZombie
                     {
                         Spawner.SpawnZombie();
                         TimeSinceLastZombieSpawn = 0f;
-                        Console.WriteLine(TimeSpawnRange);
-                        Console.WriteLine(TimeSinceLastZombieSpawn);
+                        
                     }
                     if (TimeSinceLastSunSpawn >= 3f)
                     {
