@@ -57,8 +57,8 @@ namespace PlantvsZombie
             else
             {
                 PVZGame.Game.LogicManager.TimeManager = 40f;
-                float timeSpawnRange=PVZGame.Game.LogicManager.TimeSpawnRange-=1.5f;
-                if (timeSpawnRange <= 0f)
+                float timeSpawnRange=PVZGame.Game.LogicManager.TimeSpawnRange/=2f;
+                if (timeSpawnRange < 0.5f)
                     PVZGame.Game.LogicManager.TimeSpawnRange = 8f;
 
             }
