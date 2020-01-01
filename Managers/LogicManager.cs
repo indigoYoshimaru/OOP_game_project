@@ -32,7 +32,7 @@ namespace PlantvsZombie
             TimeSinceLastZombieSpawn = 0f;
             TimeSinceLastSunSpawn = 0f;
             TimeSpawnRange = 8f;
-
+            TimeManager = 0f;
             GameMap = new Map(PVZGame.Game.GraphicsDevice.PresentationParameters.Bounds);
 
             Player = new PlayerManager();

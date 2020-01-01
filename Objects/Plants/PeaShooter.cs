@@ -32,7 +32,7 @@ namespace PlantvsZombie
             foreach (var z in PVZGame.Game.LogicManager.Zombies)
             {
                 if(z.ObjectTile != null )
-                    if (ObjectTile.Y == z.ObjectTile.Y && ObjectTile.X <= z.ObjectTile.X && z.ObjectTile.X <= ObjectTile.X + 5)
+                    if (ObjectTile.Y == z.ObjectTile.Y && ObjectTile.X < z.ObjectTile.X && z.ObjectTile.X <= ObjectTile.X + 5)
                         return z;
             }
             return null;
